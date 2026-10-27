@@ -1,0 +1,17 @@
+/* Chapter 4, lesson 08: complete multi-satellite observation epoch. */
+.scene-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:18px 22px;margin-bottom:14px;background:linear-gradient(120deg,#102e3c,#142340);border:1px solid #426377;border-radius:16px}
+.scene-toolbar label{display:grid;gap:7px;min-width:260px;color:#a4dbec;font-size:14px;font-weight:750;letter-spacing:.025em}
+.scene-toolbar select{background:#0b1b2a;color:#ecfbff;border:1px solid #49718b;border-radius:10px;font:600 16px Inter,'Segoe UI',sans-serif;min-height:44px;padding:9px 12px;max-width:100%}
+#scene-status{flex:1;min-width:220px;font-size:15px;color:#b6d9e8;line-height:1.5}
+.scene-table-card{margin:16px 0 14px}
+.scene-table-wrap{max-height:480px;overflow:auto;scrollbar-color:#4d7890 #11202d}
+.scene-channel-table{border-collapse:collapse;width:100%;min-width:850px;font-size:14px}
+.scene-channel-table th{position:sticky;top:0;z-index:1;background:#153142;color:#b8d7e5;text-transform:uppercase;letter-spacing:.04em;font-size:12px;text-align:left;padding:13px 14px}
+.scene-channel-table td{padding:11px 14px;border-bottom:1px solid #31475a;color:#d4e5ed;white-space:nowrap}
+.scene-channel-table tr.scene-band-match td{background:rgba(69,213,181,.08)}
+.scene-channel-table tr:hover td{background:rgba(80,161,189,.14)}
+.scene-system-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:9px;box-shadow:0 0 0 3px #fff1}
+.scene-isolate{border-radius:9px;background:#153c4e;border:1px solid #44768e;color:#b2f1f3;font-size:13px;font-weight:750;padding:7px 12px;cursor:pointer}
+.scene-isolate:hover,.scene-isolate:focus-visible{border-color:#5fe2d4;color:#fff;background:#21556a;outline-offset:2px}
+.scene-channel-table td:nth-child(6){font-size:13px;color:#9acdbd}
+@media(max-width:750px){.scene-toolbar{display:block;padding:15px}.scene-toolbar label{min-width:0}.scene-toolbar select{width:100%}#scene-status{padding-top:13px}.scene-channel-table{min-width:800px}}

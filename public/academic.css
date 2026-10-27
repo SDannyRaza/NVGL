@@ -1,0 +1,33 @@
+/* Shared academic reading and accessibility layer. */
+body {font-size:18px;line-height:1.7}
+h1,h2,h3 {line-height:1.25;letter-spacing:-.015em}
+h1 {font-family:Georgia,"Times New Roman",serif}
+p {text-wrap:pretty}
+button,input,select,textarea {font-size:16px;max-width:100%}
+button,select,.primary-nav a,.page-tab,.action-button {min-height:44px}
+:focus-visible {outline:3px solid #ffd27b!important;outline-offset:4px}
+.academic-skip {position:fixed;left:16px;top:-100px;z-index:10000;background:#fff;color:#102033;padding:12px 20px;border-radius:6px}
+.academic-skip:focus {top:12px}
+.academic-guide {margin:18px 24px;padding:18px 22px;border:1px solid #466177;border-left:4px solid #75c7df;border-radius:8px;background:#112332;color:#e4edf4;font-size:17px}
+.academic-guide summary {font-size:18px;font-weight:650;cursor:pointer;min-height:44px}
+.academic-guide p {max-width:100ch;margin:10px 0}
+.academic-guide a {color:#9ee4ff;text-underline-offset:3px}
+.academic-guide strong {color:#fff}
+.lab-main,.lab-layout>* {min-width:0}
+.lab-layout {grid-template-columns:290px minmax(0,1fr)}
+.context-bar {position:relative;top:auto}
+.context-controls {grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.stage-nav button {text-align:left;padding:12px;white-space:normal}
+.stage-nav button small,.brand small,.chart-note,.plot-hint,.sidebar-note small {font-size:15px;color:#afc3d0}
+.section-head {gap:18px;flex-wrap:wrap}
+.formula {font-family:"Cambria Math",Georgia,serif;font-size:21px;max-width:100%;overflow-x:auto}
+.table-wrap {max-width:100%;overflow:auto}
+th,td {line-height:1.55}
+.plot {min-height:370px}
+@media(max-width:1100px){.lab-layout{grid-template-columns:1fr}.lab-sidebar{position:relative;top:auto;max-height:none}.stage-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.grid-2{grid-template-columns:1fr}}
+@media(max-width:760px){body{font-size:17px}.academic-guide{margin:12px;padding:14px}.stage-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.context-controls{grid-template-columns:1fr}.passport-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head,.card-head{flex-wrap:wrap}.nav-field{grid-template-columns:1fr;overflow-wrap:anywhere}.brand{min-width:0}.brand small{display:none}.formula{white-space:normal}.hero-tags{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{body{background:white!important;color:black!important}.academic-guide{background:white;color:black;border-color:#777}.academic-guide strong{color:black}.primary-nav,.stage-nav,.academic-skip{display:none}}
+
+/* Keep responsive Plotly canvases inside their panels during viewport changes. */
+.js-plotly-plot {max-width:100%;overflow:hidden}

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="/api_browser.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GNSS Signal Simulation · NCGSA Virtual GNSS Laboratory</title>
+<link rel="stylesheet" href="/signals.css">
+<script src="/api/constellations.js"></script>
+<script src="/vendor/plotly.min.js"></script>
+<script src="/prn_core.js"></script>
+<link rel="stylesheet" href="/academic.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&amp;family=Manrope:wght@500..800&amp;display=swap"><link rel="stylesheet" href="/lab_chrome.css"><link rel="stylesheet" href="/lab_footer.css"><link rel="stylesheet" href="/signals_receiver.css"><link rel="stylesheet" href="/signals_scene.css"><script defer src="/lab_chrome.js"></script></head>
+<body><a class="academic-skip" href="#academic-guide">Skip to laboratory guidance</a>
+<div class="app-shell">
+<header class="topbar">
+  <a class="brand" href="/"><span class="brand-mark">VGL</span><span><strong>NCGSA Virtual GNSS Laboratory</strong><small>Academic GNSS signal synthesis from RINEX + interface-control documents</small></span></a>
+  <div class="top-status"><span class="status-dot"></span><span>Local RINEX dataset</span><span class="divider">•</span><span>ICD-traceable simulation</span></div>
+</header>
+<nav class="primary-nav" aria-label="NCGSA Virtual GNSS Laboratory chapters">
+  <a href="/rinex">RINEX Explorer</a><a href="/orbits">Satellite Orbits</a><a href="/spp">Single Point Positioning</a><a class="active" href="/signals">GNSS Signal Simulation</a><a href="/front-end">GNSS Front End</a><a href="/acquisition">GNSS Acquisition</a><a href="/tracking">GNSS Tracking</a>
+</nav>
+
+<details class="academic-guide" id="academic-guide"><summary>Learning objectives &amp; laboratory method &mdash; transmitted signal and received signal</summary><p><strong>Learning objectives.</strong> Study the generated carrier, PRN and navigation message (lessons 01–07); inspect the full observed-satellite scene at each RINEX epoch (lesson 08); then examine an individual satellite and its measurements (lessons 09–12).</p><p><strong>Suggested method.</strong> Choose an epoch and open All-Satellite Receiver. Select a compatible RF band to view a modeled combined I/Q signal, then isolate any observed satellite to inspect its code delay, Doppler and navigation data.</p><p><strong>Interpretation limits.</strong> RINEX stores observables and decoded navigation parameters, not digitized RF samples or the original transmitted navigation bits. Distinct RF bands are simulated separately; receiver waveforms are epoch-anchored reconstructions, not raw recordings.</p></details>
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">NCGSA VIRTUAL GNSS LABORATORY / CHAPTER 4</span>
+    <h1>GNSS <span>Signal Simulation</span></h1>
+    <p>Generate satellite code, carrier and data (01–07), then reconstruct the full receiver-visible signal scene and inspect individual satellites at each RINEX observation epoch (08–12).</p>
+    <div class="hero-tags"><span>01–07 · Satellite generation</span><span>08 · All-satellite scene</span><span>09–12 · Receiver perspective</span><span>Epoch-linked OBS + NAV</span></div>
+  </div>
+  <div class="hero-graphic" aria-hidden="true">
+    <svg viewBox="0 0 520 240"><defs><linearGradient id="wave" x1="0" x2="1"><stop stop-color="#35cdef"/><stop offset=".48" stop-color="#48dca5"/><stop offset="1" stop-color="#ffb84a"/></linearGradient></defs><path d="M18 144 C52 68 86 220 120 144S188 68 222 144s68 76 102 0 68-76 102 0 62 70 78 8" fill="none" stroke="url(#wave)" stroke-width="5"/><g fill="#11283b" stroke="#365269"><rect x="35" y="31" width="116" height="56" rx="13"/><rect x="202" y="31" width="116" height="56" rx="13"/><rect x="369" y="31" width="116" height="56" rx="13"/></g><g fill="#eefaff" font-size="15" font-family="Segoe UI,Arial" text-anchor="middle"><text x="93" y="65">CARRIER</text><text x="260" y="65">PRN CODE</text><text x="427" y="65">NAV DATA</text></g><text x="260" y="220" text-anchor="middle" fill="#7ea5ba" font-size="13" font-family="Segoe UI,Arial">OBSERVED SIGNAL → ICD MODEL → RECEIVER PROCESSING</text></svg>
+  </div>
+</section>
+
+<div class="lab-layout">
+<aside class="lab-sidebar">
+  <div class="sidebar-title"><div><span class="eyebrow">ACADEMIC WORKSPACE / SLIDE NAVIGATOR</span><h2>From transmitted signal to receiver observation</h2><p>01–07 · Signal generation <span class="stage-divider">|</span> 08–12 · At the receiver</p></div><div class="stage-controller"><span id="stage-count">01 / 13</span><button type="button" id="stage-prev" aria-label="Previous laboratory stage">‹</button><button type="button" id="stage-next" aria-label="Next laboratory stage">›</button></div></div>
+  <nav id="stage-nav" class="stage-nav" aria-label="GNSS signal laboratory slides">
+    <button class="active" data-view="overview"><span>01</span><div><b>Signal Overview</b><small>Passport & complete chain</small></div></button>
+    <button data-view="rinex"><span>02</span><div><b>RINEX Dataset</b><small>OBS + NAV evidence</small></div></button>
+    <button data-view="carrier"><span>03</span><div><b>Carrier Generation</b><small>Frequency & wavelength</small></div></button>
+    <button data-view="prn"><span>04</span><div><b>PRN Code Generation</b><small>ICD generator & chips</small></div></button>
+    <button data-view="nav"><span>05</span><div><b>Navigation Message</b><small>RINEX NAV + ICD framing</small></div></button>
+    <button data-view="mod"><span>06</span><div><b>Spreading & Modulation</b><small>Code/data/subcarrier</small></div></button>
+    <button data-view="composite"><span>07</span><div><b>Composite Signal</b><small>Baseband & equivalent RF</small></div></button>
+    <button data-view="scene"><span>08</span><div><b>All-Satellite Receiver</b><small>Epoch scene & RF-band mixture</small></div></button>
+    <button data-view="received"><span>09</span><div><b>Individual Received Signal</b><small>I/Q for selected satellite</small></div></button>
+    <button data-view="delay"><span>10</span><div><b>Doppler &amp; Code Delay</b><small>Measured shift / delayed chips</small></div></button>
+    <button data-view="navrx"><span>11</span><div><b>Navigation at Receiver</b><small>Symbol timing &amp; NAV fields</small></div></button>
+    <button data-view="decode"><span>12</span><div><b>Receiver Observables</b><small>Measured C / L / D / S</small></div></button>
+    <button data-view="icd"><span>13</span><div><b>ICD Reference Library</b><small>Sources & definitions</small></div></button>
+  </nav>
+  <div class="sidebar-note"><span class="status-dot"></span><div><strong id="side-mode">RINEX-driven mode</strong><small id="side-source">Loading dataset…</small></div></div>
+</aside>
+
+<main class="lab-main">
+  <section class="context-bar card">
+    <div class="context-heading"><span class="eyebrow">ACTIVE DATASET SELECTION</span><h2 id="context-title">Loading RINEX dataset…</h2><p id="context-subtitle"></p></div>
+    <div class="context-controls">
+      <label>Epoch <select id="epoch-select"></select></label>
+      <label>Constellation <select id="system-select"></select></label>
+      <label>Satellite <select id="sat-select"></select></label>
+      <label>Signal <select id="signal-select"></select></label>
+      <label>Component <select id="component-select"></select></label>
+    </div>
+    <div class="context-status" id="context-status"></div>
+    <button type="button" id="focus-stage" class="focus-stage-button" aria-label="Focus the active signal graphs">⤢ Focus graphs</button>
+  </section>
+
+  <section class="workspace-view active" data-view-panel="overview">
+    <div class="section-head"><div><span class="eyebrow">SIGNAL PASSPORT</span><h2 id="overview-title">Selected GNSS signal</h2><p>Everything below is tied to the active satellite, RINEX signal code and nearest available navigation record.</p></div><span id="implementation-badge" class="verification-badge">Verifying…</span></div>
+    <div id="passport" class="passport-grid"></div>
+    <article class="card chain-card"><div class="card-head"><div><span class="eyebrow">COMPLETE PROCESS</span><h3>From broadcast signal to receiver observables</h3></div></div><div id="full-chain" class="full-chain"></div></article>
+    <div class="grid-2"><article class="card"><div class="card-head"><div><span class="eyebrow">OBSERVED AT SELECTED EPOCH</span><h3>RINEX measurements</h3></div></div><div id="overview-measurements" class="metric-list"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">ACADEMIC INTERPRETATION</span><h3>What is recorded vs. what is simulated?</h3></div></div><div class="callout"><strong>RINEX OBS</strong><p>Stores receiver measurements such as pseudorange, carrier phase, Doppler and C/N₀.</p></div><div class="callout"><strong>RINEX NAV</strong><p>Stores decoded broadcast parameters, not the original transmitted RF navigation-message bitstream.</p></div><div class="callout accent"><strong>ICD simulation</strong><p>Reconstructs the signal structure and ranging code from the governing interface specification.</p></div></article></div>
+  </section>
+
+  <section class="workspace-view" data-view-panel="rinex">
+    <div class="section-head"><div><span class="eyebrow">DATASET EVIDENCE</span><h2>RINEX Observation & Navigation Files</h2><p>The signal laboratory is populated from the actual systems, satellites and observation codes present in the loaded dataset.</p></div></div>
+    <div class="grid-2"><article class="card"><div class="card-head"><div><span class="eyebrow">RINEX OBS</span><h3 id="obs-file-name"></h3></div></div><div id="rinex-header-summary"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">RINEX NAV</span><h3 id="nav-file-name"></h3></div></div><div id="nav-coverage"></div></article></div>
+    <article class="card"><div class="card-head"><div><span class="eyebrow">RINEX → PHYSICAL SIGNAL</span><h3>Observation-code mapping</h3></div></div><div id="mapping-table" class="table-wrap"></div></article>
+  </section>
+
+  <section class="workspace-view" data-view-panel="carrier">
+    <div class="section-head"><div><span class="eyebrow">STAGE 1 / RF FOUNDATION</span><h2>Carrier Generation</h2><p>The selected carrier frequency is taken from the signal definition; GLONASS legacy frequencies are additionally resolved from the broadcast FDMA channel when the navigation record is available.</p></div><div class="formula">c(t) = A cos(2πf<sub>c</sub>t + φ)</div></div>
+    <div class="definition-row"><div><b>Carrier</b><span>Sinusoidal RF waveform used to transport ranging code and navigation information.</span></div><div><b>Frequency</b><span>Cycles per second. GNSS bands use carefully controlled center frequencies.</span></div><div><b>Wavelength</b><span>λ = c/f<sub>c</sub>; the spatial length of one carrier cycle.</span></div></div>
+    <div class="grid-2"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">TIME DOMAIN</span><h3>Selected RF carrier</h3></div></div><div id="carrier-plot" class="plot"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">LIVE PARAMETERS</span><h3>Carrier calculation</h3></div></div><div id="carrier-math" class="math-stack"></div></article></div>
+  </section>
+
+  <section class="workspace-view" data-view-panel="prn">
+    <div class="section-head"><div><span class="eyebrow">STAGE 2 / RANGING CODE</span><h2>PRN Code Laboratory</h2><p>Regenerate the exact satellite-specific ranging code for the current RINEX satellite wherever the governing ICD supplies the required algorithm or electronic code table.</p></div><div class="prn-live"><span>Generation</span><strong id="generation-counter">#0</strong><small id="generation-reason">Waiting…</small></div></div>
+    <div id="prn-verification" class="verification-strip"></div>
+    <div class="grid-2 prn-top"><article class="card"><div class="card-head"><div><span class="eyebrow">ICD GENERATOR</span><h3 id="generator-name">Code-generation architecture</h3></div></div><div id="generator-diagram" class="generator-diagram"></div><div id="generator-details" class="parameter-grid"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">CODE IDENTITY</span><h3>Generated sequence</h3></div></div><div id="prn-stats" class="stat-grid"></div><div id="chip-readout" class="chip-readout"></div></article></div>
+    <div class="grid-2"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">CHIP DOMAIN</span><h3>Local ranging-code replica</h3></div><span class="plot-hint">First 96 chips</span></div><div id="prn-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">MATCHED-CODE PRINCIPLE</span><h3>Periodic autocorrelation</h3></div><span class="plot-hint">Normalized</span></div><div id="autocorr-plot" class="plot"></div></article></div>
+    <details class="theory card"><summary>Academic definitions & PRN terminology</summary><div class="definition-grid"><div><b>PRN</b><span>A deterministic pseudo-random ranging sequence assigned to a satellite or signal component.</span></div><div><b>Chip</b><span>One binary element of a spreading/ranging sequence; it is distinct from a navigation data bit.</span></div><div><b>Chipping rate</b><span>Number of code chips transmitted per second.</span></div><div><b>Code phase</b><span>Receiver estimate of where the locally generated code aligns with the received code.</span></div><div><b>Gold code</b><span>Sequence family formed from preferred maximal sequences with controlled correlation properties.</span></div><div><b>Memory code</b><span>A published sequence stored explicitly rather than generated solely from a short recurrence.</span></div></div></details>
+  </section>
+
+  <section class="workspace-view" data-view-panel="nav">
+    <div class="section-head"><div><span class="eyebrow">STAGE 3 / BROADCAST DATA</span><h2>Navigation Message Laboratory</h2><p>Use the selected satellite’s nearest RINEX NAV record as decoded data evidence, while keeping the transmitted bit/frame structure as an ICD-defined simulation.</p></div><div id="nav-message-badge" class="verification-badge"></div></div>
+    <div class="nav-distinction"><div><strong>1 · Raw RINEX NAV parameters</strong><span>Actually stored in the navigation file.</span></div><div><strong>2 · Decoded message fields</strong><span>Physical meaning of those broadcast parameters.</span></div><div><strong>3 · ICD frame/page structure</strong><span>Educational reconstruction; raw RF bits are not retained by RINEX.</span></div></div>
+    <div class="grid-2"><article class="card"><div class="card-head"><div><span class="eyebrow">SELECTED NAV RECORD</span><h3 id="nav-record-title">Broadcast parameters</h3></div></div><div id="nav-fields" class="nav-fields"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">ICD STRUCTURE</span><h3 id="nav-family-title">Navigation message family</h3></div></div><div id="nav-structure" class="message-structure"></div></article></div>
+    <article class="card plot-card"><div class="card-head"><div><span class="eyebrow">EDUCATIONAL RE-ENCODING</span><h3>Navigation data symbols used by the simulator</h3></div><span class="plot-hint">Deterministic from current NAV record</span></div><div id="nav-bits-plot" class="plot compact"></div><p class="chart-note">These simulated symbols are deterministically derived from the decoded RINEX NAV values for teaching. They are not claimed to be the original transmitted bitstream.</p></article>
+  </section>
+
+  <section class="workspace-view" data-view-panel="mod">
+    <div class="section-head"><div><span class="eyebrow">STAGE 4 / SPREADING</span><h2>Data, PRN Code & Modulation</h2><p>The waveform equation changes with signal architecture. The simulator does not force Galileo, BeiDou or L2C into a GPS L1 C/A equation.</p></div><div id="mod-formula" class="formula"></div></div>
+    <div class="grid-2"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">BASEBAND</span><h3>Data × ranging code</h3></div></div><div id="spreading-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">SIGNAL-SPECIFIC MODULATION</span><h3 id="mod-title">Modulated component</h3></div></div><div id="modulation-plot" class="plot"></div></article></div>
+    <details class="theory card"><summary>What do BPSK, BOC, CBOC and time-division structures mean?</summary><div id="mod-theory" class="definition-grid"></div></details>
+  </section>
+
+  <section class="workspace-view" data-view-panel="composite">
+    <div class="section-head"><div><span class="eyebrow">STAGE 5 / SINGLE-SATELLITE SYNTHESIS</span><h2>Selected Satellite Composite</h2><p>Combine this satellite's code/data component with its carrier. The equivalent RF trace illustrates modulation; lesson 08 then combines all compatible observed satellite channels.</p></div></div>
+    <div class="grid-2"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">EQUIVALENT RF</span><h3>Composite time-domain waveform</h3></div></div><div id="composite-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">FREQUENCY DOMAIN</span><h3>Normalized baseband spectrum</h3></div></div><div id="spectrum-plot" class="plot"></div></article></div>
+  </section>
+
+  <section class="workspace-view receiver-screen" data-view-panel="scene">
+    <div class="section-head receiver-head"><div><span class="eyebrow">RECEIVER / 08 · COMPLETE OBSERVATION EPOCH</span><h2>All satellites at the receiver</h2><p>Every satellite and observation channel is read from the chosen RINEX epoch. Mix compatible signals at one selected RF front-end center, then isolate any satellite for detailed study.</p></div></div>
+    <div class="scene-toolbar card"><label>Receiver RF group<select id="scene-rf-band" aria-label="Choose RF group for composite signal"><option value="l1">L1 / E1 · 1575.42 MHz</option><option value="b1">BeiDou B1 · 1561.098 MHz</option><option value="g1">GLONASS G1 · FDMA</option><option value="l2">L2 · 1227.60 MHz</option><option value="e5b">E5b / B2 · 1207.14 MHz</option><option value="g2">GLONASS G2 · FDMA</option></select></label><div id="scene-status" role="status" aria-live="polite">Select this stage to reconstruct the epoch's satellite scene.</div></div>
+    <div class="receiver-metrics" id="scene-metrics"></div>
+    <div class="receiver-plots"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">COMMON RECEIVER FRONT END</span><h3>Combined complex I/Q with shared thermal noise</h3></div></div><div id="scene-iq-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">INDIVIDUAL CHANNELS</span><h3>Clean signal contributions in the chosen band</h3></div></div><div id="scene-components-plot" class="plot"></div></article></div>
+    <article class="card scene-table-card"><div class="card-head"><div><span class="eyebrow">COMPLETE EPOCH INVENTORY</span><h3>All observed satellites and available RINEX signals</h3></div></div><div id="scene-satellite-list" class="scene-table-wrap"></div></article>
+    <p class="receiver-footnote"><strong>Scientific boundary:</strong> Satellites in different RF bands cannot be coherently added in a single narrowband front-end. Each RF group is simulated separately. RINEX-constrained code delay, Doppler and C/N₀ anchor the channels; GPS L1 C/A LNAV is re-encoded where available. The resulting complex samples are not original recorded RF or full hardware-accurate CBOC/AltBOC/L2C waveforms.</p>
+  </section>
+
+  <section class="workspace-view receiver-screen" data-view-panel="received">
+    <div class="section-head receiver-head"><div><span class="eyebrow">RECEIVER / 09 · SELECTED SATELLITE</span><h2>Received I/Q at the selected epoch</h2><p>PRN chips are delayed by the selected pseudorange, carrier rotates at measured Doppler, and thermal noise is estimated from C/N₀.</p></div><label class="receiver-switch"><input type="checkbox" id="receiver-noise" checked><span>Thermal noise</span></label></div>
+    <div id="receiver-metrics" class="receiver-metrics" aria-live="polite"></div>
+    <div class="receiver-plots"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">RECONSTRUCTED RECEIVER WAVEFORM</span><h3>I / Q amplitude vs sample time</h3></div></div><div id="receiver-iq-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">CARRIER + NOISE</span><h3>Complex baseband constellation</h3></div></div><div id="receiver-cloud-plot" class="plot"></div></article></div>
+    <p class="receiver-footnote">Model-generated IQ anchored by RINEX code, Doppler, carrier phase, and C/N₀; not actual recorded samples. The transmitted navigation bits are reconstructed for teaching because RINEX NAV does not retain the bitstream.</p>
+  </section>
+
+  <section class="workspace-view receiver-screen" data-view-panel="delay">
+    <div class="section-head receiver-head"><div><span class="eyebrow">RECEIVER / 10 · PROPAGATION AND MOTION</span><h2>Doppler shift and incoming code delay</h2><p>Change PRN or epoch above. Compare receiver-side code timing with a local replica and inspect residual carrier rotation.</p></div></div>
+    <div id="delay-metrics" class="receiver-metrics" aria-live="polite"></div>
+    <div class="receiver-plots"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">DELAYED RANGING CHIPS</span><h3>Local reference versus received PRN</h3></div></div><div id="received-code-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">RINEX DOPPLER</span><h3>Complex carrier after nominal RF removal</h3></div></div><div id="received-doppler-plot" class="plot"></div></article></div>
+    <p class="receiver-footnote">Observed pseudorange includes receiver/satellite clock and atmospheric contributions; the displayed code delay is an apparent propagation delay, modulo the current code period. Doppler is the RINEX D observable at this epoch.</p>
+  </section>
+
+  <section class="workspace-view receiver-screen" data-view-panel="navrx">
+    <div class="section-head receiver-head"><div><span class="eyebrow">RECEIVER / 11 · NAVIGATION SYMBOLS</span><h2>Navigation data arriving at the receiver</h2><p>For GPS L1 C/A, re-encode RINEX ephemeris as LNAV with GNSS-SDR-SIM's word layout and parity. Select another system to compare explicitly illustrative symbols.</p></div></div>
+    <div id="nav-receiver-metrics" class="receiver-metrics" aria-live="polite"></div>
+    <div class="receiver-plots nav-rx-layout"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">SYMBOL TIMELINE AT RECEIVE EPOCH</span><h3>Delayed navigation data signs</h3></div></div><div id="received-nav-plot" class="plot"></div></article><article class="card nav-receiver-context"><div class="card-head"><div><span class="eyebrow">MATCHED RINEX NAV RECORD</span><h3>Navigation message context</h3></div></div><div id="received-nav-details" class="nav-receiver-details"></div></article></div>
+    <p class="receiver-footnote"><strong>Scientific boundary:</strong> RINEX does not store original RF samples or a bit-perfect broadcast. GPS LNAV subframes 1–3, TOW and parity are re-encoded from the nearest NAV record; subframe 4 page 18 is populated when GPS ionosphere/UTC header data are available, while subframe 5 remains a simulator placeholder. NAV-record time differences mean a retrospective replay.</p>
+  </section>
+
+  <section class="workspace-view" data-view-panel="decode">
+    <div class="section-head"><div><span class="eyebrow">RECEIVER / 12 · MEASUREMENT EVIDENCE</span><h2>Receiver Observables &amp; NAV Parameters</h2><p>Check the actual code, carrier phase, Doppler and C/N₀ values recorded in RINEX. These measurements anchor lessons 09–11.</p></div></div>
+    <div id="receiver-chain" class="receiver-chain"></div>
+    <div class="grid-2"><article class="card"><div class="card-head"><div><span class="eyebrow">RINEX OBS</span><h3>Measurements from tracking</h3></div></div><div id="decode-obs" class="metric-list"></div></article><article class="card"><div class="card-head"><div><span class="eyebrow">RINEX NAV</span><h3>Decoded broadcast parameters</h3></div></div><div id="decode-nav"></div></article></div>
+  </section>
+
+  <section class="workspace-view" data-view-panel="icd">
+    <div class="section-head"><div><span class="eyebrow">ACADEMIC TRACEABILITY</span><h2>ICD Reference Library & Glossary</h2><p>Open the local interface documents used to define the signals. Each active signal identifies its governing document and relevant section/table.</p></div></div>
+    <article id="selected-source" class="selected-source card"></article>
+    <div id="icd-library" class="icd-grid"></div>
+    <article class="card glossary"><div class="card-head"><div><span class="eyebrow">DEFINITIONS</span><h3>GNSS Signal Processing Glossary</h3></div><input id="glossary-search" type="search" placeholder="Search PRN, chip, BOC, DLL, pseudorange…"></div><div id="glossary-grid" class="glossary-grid"></div></article>
+  </section>
+</main>
+</div>
+<footer><strong>NCGSA Virtual GNSS Laboratory · GNSS Signal Simulation</strong><span>Recorded RINEX measurements and ICD-based signal reconstruction are intentionally distinguished throughout the laboratory.</span></footer>
+</div>
+<script src="/gps_lnav_replay.js"></script>
+<script src="/signal_receiver_model.js"></script>
+<script src="/signals.js"></script>
+<script src="/signals_scene.js"></script>
+<footer class="institutional-footer" id="footer">
+    <div class="footer-inner content-width">
+      <div class="footer-overview">
+        <div class="footer-lead"><div class="footer-kicker">GNSS RESEARCH LAB · NCGSA · IST</div><h2>NCGSA Virtual GNSS Laboratory</h2><p>An interactive teaching and research environment in satellite navigation, developed at the National Center of GIS &amp; Space Applications, Institute of Space Technology.</p></div>
+        <div class="footer-invite"><span class="footer-invite-label">EXPLORE · EXPERIMENT · LEARN</span><p>From observation data to navigation solutions.</p><a href="https://gnss.ncgsa.org.pk" target="_blank" rel="noopener noreferrer">Visit GNSS Research Lab <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="footer-affiliation-head"><span>INSTITUTIONAL AFFILIATIONS</span></div>
+      <div class="identity-row" role="list" aria-label="Institutional affiliations">
+        <div class="identity identity-uraan" role="listitem" title="URAAN Pakistan"><img src="/footer_logos/uraan-pakistan.png" alt="URAAN Pakistan" loading="lazy" decoding="async"></div>
+        <div class="identity identity-ministry" role="listitem" title="Ministry of Planning, Development and Special Initiatives"><img src="/footer_logos/planning-ministry-2026.png" alt="Ministry of Planning, Development and Special Initiatives, Government of Pakistan" loading="lazy" decoding="async"></div>
+        <div class="identity" role="listitem"><img src="/footer_logos/hec.png" alt="Higher Education Commission Pakistan" loading="lazy" decoding="async"></div>
+        <div class="identity identity-round" role="listitem"><img src="/footer_logos/ncgsa-official.jpg" alt="National Center of GIS and Space Applications" loading="lazy" decoding="async"></div>
+        <div class="identity" role="listitem"><img src="/footer_logos/ist.png" alt="Institute of Space Technology" loading="lazy" decoding="async"></div>
+        <div class="identity identity-round" role="listitem"><img src="/footer_logos/gnss-official.jpg" alt="GNSS Research Lab" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="footer-contact-grid"><div class="footer-contact-title"><blockquote class="footer-quote">“Challenges are opportunities in disguise.”</blockquote><p class="footer-quote-attribution">— Dr. Gladys West <span>Pioneer in Satellite Geodesy and GPS</span></p></div><div class="footer-contact-links"><a href="tel:+92519675750"><span class="footer-icon" aria-hidden="true">☎</span><span>+92-51-967-5750 / 5751</span></a><a href="mailto:gnss@ncgsa.org.pk"><span class="footer-icon" aria-hidden="true">✉</span><span>gnss@ncgsa.org.pk</span></a><a href="https://www.ncgsa.org.pk" target="_blank" rel="noopener noreferrer"><span class="footer-icon" aria-hidden="true">◎</span><span>www.ncgsa.org.pk</span></a><div><span class="footer-icon" aria-hidden="true">⌖</span><span>1, Islamabad Expressway, Islamabad, Pakistan</span></div></div></div>
+      <div class="footer-bottom"><p>© 2026 GNSS Research Lab · NCGSA · Institute of Space Technology</p><div class="footer-social"><a href="https://www.facebook.com/GNSSResearchLab" target="_blank" rel="noopener noreferrer">Facebook <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/company/gnss-research-lab-ncgsa/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></div><a class="back-top" href="#top" aria-label="Back to top">↑</a></div>
+    </div>
+  </footer></body>
+</html>

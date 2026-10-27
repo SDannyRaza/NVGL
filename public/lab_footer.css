@@ -1,0 +1,83 @@
+/* Single institutional footer used by the home page and all seven dashboards.
+   The HTML is sourced directly from landing.html by rinex_explorer.py. */
+.institutional-footer{
+  box-sizing:border-box;clear:both;width:100%;margin:0;padding:74px 0 25px;
+  color:#d9eafa;font:400 15px/1.6 Inter,ui-sans-serif,"Segoe UI",Arial,sans-serif;
+  text-align:left;background:radial-gradient(ellipse 950px 340px at 90% 0,rgba(29,105,158,.18),transparent 90%),linear-gradient(180deg,#08172a,#030914);
+  border-top:1px solid #315876;border-radius:0;
+}
+.institutional-footer *{box-sizing:border-box}
+.institutional-footer a{color:#9bd1ee;text-decoration:none}
+.institutional-footer .footer-inner.content-width{width:min(1400px,calc(100% - 100px));max-width:1400px;margin:0 auto;padding:0}
+.institutional-footer .footer-overview{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(290px,.6fr);gap:75px;align-items:center;padding-bottom:42px}
+.institutional-footer .footer-lead{text-align:left;max-width:740px}
+.institutional-footer .footer-kicker{display:block;color:#40c4f8;font-size:11px;font-weight:850;letter-spacing:.19em;line-height:1.55;margin:0 0 11px}
+.institutional-footer .footer-lead h2{font:840 clamp(25px,2.75vw,37px)/1.2 Manrope,Inter,sans-serif;letter-spacing:-.028em;text-transform:none;color:#eef7ff;margin:0 0 15px}
+.institutional-footer .footer-lead p{font-size:15px;font-weight:450;line-height:1.75;letter-spacing:0;text-transform:none;color:#b8cadc;max-width:670px;margin:0}
+.institutional-footer .footer-invite{border-left:1px solid #366285;padding:8px 0 8px 26px}
+.institutional-footer .footer-invite-label{color:#69d9fa;font-size:10px;letter-spacing:.17em;font-weight:780}
+.institutional-footer .footer-invite p{font:650 20px/1.36 Manrope,Inter,sans-serif;color:#e8f7ff;margin:9px 0 18px}
+.institutional-footer .footer-invite a{font-size:13px;font-weight:730;color:#7ddcff;display:inline-flex;align-items:center;gap:10px;border-bottom:1px solid #458caf;padding-bottom:3px}
+.institutional-footer .footer-invite a:hover{color:#fff}
+.institutional-footer .footer-affiliation-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-top:25px;border-top:1px solid #264661}
+.institutional-footer .footer-affiliation-head span{color:#a5c9e3;font-size:11px;font-weight:790;letter-spacing:.16em}
+.institutional-footer .footer-affiliation-head p{font-size:12px;color:#8eaabe;margin:0}
+.institutional-footer .identity-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;gap:8px;padding:14px;margin:19px 0 38px;min-height:124px;border:1px solid #2d4966;border-radius:15px;background:linear-gradient(115deg,#10223a77,#07182b88)}
+.institutional-footer .identity{display:flex;align-items:center;justify-content:center;height:108px;min-width:0;padding:9px 7px;overflow:hidden;border:1px solid rgba(100,169,214,.16);border-radius:11px;background:linear-gradient(145deg,rgba(30,65,96,.48),rgba(6,20,37,.24))}
+.institutional-footer .identity::after{display:none!important}
+.institutional-footer .identity img{display:block;width:100%;height:69px;max-width:100%;object-fit:contain;filter:drop-shadow(0 2px 12px #0006)}
+.institutional-footer .identity-round img{width:76px;height:76px;border-radius:50%;background:#ecf3fc}
+.institutional-footer .identity-uraan img{width:160px;height:160px;max-width:calc(100% + 14px);max-height:none;flex-shrink:0}
+.institutional-footer .identity-ministry img{width:82px;height:82px;border-radius:50%;background:#fff;object-fit:cover}
+.institutional-footer .footer-contact-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:65px;padding:31px 0 40px;border-top:1px solid #25435e}
+.institutional-footer .footer-quote{margin:0;padding:0;border:0;background:none;color:#eef8ff;font:680 clamp(20px,2.05vw,27px)/1.46 Manrope,Inter,sans-serif;letter-spacing:-.028em;max-width:530px}
+.institutional-footer .footer-quote-attribution{margin:13px 0 0;color:#a3d8f0;font-size:13px;font-weight:680;line-height:1.7}
+.institutional-footer .footer-quote-attribution span{display:block;color:#93afc6;font-size:11px;font-weight:550;letter-spacing:.035em}
+.institutional-footer .footer-contact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 26px;align-items:start}
+.institutional-footer .footer-contact-links>a,.institutional-footer .footer-contact-links>div{display:flex;align-items:center;gap:11px;color:#c7d9e7;font-size:13px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.institutional-footer .footer-contact-links a:hover{color:#76d8ff}
+.institutional-footer .footer-icon{display:grid;place-items:center;flex:none;font-size:16px;line-height:1;width:30px;height:30px;border:1px solid #315e80;border-radius:50%;background:#0b2d46;color:#4bcfff}
+.institutional-footer .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:69px;padding-top:21px;border-top:1px solid #1d324a;color:#9bb2c6;font-size:12px}
+.institutional-footer .footer-bottom p{margin:0;color:#9bb2c6;font-size:12px}
+.institutional-footer .footer-social{display:flex;flex-wrap:wrap;gap:22px;margin-left:auto}
+.institutional-footer .footer-social a{font-size:12px;color:#9bd1ee;font-weight:600}
+.institutional-footer .footer-social a:hover{color:#fff}
+.institutional-footer .footer-social a span{color:#53d1ff;margin-left:4px}
+.institutional-footer .back-top{display:grid;place-items:center;flex:none;width:39px;height:39px;border:1px solid #315575;border-radius:8px;color:#7dd6fb;font-size:23px;line-height:1}
+.institutional-footer .back-top:hover{background:#123956}
+
+/* Functional RINEX shortcuts, retained above the common institutional footer. */
+.lab-rinex-footer-resources{width:min(1400px,calc(100% - 48px));margin:24px auto 38px;padding:14px 19px;border:1px solid #2d506a;border-radius:12px;background:#0c2235;color:#d1e6f4;font:500 14px/1.6 Inter,sans-serif}
+.lab-rinex-footer-resources summary{cursor:pointer;color:#95dffc;font-weight:700}
+.lab-rinex-footer-resources .institutional-explore{margin-top:12px}
+
+/* Orbital chapter already has the common institutional footer below; suppress
+   its obsolete minimal page sign-off without affecting academic source notes. */
+body.lab-theme-orbits>footer.footer{display:none}
+
+@media(max-width:1120px){.institutional-footer .identity-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1000px){.institutional-footer .footer-overview{gap:35px}.institutional-footer .footer-contact-grid{gap:35px}}
+@media(max-width:800px){
+  .institutional-footer .footer-inner.content-width{width:min(1400px,calc(100% - 46px))}
+  .institutional-footer .footer-overview{grid-template-columns:1fr;gap:22px}
+  .institutional-footer .footer-invite{max-width:490px}
+  .institutional-footer .footer-affiliation-head{display:block}
+  .institutional-footer .footer-affiliation-head p{margin-top:6px}
+  .institutional-footer .footer-contact-grid{grid-template-columns:1fr;gap:20px}
+}
+@media(max-width:640px){
+  .institutional-footer .identity-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:10px}
+  .institutional-footer .identity{height:100px}
+  .institutional-footer .identity-ministry img{width:75px;height:75px}
+}
+@media(max-width:590px){
+  .institutional-footer{padding-top:52px}
+  .institutional-footer .footer-inner.content-width{width:calc(100% - 36px)}
+  .institutional-footer .footer-lead h2{font-size:26px}
+  .institutional-footer .footer-lead p{font-size:14px}
+  .institutional-footer .footer-invite p{font-size:18px}
+  .institutional-footer .footer-contact-links{grid-template-columns:1fr;gap:15px}
+  .institutional-footer .footer-bottom{flex-direction:column;align-items:flex-start;gap:13px}
+  .institutional-footer .footer-social{margin-left:0;gap:17px}
+  .institutional-footer .back-top{align-self:flex-end;margin-top:-46px}
+}

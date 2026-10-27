@@ -1,0 +1,211 @@
+/* NCGSA GNSS Signal Simulation: horizontal lesson slider and receiver-first plots.
+   The institutional dark palette, fonts, navigation, and footer remain unchanged. */
+body.lab-unified .hero, body .hero {
+  min-height:0;
+  margin:12px 19px 14px;
+  padding:22px 28px;
+  grid-template-columns:minmax(0,1.65fr) minmax(255px,.65fr);
+}
+body .hero p {max-width:85ch;line-height:1.46;font-size:17px}
+body .hero .hero-graphic svg{max-height:132px}
+body .hero .hero-tags{margin-top:10px}
+body .hero .hero-tags span{padding:5px 10px;font-size:13px}
+body.signal-focus-mode .hero,
+body.signal-focus-mode .academic-guide{display:none!important}
+
+body .lab-layout{
+  display:flex;
+  flex-direction:column;
+  padding:0 19px 26px;
+  gap:10px;
+  min-width:0;
+}
+body .lab-sidebar{
+  position:relative;
+  top:auto;
+  align-self:stretch;
+  max-height:none;
+  display:block;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(120deg,#101f31,#111d2e);
+  border:1px solid #31516c;
+  box-shadow:0 10px 25px #00000016;
+}
+body .sidebar-title{
+  padding:13px 16px 10px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border:0;
+}
+body .sidebar-title .eyebrow{font-size:12px;color:#87ddea;letter-spacing:.11em}
+body .sidebar-title h2{font-size:19px;line-height:1.24;margin:1px 0 0}
+body .sidebar-title p{color:#aac3d1;font-size:13px;margin:2px 0 0}
+.stage-divider{padding:0 8px;color:#517088}
+.stage-controller{display:flex;align-items:center;gap:9px;flex-shrink:0}
+.stage-controller>span{font:750 13px Inter,'Segoe UI',sans-serif;color:#a5c2d1;letter-spacing:.08em;margin-right:3px}
+.stage-controller button{
+  width:36px;height:36px;display:grid;place-items:center;
+  border:1px solid #36546b;border-radius:10px;
+  background:#0a1b2a;color:#cbeefa;font:650 27px/1 Inter,'Segoe UI',sans-serif;
+  cursor:pointer;transition:background .17s,border-color .17s;
+}
+.stage-controller button:disabled{opacity:.32;cursor:default}
+.stage-controller button:not(:disabled):hover{background:#183b4c;border-color:#52cfe8}
+
+body .stage-nav{
+  display:flex;
+  grid-template-columns:none;
+  gap:9px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#36576d transparent;
+  padding:5px 15px 12px;
+}
+body .stage-nav button{
+  flex:0 0 clamp(165px,15.4vw,233px);
+  min-height:69px;
+  width:auto;
+  gap:11px;
+  display:flex;
+  align-items:center;
+  padding:10px 13px;
+  border:1px solid #2c4359;
+  border-radius:12px;
+  background:#0d1b29;
+  scroll-snap-align:center;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+body .stage-nav button:nth-child(n+8):nth-child(-n+11){border-top:2px solid #56d7a5}
+body .stage-nav button:hover{background:#15283a;transform:translateY(-1px)}
+body .stage-nav button.active{
+  background:linear-gradient(112deg,#183646,#17334a);
+  border-color:#68b9cf;
+  box-shadow:inset 0 3px var(--active),0 5px 15px #00000018;
+}
+body .stage-nav button>span{flex:0 0 22px;width:22px;color:#79cfeb;font-size:13px}
+body .stage-nav button b{font-size:14px;line-height:1.25;color:#e6f5fa}
+body .stage-nav button small{font-size:12px;line-height:1.25;color:#9fb7c5;margin-top:3px}
+body .sidebar-note{display:none}
+
+body .lab-main{min-width:0;display:block}
+body .context-bar{
+  position:sticky;top:0;z-index:70;
+  padding:12px 15px 9px;
+  margin-bottom:11px;
+  grid-template-columns:minmax(215px,.95fr) minmax(610px,2.55fr) auto;
+  gap:10px 15px;
+  align-items:center;
+  border-radius:13px;
+  border-color:#355775;
+  background:rgba(13,26,42,.96);
+  box-shadow:0 7px 24px #00000028;
+  backdrop-filter:blur(15px);
+}
+body .context-heading .eyebrow{font-size:12px}
+body .context-heading h2{font-size:18px;margin:0 0 2px;line-height:1.28}
+body .context-heading p{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body .context-controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+body .context-controls label{font-size:11.5px;color:#aec4d2;letter-spacing:.035em;gap:2px}
+body .context-controls select{height:39px;font:600 13px Inter,'Segoe UI',sans-serif;color:#e7f5fb;padding:0 8px}
+body .context-status{grid-column:1/3;display:flex;flex-wrap:nowrap;overflow:hidden;gap:7px}
+body .context-status span{padding:2px 7px;max-width:27%;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.focus-stage-button{
+  grid-column:3;grid-row:1/3;align-self:center;
+  display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;
+  min-height:37px;border:1px solid #426a82;background:#112f45;
+  color:#c4ecf7;border-radius:9px;font:700 12px Inter,'Segoe UI',sans-serif;
+  cursor:pointer;padding:8px 11px;
+}
+.focus-stage-button:hover{background:#1b4258;border-color:#77ddef}
+body .workspace-view>.section-head{margin:1px 4px 9px}
+body .workspace-view>.section-head h2{font-size:clamp(23px,2.1vw,30px);margin:2px 0}
+body .workspace-view>.section-head p{font-size:15px;line-height:1.48}
+/* On PRN and NAV pages, keep the graphs directly under the epoch/PRN controls;
+   code identity and long decoded-message tables remain available below. */
+body [data-view-panel="prn"].active,
+body [data-view-panel="nav"].active{display:flex;flex-direction:column}
+body [data-view-panel="prn"]>.section-head,
+body [data-view-panel="nav"]>.section-head{order:0}
+body [data-view-panel="prn"]>#prn-verification{order:1}
+body [data-view-panel="prn"]>.grid-2:not(.prn-top),
+body [data-view-panel="nav"]>.plot-card{order:2}
+body [data-view-panel="prn"]>.prn-top,
+body [data-view-panel="nav"]>.nav-distinction{order:3}
+body [data-view-panel="prn"]>.theory,
+body [data-view-panel="nav"]>.grid-2{order:4}
+body [data-view-panel="prn"]>.grid-2:not(.prn-top) .plot,
+body [data-view-panel="nav"]>.plot-card .plot{height:clamp(260px,32vh,385px)}
+
+/* Three new receiver stages use consistently sized plot surfaces on one row. */
+.receiver-screen{--receiver-accent:#63dbb2}
+.receiver-head{align-items:center;min-width:0}
+.receiver-head>div{min-width:0}
+.receiver-head .eyebrow{color:#63dfbe}
+.receiver-switch{
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+  color:#c5e5ec;font-size:14px;font-weight:650;
+  border:1px solid #315e65;border-radius:10px;background:#112b34;
+  padding:8px 12px;
+}
+.receiver-switch input{accent-color:#31cbab;width:17px;height:17px}
+.receiver-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:11px 0}
+.receiver-metric{
+  min-width:0;display:grid;gap:3px;padding:12px 13px;
+  border:1px solid #2e515f;border-radius:12px;
+  background:linear-gradient(145deg,#132839,#0e1e2c);
+}
+.receiver-metric span{font-size:11px;font-weight:780;text-transform:uppercase;letter-spacing:.07em;color:#a1c5d3}
+.receiver-metric strong{display:block;font-size:clamp(17px,1.55vw,24px);letter-spacing:-.015em;color:#e7f9fc;overflow-wrap:anywhere;line-height:1.2}
+.receiver-metric small{font-size:12px;color:#8fabbc}
+.receiver-plots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.receiver-plots>.card{min-width:0}
+.receiver-plots .card-head{padding:10px 14px 4px}
+.receiver-plots .card-head .eyebrow{font-size:11px;color:#6bd9c2}
+.receiver-plots .card-head h3{font-size:17px;margin:0}
+.receiver-plots .plot{height:clamp(255px,34vh,393px);min-height:255px}
+.receiver-footnote{
+  font-size:13px;color:#b5cddb;line-height:1.5;
+  background:#101f2d;border-left:3px solid #46d1bd;
+  border-radius:8px;padding:10px 13px;margin:10px 1px 0;
+}
+.nav-receiver-context{overflow:auto;max-height:465px}
+.nav-receiver-details{display:grid;gap:11px;padding:4px 15px 17px}
+.nav-detail{border:1px solid #274757;background:#0d1e2b;border-radius:9px;padding:10px 13px}
+.nav-detail b{display:block;color:#7ce2cf;font-size:13px}
+.nav-detail span{display:block;color:#eaf8fb;font-size:14px;margin-top:3px;overflow-wrap:anywhere}
+.receiver-empty{display:grid;place-items:center;min-height:190px;padding:25px;text-align:center;color:#eac79f;font-size:16px}
+body .receiver-screen .plot-card{overflow:hidden}
+
+@media(max-width:1100px){
+  body .context-bar{grid-template-columns:1fr;gap:10px}
+  body .context-controls{grid-template-columns:repeat(5,minmax(0,1fr))}
+  body .context-status{grid-column:1/2;grid-row:auto}
+  .focus-stage-button{grid-column:1;grid-row:auto;justify-self:start}
+  body .receiver-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body .receiver-plots{grid-template-columns:1fr}
+  body .stage-nav button{flex-basis:190px}
+}
+@media(max-width:660px){
+  body .hero{grid-template-columns:1fr;padding:18px 16px}
+  body .hero .hero-graphic{display:none}
+  body .lab-layout{padding-inline:10px}
+  body .sidebar-title h2{font-size:17px}
+  body .stage-nav button{flex-basis:172px;min-height:60px}
+  body .context-bar{position:sticky;top:0;padding:10px}
+  body .context-heading p{max-width:91vw}
+  body .context-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body .context-status{display:none}
+  body .receiver-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .receiver-metric strong{font-size:17px}
+  .receiver-plots .plot{height:270px;min-height:270px}
+  .receiver-footnote{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){body .stage-nav{scroll-behavior:auto}}

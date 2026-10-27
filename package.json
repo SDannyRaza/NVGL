@@ -1,0 +1,15 @@
+{
+  "name": "ncgsa-virtual-gnss-laboratory",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Frontend-only Virtual GNSS Laboratory for GitHub and Vercel. Scientific Python executes client-side through Pyodide/WebAssembly.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "verify": "node scripts/verify-static.mjs && node scripts/check-syntax.mjs",
+    "test": "node --test *.test.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

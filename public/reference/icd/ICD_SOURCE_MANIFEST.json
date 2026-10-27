@@ -1,0 +1,67 @@
+{
+  "generated_for": "Virtual GNSS Laboratory \u2014 GNSS Signal Simulation",
+  "verification_basis": "User uploaded GNSS ICD.zip",
+  "documents": [
+    {
+      "file": "BeiDou1.pdf",
+      "size_bytes": 1685079
+    },
+    {
+      "file": "Beidou2.pdf",
+      "size_bytes": 343119
+    },
+    {
+      "file": "GLONASS.ICD.pdf",
+      "size_bytes": 994607
+    },
+    {
+      "file": "GLONASS.pdf",
+      "size_bytes": 7862836
+    },
+    {
+      "file": "Galileo_HAS_SIS_ICD_v1.0.pdf",
+      "size_bytes": 2079523
+    },
+    {
+      "file": "Galileo_OS_SIS_ICD_v2.2.pdf",
+      "size_bytes": 5335673
+    },
+    {
+      "file": "ICD-GPS-240D.pdf",
+      "size_bytes": 1859702
+    },
+    {
+      "file": "ICD_GLONASS_4.0_(1998)_en.pdf",
+      "size_bytes": 1300419
+    },
+    {
+      "file": "IS-GPS-200N.pdf",
+      "size_bytes": 3338120
+    },
+    {
+      "file": "IS-GPS-705J.pdf",
+      "size_bytes": 1771754
+    },
+    {
+      "file": "IS-GPS-800J.pdf",
+      "size_bytes": 4167288
+    },
+    {
+      "file": "is-qzss-l1s-009.pdf",
+      "size_bytes": 1169920
+    },
+    {
+      "file": "is-qzss-l6-008.pdf",
+      "size_bytes": 1505520
+    },
+    {
+      "file": "is-qzss-pnt-006.pdf",
+      "size_bytes": 4131112
+    }
+  ],
+  "limitations": [
+    "NavIC SIS ICD not in uploaded archive",
+    "SBAS/WAAS SIS specification not in uploaded archive",
+    "Modern BeiDou detailed B1C/B2a/B2b/B3I SIS ICDs not in uploaded archive; only high-level performance standard is bundled"
+  ]
+}

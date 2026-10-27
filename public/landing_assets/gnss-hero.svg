@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="800" viewBox="0 0 1920 800" role="img" aria-label="Navigation satellite in orbit above the illuminated Earth">
+  <defs>
+    <radialGradient id="space" cx="84%" cy="48%" r="92%"><stop stop-color="#143e70"/><stop offset=".48" stop-color="#071d3b"/><stop offset="1" stop-color="#020917"/></radialGradient>
+    <radialGradient id="earth" cx="39%" cy="15%" r="89%"><stop stop-color="#72d6fa"/><stop offset=".14" stop-color="#1b7bbb"/><stop offset=".5" stop-color="#0b3469"/><stop offset=".82" stop-color="#031a3b"/><stop offset="1" stop-color="#010c21"/></radialGradient>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2=".5"><stop stop-color="#397db3"/><stop offset=".24" stop-color="#153e78"/><stop offset=".53" stop-color="#08234e"/><stop offset=".78" stop-color="#113d76"/><stop offset="1" stop-color="#2e77af"/></linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2=".82"><stop stop-color="#fbffff"/><stop offset=".16" stop-color="#c8dceb"/><stop offset=".34" stop-color="#54728f"/><stop offset=".63" stop-color="#daeaf7"/><stop offset=".86" stop-color="#557f9c"/><stop offset="1" stop-color="#e6f4ff"/></linearGradient>
+    <linearGradient id="dish" x1=".15" x2=".9" y1="0" y2="1"><stop stop-color="#f5fcff"/><stop offset=".45" stop-color="#98b8cf"/><stop offset="1" stop-color="#243f62"/></linearGradient>
+    <linearGradient id="atmosphere" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b5f7ff" stop-opacity=".9"/><stop offset=".25" stop-color="#3bbcff" stop-opacity=".72"/><stop offset="1" stop-color="#1c8cf4" stop-opacity="0"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#62d5ff" stop-opacity=".85"/><stop offset=".14" stop-color="#1c9aff" stop-opacity=".3"/><stop offset="1" stop-color="#1b93e4" stop-opacity="0"/></radialGradient>
+    <filter id="halo" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="15"/></filter>
+    <pattern id="cells" width="27" height="33" patternUnits="userSpaceOnUse"><rect width="27" height="33" fill="none" stroke="#69afdf" stroke-width="1.1" opacity=".65"/><path d="M13.5 0V33M0 16.5H27" stroke="#7bbce6" stroke-width=".5" opacity=".45"/></pattern>
+    <pattern id="stars" width="217" height="179" patternUnits="userSpaceOnUse"><circle cx="17" cy="31" r="1.1" fill="#b5deff" opacity=".5"/><circle cx="98" cy="111" r="1.4" fill="#d2ebff" opacity=".4"/><circle cx="180" cy="20" r=".9" fill="#8ab9eb" opacity=".55"/><circle cx="156" cy="148" r="1.2" fill="#89cfff" opacity=".38"/><circle cx="31" cy="159" r=".6" fill="#cce6ff" opacity=".5"/></pattern>
+    <clipPath id="globeClip"><circle cx="1520" cy="1080" r="790"/></clipPath>
+  </defs>
+  <rect width="1920" height="800" fill="url(#space)"/>
+  <rect width="1920" height="800" fill="url(#stars)"/>
+  <g opacity=".37" stroke="#80bafa" stroke-width=".7">
+    <path d="M678 15h280M1000 105h200M845 643h150M1190 54h280M1649 652h180" stroke-dasharray="1 17"/>
+  </g>
+  <g fill="#d0eaff"><circle cx="980" cy="79" r="1.8"/><circle cx="1531" cy="40" r="1.4"/><circle cx="1809" cy="96" r="1.4"/><circle cx="1192" cy="219" r="1.8"/><circle cx="752" cy="418" r="1.1"/><circle cx="886" cy="257" r="2"/><circle cx="1769" cy="384" r="1.4"/><circle cx="1447" cy="166" r="1.5"/><circle cx="1278" cy="74" r="1"/><circle cx="660" cy="522" r="1.3"/></g>
+  <g opacity=".85"><circle cx="1594" cy="97" r="33" fill="url(#glow)"/><circle cx="1594" cy="97" r="2.7" fill="#d2f5ff"/><circle cx="981" cy="264" r="22" fill="url(#glow)"/><circle cx="981" cy="264" r="2" fill="#d3ecff"/></g>
+  <!-- Curvature of the Earth, with cloud-like continents and an atmospheric halo. -->
+  <circle cx="1520" cy="1080" r="822" fill="#33bdff" opacity=".23" filter="url(#halo)"/>
+  <circle cx="1520" cy="1080" r="807" fill="none" stroke="#63d5ff" stroke-width="22" opacity=".16"/>
+  <circle cx="1520" cy="1080" r="790" fill="url(#earth)"/>
+  <g clip-path="url(#globeClip)">
+    <path d="M901 580c107-103 174-125 280-75 59 31 93 18 133 50 64 57 99 40 148 87 70 65 60 118 124 153l-113 160-528-14z" fill="#205c70" opacity=".68"/>
+    <path d="M1360 410c87-59 169-77 216-50 52 30 82 92 154 106 66 13 107-18 158 6 34 16 51 51 72 83l-72 116c-79 6-107 66-151 72-43 6-74-49-114-51-68-4-89 32-154-10-80-53-25-87-108-139z" fill="#367a80" opacity=".46"/>
+    <path d="M955 517c48-28 111-26 169-12 89 21 114 78 182 93 104 25 152 33 202 74" fill="none" stroke="#a6eaff" stroke-width="42" stroke-linecap="round" opacity=".21"/>
+    <path d="M1109 473c68-18 130 1 165 29 48 38 71 27 143 35M1371 421c84-18 121 2 174 27M1595 492c73 14 86 68 161 60" fill="none" stroke="#e7fcff" stroke-width="13" opacity=".13" stroke-linecap="round"/>
+    <g stroke="#74cef7" fill="none" opacity=".17" stroke-width="1.5"><ellipse cx="1520" cy="1079" rx="515" ry="790"/><ellipse cx="1520" cy="1079" rx="300" ry="790"/><path d="M709 630c270 125 1096 125 1630 0M679 735c290 122 1126 122 1691 0"/></g>
+  </g>
+  <path d="M703 703C948 394 1238 276 1570 291c128 4 265 36 412 107" stroke="url(#atmosphere)" stroke-width="7" fill="none" opacity=".8"/>
+  <path d="M668 717C948 370 1264 261 1584 280c144 9 266 40 404 98" stroke="#6ddcff" stroke-width="1.8" fill="none" opacity=".75"/>
+  <!-- Orbital precision and radio-range arcs. -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M700 580Q1265 180 1816 455" stroke="#3ac7ff" stroke-width="1.5" opacity=".48"/>
+    <path d="M760 697Q1354 82 1960 457" stroke="#54c7ff" stroke-width="1.4" opacity=".4"/>
+    <path d="M1018 724Q1225 378 1545 278" stroke="#8de8ff" stroke-width="1.3" stroke-dasharray="4 12" opacity=".55"/>
+    <path d="M1017 692Q1516 331 1926 700" stroke="#54bfff" stroke-width="1.3" stroke-dasharray="2 10" opacity=".5"/>
+  </g>
+  <g><circle cx="1058" cy="587" r="6" fill="#aeecff"/><circle cx="1058" cy="587" r="18" stroke="#76d4ff" stroke-width="2" opacity=".56" fill="none"/><circle cx="1758" cy="456" r="4" fill="#b8f3ff"/><circle cx="1758" cy="456" r="15" stroke="#76d4ff" opacity=".5" fill="none"/></g>
+  <!-- A large detailed satellite, positioned on the right side of the panorama. -->
+  <g transform="translate(1340 222) rotate(-13)">
+    <!-- mast and panels -->
+    <path d="M-40 11H-492M60 11H565" stroke="#afc6df" stroke-width="13" stroke-linecap="round"/>
+    <path d="M-40 11H-492M60 11H565" stroke="#325f8a" stroke-width="5"/>
+    <g transform="translate(-521 -82)">
+      <path d="M0 0H450V191H0Z" fill="url(#panel)" stroke="#a6cce9" stroke-width="7"/>
+      <path d="M0 0H450V191H0Z" fill="url(#cells)" opacity=".8"/>
+      <path d="M0 63H450M0 127H450M75 0V191M150 0V191M225 0V191M300 0V191M375 0V191" stroke="#98caef" stroke-opacity=".65" stroke-width="3"/>
+      <path d="M3 1L448 2" stroke="#effaff" stroke-width="4" opacity=".7"/>
+      <circle cx="446" cy="97" r="8" fill="#c7e5f6"/>
+    </g>
+    <g transform="translate(83 -82)">
+      <path d="M0 0H465V191H0Z" fill="url(#panel)" stroke="#a6cce9" stroke-width="7"/>
+      <path d="M0 0H465V191H0Z" fill="url(#cells)" opacity=".8"/>
+      <path d="M0 63H465M0 127H465M77 0V191M154 0V191M231 0V191M308 0V191M385 0V191" stroke="#98caef" stroke-opacity=".65" stroke-width="3"/>
+      <path d="M2 1L463 2" stroke="#f4fbff" stroke-width="4" opacity=".7"/>
+      <circle cx="7" cy="96" r="8" fill="#c7e5f6"/>
+    </g>
+    <!-- front of spacecraft -->
+    <path d="M-71-61L55-78 82 80-44 100Z" fill="#4a718f" stroke="#a8c6de" stroke-width="6"/>
+    <path d="M-71-61L55-78 53 41-62 59Z" fill="url(#metal)" stroke="#e4f4ff" stroke-width="4"/>
+    <path d="M-62 59L53 41 82 80-44 100Z" fill="#315675"/>
+    <path d="M-43-29L38-37 43 17-36 25Z" fill="#263e5c" stroke="#f8fcff" stroke-width="4"/>
+    <path d="M-34-20H34M-31-5H35M-28 10H36" stroke="#c0dcf0" stroke-width="2" opacity=".65"/>
+    <path d="M49-69L99-49 114 76 82 80Z" fill="#173350" stroke="#c7d5e3" stroke-width="3"/>
+    <g fill="#e7eef4"><circle cx="-55" cy="-52" r="5"/><circle cx="42" cy="-64" r="5"/><circle cx="-32" cy="83" r="5"/><circle cx="67" cy="71" r="5"/></g>
+    <!-- dish with struts -->
+    <path d="M8 80L13 123M62 72L42 126" stroke="#bccbdd" stroke-width="5"/>
+    <ellipse cx="30" cy="136" rx="87" ry="28" fill="url(#dish)" stroke="#ebf8ff" stroke-width="4" transform="rotate(13 30 136)"/>
+    <path d="M-51 112Q28 172 111 143" fill="none" stroke="#5e8dac" stroke-width="3"/>
+    <path d="M30 137L40 166" stroke="#e9faff" stroke-width="4"/><circle cx="40" cy="166" r="5" fill="#e6faff"/>
+    <!-- navigation radiating element and high-gain antenna -->
+    <path d="M-24-76L-29-124M14-77L27-137" stroke="#c9e3f3" stroke-width="4"/>
+    <ellipse cx="29" cy="-142" rx="39" ry="13" fill="#e1f1fb" stroke="#8ab7d7" stroke-width="3"/>
+    <path d="M29-142L29-164" stroke="#defaff" stroke-width="3"/>
+    <circle cx="29" cy="-167" r="5" fill="#eafcff"/>
+  </g>
+  <circle cx="1549" cy="373" r="115" fill="url(#glow)" opacity=".22"/>
+  <rect width="1920" height="800" fill="url(#space)" opacity=".08"/>
+</svg>
