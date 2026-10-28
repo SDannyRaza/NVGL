@@ -58,15 +58,17 @@
   <section class="context-bar card">
     <div class="context-heading"><span class="eyebrow">ACTIVE DATASET SELECTION</span><h2 id="context-title">Loading RINEX dataset…</h2><p id="context-subtitle"></p></div>
     <div class="context-controls">
-      <label>Epoch <select id="epoch-select"></select></label>
+      <label class="epoch-control" for="epoch-select">Epoch <output id="epoch-readout" for="epoch-select">0000</output><input id="epoch-select" type="range" min="0" max="0" step="1" value="0" aria-describedby="epoch-time"><small id="epoch-time"></small></label>
       <label>Constellation <select id="system-select"></select></label>
-      <label>Satellite <select id="sat-select"></select></label>
+      <label>Observed satellite · all systems <select id="sat-select"></select></label>
       <label>Signal <select id="signal-select"></select></label>
       <label>Component <select id="component-select"></select></label>
     </div>
     <div class="context-status" id="context-status"></div>
     <button type="button" id="focus-stage" class="focus-stage-button" aria-label="Focus the active signal graphs">⤢ Focus graphs</button>
   </section>
+
+  <aside class="callout signal-fidelity" aria-label="Signal reconstruction fidelity"><strong>Observation-constrained simulation · exact RF replica unverified</strong><p>Code delay = C/c; carrier Doppler = D; initial phase uses fractional L. These constrain a modeled received signal. RINEX does not contain the original I/Q, full navigation bitstream, receiver oscillator response, multipath or noise realization. GPS L1 C/A NAV is re-encoded; other NAV symbols may be illustrative. Current plots are not validated acquisition input.</p></aside>
 
   <section class="workspace-view active" data-view-panel="overview">
     <div class="section-head"><div><span class="eyebrow">SIGNAL PASSPORT</span><h2 id="overview-title">Selected GNSS signal</h2><p>Everything below is tied to the active satellite, RINEX signal code and nearest available navigation record.</p></div><span id="implementation-badge" class="verification-badge">Verifying…</span></div>

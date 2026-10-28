@@ -15,6 +15,23 @@ const routes = [
 ];
 
 let failures = 0;
+// /signals/ and /signals.html share one script and must expose the same DOM.
+for (const base of new Set([path.join(root, 'public'), site])) {
+  const canonical = fs.readFileSync(path.join(base, 'signals.html'), 'utf8');
+  const routed = fs.readFileSync(path.join(base, 'signals', 'index.html'), 'utf8');
+  if (canonical !== routed) {
+    console.error(`FAIL signal dashboard HTML differs between /signals.html and /signals/ in ${base}`);
+    failures++;
+  }
+  for (const id of ['epoch-readout', 'epoch-time']) {
+    if (!routed.includes(`id="${id}"`)) {
+      console.error(`FAIL signal dashboard is missing #${id}`); failures++;
+    }
+  }
+  if (!/id="epoch-select"[^>]*type="range"/.test(routed)) {
+    console.error('FAIL signal dashboard epoch control must be a range slider'); failures++;
+  }
+}
 const localRef = /(?:src|href)=["'](\/[A-Za-z0-9_./?=#%+~-]+)["']/g;
 for (const [name, route] of routes) {
   const file = path.join(site, route, 'index.html');
