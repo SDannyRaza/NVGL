@@ -11,7 +11,7 @@ sys.path.insert(0,'public/py')
 from signal_engine import SignalEngine
 engine=SignalEngine('public/data/COM14___9600_260914_111044.26O','public/data/COM14___9600_260914_111044.26P')
 print(json.dumps(engine.selection(0,'G03','G-1C')))`;
-const sel=JSON.parse(execFileSync('python3',['-c',py],{cwd:__dirname,encoding:'utf8'}));
+const sel=JSON.parse(execFileSync(process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3'),['-c',py],{cwd:__dirname,encoding:'utf8'}));
 assert.equal(sel.satellite,'G03');
 assert.ok(sel.navigation.fields.length>20);
 const lnav=replay.create(sel.navigation,sel.signal.id);

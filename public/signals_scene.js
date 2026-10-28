@@ -146,12 +146,12 @@ async function renderScene(){
       {x:output.tUs,y:output.sumQ,name:'Combined Q + common noise',mode:'lines',line:{width:1.2,color:'#febf7d'}},
       {x:output.tUs,y:output.cleanI,name:'Noiseless composite I',mode:'lines',line:{width:2,color:'#6de2bb'}},
     ],{xaxis:{title:'Sample time [µs]'},yaxis:{title:'Normalized front-end amplitude'},legend:{orientation:'h',y:1.22},margin:{l:69,r:20,t:45,b:60}});
-    const best=entries.map((e,i)=>({...e,index:i})).sort((a,b)=>(b.model.cn0??-100)-(a.model.cn0??-100)).slice(0,8);
+    const best=entries.map((e,i)=>({...e,index:i})).sort((a,b)=>(b.model.cn0??-100)-(a.model.cn0??-100));
     plot('scene-components-plot',best.map(e=>({
       x:output.tUs,y:output.contributions[e.index],name:`${e.selection.satellite} ${e.selection.signal.name}`,
       mode:'lines',line:{width:1.3,color:COLORS[e.selection.satellite[0]]||'#b3cad8'},
     })),{xaxis:{title:'Sample time [µs]'},yaxis:{title:'Individual clean I contribution'},legend:{orientation:'h',y:1.28},margin:{l:68,r:20,t:70,b:60}});
-    $('scene-status').textContent+=` · ${entries.length} channels summed · plotted the strongest ${best.length} separately`;
+    $('scene-status').textContent+=` · ${entries.length} channels summed · all ${best.length} contributions available in the legend`;
   }catch(error){
     if(token!==SCENE_STORE.generation)return;
     $('scene-status').textContent='Unable to construct this epoch: '+error.message;

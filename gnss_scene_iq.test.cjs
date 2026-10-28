@@ -10,7 +10,7 @@ sys.path.insert(0,'public/py')
 from signal_engine import SignalEngine
 e=SignalEngine('public/data/COM14___9600_260914_111044.26O','public/data/COM14___9600_260914_111044.26P')
 print(json.dumps([e.selection(0,'G03','G-1C'),e.selection(0,'G08','G-1C')]))`;
-const entries=JSON.parse(execFileSync('python3',['-c',py],{cwd:__dirname,encoding:'utf8'})).map(selection=>({
+const entries=JSON.parse(execFileSync(process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3'),['-c',py],{cwd:__dirname,encoding:'utf8'})).map(selection=>({
   selection,model:globalThis.RECEIVER_MODEL.prepare({selection,epoch:selection.epoch,
     prn:globalThis.PRNLAB.gpsCA(selection.prn_number),component:'C/A data'})
 }));

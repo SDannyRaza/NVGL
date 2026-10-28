@@ -84,11 +84,20 @@ function systemOrder(list){return [...list].sort((a,b)=>ORDER.indexOf(a.id)-ORDE
 function selectOptions(el,items,valueFn,labelFn,selected){el.innerHTML=items.map(x=>`<option value="${escapeHtml(valueFn(x))}" ${String(valueFn(x))===String(selected)?'selected':''}>${escapeHtml(labelFn(x))}</option>`).join('')}
 function selectedMeasurement(label){return state.selection?.measurements?.[label]||{}}
 
+function updateEpochReadout(index=state.epoch.index){
+  const iso=state.meta.dataset.epoch_times?.[index]||(index===state.epoch.index?state.epoch.epoch:null);
+  const label=iso?iso.replace('T',' ').replace(/(?:\+00:00|Z)$/,''):'Loading observation time…';
+  $('epoch-readout').textContent=label;
+  $('epoch-time').textContent=(state.meta.dataset.time_system||'GNSS time')+' · observation '+(Number(index)+1)+' of '+state.meta.dataset.epoch_count;
+  $('epoch-select').setAttribute('aria-valuetext',label+' '+(state.meta.dataset.time_system||'GNSS time'));
+}
+
 async function init(){
   state.meta=await getJSON('/api/signals/meta');
   const n=state.meta.dataset.epoch_count;
-  const ep=$('epoch-select');ep.innerHTML=Array.from({length:n},(_,i)=>`<option value="${i}">${i.toString().padStart(4,'0')}</option>`).join('');
+  const ep=$('epoch-select');ep.max=String(Math.max(0,n-1));ep.value='0';ep.disabled=n<2;
   state.epoch=await getJSON('/api/signals/epoch?index=0');
+  updateEpochReadout();
   state.system=state.epoch.systems.G?'G':ORDER.find(s=>state.epoch.systems[s])||Object.keys(state.epoch.systems)[0];
   bindEvents();populateSystem();await refreshSelection('initial dataset load');renderStatic();
 }
@@ -102,15 +111,38 @@ function bindEvents(){
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   });
   $('receiver-noise').addEventListener('change',()=>{if(state.view==='received')renderReceived()});
-  $('epoch-select').addEventListener('change',async e=>{state.epoch=await getJSON('/api/signals/epoch?index='+e.target.value);if(!state.epoch.systems[state.system])state.system=ORDER.find(s=>state.epoch.systems[s])||Object.keys(state.epoch.systems)[0];populateSystem();await refreshSelection('epoch changed')});
+  let epochRequest=0;
+  $('epoch-select').addEventListener('input',e=>{
+    ++epochRequest; ++state.revision;
+    updateEpochReadout(Number(e.target.value));
+  });
+  $('epoch-select').addEventListener('change',async e=>{
+    const request=++epochRequest,index=e.target.value;
+    $('epoch-time').textContent='Loading observation…';
+    try{
+      const epoch=await getJSON('/api/signals/epoch?index='+index);
+      if(request!==epochRequest)return;
+      state.epoch=epoch;updateEpochReadout();
+      if(!state.epoch.systems[state.system])state.system=ORDER.find(s=>state.epoch.systems[s])||Object.keys(state.epoch.systems)[0];
+      populateSystem();await refreshSelection('epoch changed');
+    }catch(error){
+      if(request!==epochRequest)return;
+      $('epoch-select').value=String(state.epoch.index);updateEpochReadout();
+      $('epoch-time').textContent='Could not load epoch: '+error.message;
+    }
+  });
   $('system-select').addEventListener('change',async e=>{state.system=e.target.value;setActiveColor();populateSatellite();populateSignal();populateComponent();await refreshSelection('constellation changed')});
-  $('sat-select').addEventListener('change',async e=>{state.sat=e.target.value;await refreshSelection('satellite/PRN changed')});
+  $('sat-select').addEventListener('change',async e=>{state.sat=e.target.value;state.system=state.sat[0];populateSystem();await refreshSelection('satellite/PRN changed')});
   $('signal-select').addEventListener('change',async e=>{state.signalId=e.target.value;populateComponent();await refreshSelection('signal changed')});
   $('component-select').addEventListener('change',async e=>{state.component=e.target.value;await regeneratePRN('data/pilot component changed');renderContext();renderCurrent()});
   $('glossary-search').addEventListener('input',renderGlossary);
 }
 function populateSystem(){const available=systemOrder(state.meta.systems.filter(s=>state.epoch.systems[s.id]?.length));selectOptions($('system-select'),available,x=>x.id,x=>`${x.name} (${x.id})`,state.system);setActiveColor();populateSatellite();populateSignal();populateComponent()}
-function populateSatellite(){const sats=state.epoch.systems[state.system]||[];if(!sats.includes(state.sat))state.sat=sats[0];selectOptions($('sat-select'),sats,x=>x,x=>x,state.sat)}
+function populateSatellite(){
+  const sats=state.epoch.systems[state.system]||[];
+  if(!sats.includes(state.sat))state.sat=sats[0];
+  $('sat-select').innerHTML=ORDER.filter(sys=>state.epoch.systems[sys]?.length).map(sys=>`<optgroup label="${escapeHtml(NAMES[sys])}">${state.epoch.systems[sys].map(sat=>`<option value="${escapeHtml(sat)}" ${sat===state.sat?'selected':''}>${escapeHtml(sat)}</option>`).join('')}</optgroup>`).join('');
+}
 function populateSignal(){const sigs=systemMeta()?.signals||[];if(!sigs.some(s=>s.id===state.signalId))state.signalId=sigs[0]?.id;selectOptions($('signal-select'),sigs,x=>x.id,x=>`${x.name} · ${x.observation_codes.join('/')}`,state.signalId)}
 function populateComponent(){const comps=signalMeta()?.components||[];if(!comps.includes(state.component))state.component=signalMeta()?.default_component||comps[0];selectOptions($('component-select'),comps,x=>x,x=>x,state.component)}
 async function refreshSelection(reason){

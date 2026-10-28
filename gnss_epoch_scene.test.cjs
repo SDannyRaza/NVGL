@@ -5,8 +5,11 @@ sys.path.insert(0,'public/py')
 from signal_engine import SignalEngine
 e=SignalEngine('public/data/COM14___9600_260914_111044.26O','public/data/COM14___9600_260914_111044.26P')
 print(json.dumps([e.scene(i) for i in (0,2,16)]))`;
-const scenes=JSON.parse(execFileSync('python3',['-c',py],{cwd:__dirname,encoding:'utf8'}));
+const scenes=JSON.parse(execFileSync(process.env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3'),['-c',py],{cwd:__dirname,encoding:'utf8'}));
 assert.deepEqual(scenes.map(s=>s.satellite_count),[30,31,29]);
+assert.notDeepEqual([...new Set(scenes[0].channels.map(c=>c.satellite))].sort(),
+  [...new Set(scenes[2].channels.map(c=>c.satellite))].sort(),
+  'Satellite membership must reflect the individual observation epoch');
 for(const scene of scenes){
   const sats=new Set(scene.channels.map(c=>c.satellite));
   assert.equal(sats.size,scene.satellite_count);

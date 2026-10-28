@@ -168,6 +168,7 @@ class SignalEngine:
                 "observation_file": self.obs_path.name,
                 "navigation_file": self.nav_path.name,
                 "epoch_count": len(self.obs.epochs),
+                "epoch_times": [ep.dt_gps.isoformat() for ep in self.obs.epochs],
                 "first_epoch": self.obs.epochs[0].dt_gps.isoformat(),
                 "last_epoch": self.obs.epochs[-1].dt_gps.isoformat(),
                 "time_system": self.obs.time_system,

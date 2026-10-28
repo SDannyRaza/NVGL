@@ -9,3 +9,11 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:18px 28px;bor
 @media(max-width:1300px){.passport-grid{grid-template-columns:repeat(3,1fr)}.context-bar{grid-template-columns:1fr}.context-controls{grid-template-columns:repeat(5,1fr)}.hero{grid-template-columns:1.6fr .6fr}}
 @media(max-width:1050px){.lab-layout{grid-template-columns:1fr}.lab-sidebar{position:relative;top:auto;max-height:none}.stage-nav{display:grid;grid-template-columns:repeat(3,1fr)}.stage-nav button{min-height:58px}.sidebar-note{display:none}.hero{grid-template-columns:1fr}.hero-graphic{display:none}.grid-2{grid-template-columns:1fr}.icd-grid,.glossary-grid{grid-template-columns:repeat(2,1fr)}.context-bar{position:relative;top:auto}}
 @media(max-width:760px){body{font-size:17.0px}.topbar{padding:10px 14px}.top-status{display:none}.primary-nav{padding:7px 12px}.hero{margin:10px 12px;padding:20px}.hero h1{font-size:32.0px}.lab-layout{padding:0 12px 22px}.stage-nav{grid-template-columns:1fr 1fr}.context-controls{grid-template-columns:1fr 1fr}.passport-grid{grid-template-columns:1fr 1fr}.definition-row,.definition-grid,.nav-distinction{grid-template-columns:1fr}.icd-grid,.glossary-grid{grid-template-columns:1fr}.section-head{display:block}.formula{margin-top:10px;white-space:normal}.plot{height:330px}.plot.xl{height:430px}footer{display:block;padding:18px}}
+
+/* Observation epoch scrubber */
+.context-controls .epoch-control{display:flex;flex-direction:column;gap:5px;min-width:0}
+.epoch-control output{color:var(--active);font-variant-numeric:tabular-nums;font-size:15px}
+.context-controls .epoch-control input[type=range]{width:100%;min-width:0;min-height:28px;margin:0;padding:0;accent-color:var(--active);cursor:pointer}
+.epoch-control input:focus-visible{outline:2px solid var(--active);outline-offset:3px}
+.epoch-control small{font-size:12px;font-weight:400;text-transform:none;overflow-wrap:anywhere;color:#9bb0ba}
+.signal-fidelity{margin:0 0 16px;border:1px solid #766643;border-radius:12px;background:#201e19}
