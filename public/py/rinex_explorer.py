@@ -162,8 +162,17 @@ def observation_info(system, code):
 
 class RinexFile:
     def __init__(self, path):
+        for _ in self.initialize_chunks(path):
+            pass
+
+    def initialize_chunks(self, path, chunk_lines=2048):
         self.path = Path(path)
-        self.lines = self.path.read_text(encoding="ascii", errors="replace").splitlines()
+        self.lines = []
+        with self.path.open(encoding="ascii", errors="replace") as stream:
+            for index, line in enumerate(stream):
+                self.lines.append(line.rstrip("\r\n"))
+                if (index + 1) % chunk_lines == 0:
+                    yield len(self.lines)
         if not self.lines or self.lines[0][:9].strip() != "3.02":
             raise ValueError(f"{self.path.name}: this teaching viewer supports RINEX 3.02.")
         self.obs = "OBSERVATION" in self.lines[0]
@@ -180,6 +189,8 @@ class RinexFile:
         self.satellites = set()
         current, offset, epoch, event_remaining = "", 0, "", 0
         for i in range(self.header_end, len(self.lines)):
+            if (i - self.header_end) % chunk_lines == 0:
+                yield i
             line = self.lines[i]
             if self.obs:
                 if line.startswith(">"):
@@ -336,9 +347,33 @@ def load_data(folder):
             first = stream.readline()
         if "RINEX VERSION / TYPE" in first:
             key = "obs" if "OBSERVATION" in first else "nav"
-            result.setdefault(key, RinexFile(path))
+            if key not in result:
+                result[key] = RinexFile(path)
     if set(result) != {"obs", "nav"}:
         raise ValueError("The data folder must contain an observation and a navigation RINEX 3.02 file.")
     return result
 
 
+
+
+async def load_data_async(folder):
+    """Index records in bounded batches, yielding to the browser worker event loop."""
+    import asyncio
+    result = {}
+    for path in sorted(Path(folder).iterdir()):
+        if not path.is_file():
+            continue
+        with path.open(encoding="ascii", errors="replace") as stream:
+            first = stream.readline()
+        if "RINEX VERSION / TYPE" not in first:
+            continue
+        key = "obs" if "OBSERVATION" in first else "nav"
+        if key in result:
+            continue
+        item = RinexFile.__new__(RinexFile)
+        for _ in item.initialize_chunks(path):
+            await asyncio.sleep(0)
+        result[key] = item
+    if set(result) != {"obs", "nav"}:
+        raise ValueError("The data folder must contain observation and navigation RINEX files.")
+    return result

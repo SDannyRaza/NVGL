@@ -13,6 +13,14 @@ ROOT = Path('/lab')
 sys.path.insert(0, str(ROOT))
 
 _runtime = None
+_rinex_files = None
+
+async def initialize_rinex_async():
+    global _rinex_files
+    if _rinex_files is None:
+        from rinex_explorer import load_data_async
+        _rinex_files = await load_data_async(ROOT / 'data')
+
 
 
 def _initialize():
@@ -52,6 +60,9 @@ def handle_request(method, route, query_text='{}', body_text='{}'):
     try:
         query = json.loads(query_text or '{}')
         body = json.loads(body_text or '{}')
+        if method == 'GET' and route == '/api/view' and _rinex_files is not None:
+            target = _rinex_files[query.get('file', 'obs')]
+            return _result(target.view(query.get('section', 'header'), int(query.get('record', 0)), int(query.get('start', 0)), query.get('query', '')))
         files, orbit, signals, spp = _initialize()
         if method == 'GET' and route == '/api/view':
             target = files[query.get('file', 'obs')]

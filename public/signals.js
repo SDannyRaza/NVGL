@@ -147,7 +147,7 @@ function populateSignal(){const sigs=systemMeta()?.signals||[];if(!sigs.some(s=>
 function populateComponent(){const comps=signalMeta()?.components||[];if(!comps.includes(state.component))state.component=signalMeta()?.default_component||comps[0];selectOptions($('component-select'),comps,x=>x,x=>x,state.component)}
 async function refreshSelection(reason){
   const rev=++state.revision; const url=`/api/signals/selection?epoch=${state.epoch.index}&sat=${encodeURIComponent(state.sat)}&signal=${encodeURIComponent(state.signalId)}`;
-  try{const result=await getJSON(url);if(rev!==state.revision)return;state.selection=result;await regeneratePRN(reason,rev);if(rev!==state.revision)return;renderContext();renderCurrent();}
+  try{const result=await getJSON(url);if(rev!==state.revision)return;state.selection=result;try{if(result.satellite?.startsWith('G')&&result.signal?.prn_mode==='gps-ca')sessionStorage.setItem('nvgl.gps-l1-context',JSON.stringify({epoch:state.epoch.index,satellite:result.satellite,signalId:state.signalId}));}catch{}await regeneratePRN(reason,rev);if(rev!==state.revision)return;renderContext();renderCurrent();}
   catch(err){if(rev!==state.revision)return;console.error(err);$('context-title').textContent='Signal selection error';$('context-subtitle').textContent=err.message;}
 }
 function shiftStage(direction){
