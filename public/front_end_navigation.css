@@ -102,3 +102,47 @@ html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thi
 
 .chapter-front-end .fe-component-title .fe-path-number{display:block;color:var(--component-color);font-size:11px;margin-bottom:5px}
 @media(max-width:1100px){.chapter-front-end .fe-component:nth-child(3n):not(:last-child)::after{content:none}}
+
+/* Terminal-to-terminal connectors are drawn in one measured SVG overlay. */
+.chapter-front-end .fe-system-overview{position:relative}
+.chapter-front-end .fe-connections{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.chapter-front-end .fe-connections>path{fill:none;stroke-width:1.7;stroke-linejoin:round}
+.chapter-front-end .fe-signal-connection{stroke:#72d8ef}
+.chapter-front-end .fe-clock-connection{stroke:#ffd17a}
+.chapter-front-end .fe-wire,.chapter-front-end .fe-clock-flow>span{display:none}
+.chapter-front-end .fe-component-title{height:48px;min-height:48px}
+.chapter-front-end .fe-component svg{flex:none}
+.chapter-front-end .fe-clock-lane{margin-top:38px}
+.chapter-front-end .fe-clock-flow{display:grid;grid-template-columns:170px 225px minmax(0,1fr);gap:72px}
+.chapter-front-end .fe-clock-branch{display:grid;grid-template-columns:1fr;gap:22px;border:0!important;padding:0!important}
+.chapter-front-end .fe-clock-branch>span{border:1px solid #77633f;border-radius:8px;padding:12px 16px}
+.chapter-front-end .fe-clock-branch small{display:block;color:#b5c7d7;font-size:11px;margin-top:5px}
+@media(max-width:1100px){
+ .chapter-front-end .fe-circuit{grid-template-columns:minmax(0,1fr);gap:32px}
+ .chapter-front-end .fe-component{max-width:420px;width:100%;justify-self:center;padding:14px;border:1px solid #29445a;background:#102036}
+ .chapter-front-end .fe-component-title{height:auto;min-height:0;font-size:14px}
+ .chapter-front-end .fe-component-frequency{font-size:13px}
+ .chapter-front-end .fe-component small{font-size:12px}
+ .chapter-front-end .fe-clock-flow{grid-template-columns:minmax(0,1fr);gap:36px;max-width:420px;margin:auto}
+ .chapter-front-end .fe-clock-flow>div{text-align:center}
+ .chapter-front-end .fe-clock-branch{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+}
+
+@media(min-width:1101px){.chapter-front-end .fe-clock-branch{margin-right:32px}}
+
+/* Keep the LO and clock ports clear of all component annotations. */
+@media(min-width:1101px){
+ .chapter-front-end .fe-component{padding-bottom:12px}
+ .chapter-front-end .fe-component-title{order:0;height:48px;min-height:48px}
+ .chapter-front-end .fe-component-frequency{order:1;min-height:36px;display:flex;align-items:center;justify-content:center}
+ .chapter-front-end .fe-component>small{order:2;min-height:32px}
+ .chapter-front-end .fe-component>svg{order:3;margin:6px 0 0}
+}
+
+.chapter-front-end .fe-reference-scroll{overflow-x:auto;scrollbar-color:#52718a #0c1c2d;border-radius:12px}
+.chapter-front-end .fe-reference-svg{display:block;width:100%;height:auto;min-width:1000px;font-family:inherit}
+.chapter-front-end .fe-reference-node{cursor:pointer}
+.chapter-front-end .fe-reference-node:hover,.chapter-front-end .fe-reference-node:focus{filter:brightness(1.35);outline:none}
+.chapter-front-end .fe-reference-node:focus-visible{outline:2px solid #fff}
+.chapter-front-end .fe-spectrum-svg{display:block;width:100%;height:auto;min-width:850px;font-family:inherit}
+.chapter-front-end .fe-spectrum-caption{padding:12px 20px;line-height:1.7;color:#b5cad9;font-size:14px}
