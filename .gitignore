@@ -7,3 +7,7 @@ dist/
 .vercel/
 
 /public/reference/front_end/*.pdf
+
+# Local Python validation artifacts.
+__pycache__/
+*.py[cod]

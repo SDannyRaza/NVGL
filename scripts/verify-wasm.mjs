@@ -2,8 +2,9 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { loadPyodide } from 'pyodide';
+import { fileURLToPath } from 'node:url';
 
-const project = new URL('../', import.meta.url).pathname;
+const project = fileURLToPath(new URL('../', import.meta.url));
 const files = JSON.parse(await readFile(join(project, 'public/python-assets.json'))).paths;
 const py = await loadPyodide();
 await py.loadPackage('numpy');

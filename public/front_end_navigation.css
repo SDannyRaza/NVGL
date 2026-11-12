@@ -1,0 +1,32 @@
+/* Front End navigation accents: scoped to this chapter; shared theme and fonts are inherited. */
+.chapter-front-end .fe-journey{margin:0 0 24px;padding:20px;background:#102036;border:1px solid #2c4661;border-radius:16px}
+.chapter-front-end .fe-journey-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}
+.chapter-front-end .fe-journey-head h3{margin:5px 0 0;font-size:20px;color:#e5f2f8}
+.chapter-front-end .fe-overview-link{font:inherit;font-size:14px;color:#bdd0df;background:transparent;border:1px solid #486078;padding:9px 14px;border-radius:9px;cursor:pointer}
+.chapter-front-end .fe-overview-link[aria-current]{background:#24384d;border-color:#b8cbdc;color:#fff}
+.chapter-front-end .fe-stage-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.chapter-front-end .fe-stage-tile{position:relative;display:flex;align-items:flex-start;gap:10px;min-width:0;min-height:112px;padding:14px 10px;text-align:left;font:inherit;color:#c4d4e2;background:#0d1b2b;border:1px solid #30465d;border-top:3px solid var(--stage-accent);border-radius:10px;cursor:pointer;transition:background .15s,border-color .15s}
+.chapter-front-end .fe-stage-tile:hover{background:#1b3045;border-color:var(--stage-accent)}
+.chapter-front-end .fe-stage-tile.is-current{background:#20364a;border-color:var(--stage-accent);box-shadow:inset 0 0 0 1px var(--stage-accent)}
+.chapter-front-end .fe-stage-number{display:grid;place-items:center;flex:0 0 26px;height:26px;border:1px solid var(--stage-accent);border-radius:8px;color:var(--stage-accent);font-size:14px;font-weight:750}
+.chapter-front-end .fe-stage-copy{min-width:0;padding-bottom:12px}.chapter-front-end .fe-stage-copy strong{display:block;color:var(--stage-accent);font-size:15px;line-height:1.4}.chapter-front-end .fe-stage-copy small{display:block;margin-top:5px;font-size:13px;line-height:1.5;color:#b5c8da}
+.chapter-front-end .fe-current-label{position:absolute;bottom:7px;right:10px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--stage-accent)}
+.chapter-front-end .fe-journey-caption{margin:15px 0 0;font-size:13px;line-height:1.6;color:#adc1d3}
+.chapter-front-end #fe-nav button{border-left:3px solid var(--stage-accent);font-family:inherit;text-align:left}
+.chapter-front-end #fe-nav button.active{border-color:var(--stage-accent);background:#20364a}
+.chapter-front-end #fe-nav button.active b,.chapter-front-end .fe-sidebar-number{color:var(--stage-accent)}
+.chapter-front-end #fe-nav button b{font-size:15px}.chapter-front-end #fe-nav button small{display:block;margin-top:3px;font-size:12px}
+.chapter-front-end .fe-lesson>.section-head{border-left:4px solid var(--fe-stage-color);padding-left:17px}
+.chapter-front-end .fe-lesson>.section-head .eyebrow{color:var(--fe-stage-color)}
+.chapter-front-end .fe-lesson>.fe-card{border-top:2px solid var(--fe-stage-color)}
+.chapter-front-end .fe-lesson>.fe-card>.card-head{border-bottom-color:var(--fe-stage-color)}
+.chapter-front-end .fe-lesson>.fe-card>.card-head h3{color:var(--fe-stage-color)}
+.chapter-front-end .fe-lesson>.fe-card>.fe-note{border-left-color:var(--fe-stage-color)}
+.chapter-front-end .fe-stage-tile:focus-visible,.chapter-front-end .fe-overview-link:focus-visible,.chapter-front-end #fe-nav button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:1100px){.chapter-front-end .fe-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chapter-front-end .fe-stage-tile{min-height:100px}}
+@media(max-width:850px){.receiver-redesign.chapter-front-end .lab-sidebar{display:none}.chapter-front-end .fe-journey{padding:15px}.chapter-front-end .fe-journey-head h3{font-size:18px}.chapter-front-end .fe-stage-tile{min-height:106px}.chapter-front-end .fe-journey-head{align-items:flex-start}.chapter-front-end .fe-stage-grid{gap:9px}}
+@media(prefers-reduced-motion:reduce){.chapter-front-end .fe-stage-tile{transition:none}}
+
+.chapter-front-end #fe-nav button .fe-sidebar-number{color:var(--stage-accent)}
+.chapter-front-end .fe-lesson .fe-definitions dt{color:var(--fe-stage-color)}
+.chapter-front-end .fe-lesson .fe-worked summary::marker{color:var(--fe-stage-color)}

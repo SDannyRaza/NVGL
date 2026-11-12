@@ -10,8 +10,31 @@
     "/py/spp/error_analysis.py",
     "/py/spp/error_models.py",
     "/py/spp/least_squares.py",
-    "/py/precomputed.pkl.gz",
+    "/py/science-cache.pkl.gz",
     "/data/COM14___9600_260914_111044.26O",
     "/data/COM14___9600_260914_111044.26P"
-  ]
+  ],
+  "groups": {
+    "base": [
+      "/py/science_dispatcher.py"
+    ],
+    "rinex": [
+      "/py/rinex_explorer.py",
+      "/data/COM14___9600_260914_111044.26O",
+      "/data/COM14___9600_260914_111044.26P"
+    ],
+    "science": [
+      "/py/gnss_orbit.py",
+      "/py/orbit_geometry.py",
+      "/py/signal_engine.py",
+      "/py/science-cache.pkl.gz"
+    ],
+    "spp": [
+      "/py/spp/__init__.py",
+      "/py/spp/epoch_solver.py",
+      "/py/spp/error_analysis.py",
+      "/py/spp/error_models.py",
+      "/py/spp/least_squares.py"
+    ]
+  }
 }

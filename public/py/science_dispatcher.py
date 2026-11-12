@@ -12,7 +12,8 @@ from pathlib import Path
 ROOT = Path('/lab')
 sys.path.insert(0, str(ROOT))
 
-_runtime = None
+_science = None
+_spp = None
 _rinex_files = None
 
 async def initialize_rinex_async():
@@ -21,30 +22,40 @@ async def initialize_rinex_async():
         from rinex_explorer import load_data_async
         _rinex_files = await load_data_async(ROOT / 'data')
 
-
-
-def _initialize():
-    global _runtime
-    if _runtime is None:
-        from spp import SPPEngine
-        cache_path = ROOT / 'precomputed.pkl.gz'
+def _load_science():
+    global _science
+    if _science is None:
+        cache_path = ROOT / 'science-cache.pkl.gz'
         if cache_path.exists():
-            # Preparsed versions of the *same* source observations and NAV
-            # records: computations still use the original algorithms.
             import gzip
             import pickle
+            # Only the repository's trusted, generated cache is accepted.
             with gzip.open(cache_path, 'rb') as stream:
-                files, orbit, signals = pickle.load(stream)
+                _science = pickle.load(stream)
         else:
-            from rinex_explorer import load_data
             from gnss_orbit import OrbitEngine
             from signal_engine import SignalEngine
-            files = load_data(ROOT / 'data')
-            orbit = OrbitEngine(files['obs'].path, files['nav'].path)
-            signals = SignalEngine(files['obs'].path, files['nav'].path)
-        spp = SPPEngine(orbit)
-        _runtime = (files, orbit, signals, spp)
-    return _runtime
+            obs = ROOT / 'data/COM14___9600_260914_111044.26O'
+            nav = ROOT / 'data/COM14___9600_260914_111044.26P'
+            _science = (OrbitEngine(obs, nav), SignalEngine(obs, nav))
+    return _science
+
+def _initialize(route):
+    global _spp, _rinex_files
+    files = orbit = signals = spp = None
+    if route == '/api/view':
+        if _rinex_files is None:
+            from rinex_explorer import load_data
+            _rinex_files = load_data(ROOT / 'data')
+        files = _rinex_files
+    elif route.startswith('/api/orbit') or route.startswith('/api/signals/') or route.startswith('/api/spp/'):
+        orbit, signals = _load_science()
+        if route.startswith('/api/spp/') and route != '/api/spp/coordinates':
+            if _spp is None:
+                from spp import SPPEngine
+                _spp = SPPEngine(orbit)
+            spp = _spp
+    return files, orbit, signals, spp
 
 
 def _result(payload, status=200):
@@ -63,7 +74,7 @@ def handle_request(method, route, query_text='{}', body_text='{}'):
         if method == 'GET' and route == '/api/view' and _rinex_files is not None:
             target = _rinex_files[query.get('file', 'obs')]
             return _result(target.view(query.get('section', 'header'), int(query.get('record', 0)), int(query.get('start', 0)), query.get('query', '')))
-        files, orbit, signals, spp = _initialize()
+        files, orbit, signals, spp = _initialize(route)
         if method == 'GET' and route == '/api/view':
             target = files[query.get('file', 'obs')]
             data = target.view(
