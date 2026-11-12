@@ -146,3 +146,63 @@ html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thi
 .chapter-front-end .fe-reference-node:focus-visible{outline:2px solid #fff}
 .chapter-front-end .fe-spectrum-svg{display:block;width:100%;height:auto;min-width:850px;font-family:inherit}
 .chapter-front-end .fe-spectrum-caption{padding:12px 20px;line-height:1.7;color:#b5cad9;font-size:14px}
+
+/* A persistent visual location within each of the ten lessons. */
+.chapter-front-end .fe-lesson>.fe-system-overview{margin:20px 0 26px;padding:20px;border-top:3px solid var(--fe-stage-color);background:#102036}
+.chapter-front-end .fe-location{display:flex;align-items:flex-start;gap:16px;padding:16px;margin-bottom:22px;border:1px solid var(--fe-stage-color);border-radius:12px;background:#172d40}
+.chapter-front-end .fe-location-badge{color:var(--fe-stage-color);font-size:11px;font-weight:750;letter-spacing:.08em;white-space:nowrap;padding-top:3px}
+.chapter-front-end .fe-location strong{display:block;font-size:16px;line-height:1.5;color:#e5effb}
+.chapter-front-end .fe-location p{margin:5px 0 0;font-size:14px;color:#b6cbdc;line-height:1.6}
+.chapter-front-end .fe-system-heading h3{font-size:20px;margin:8px 0;color:#e8f1ff}
+.chapter-front-end .fe-reference-svg{min-width:850px}
+.chapter-front-end .fe-reference-node.is-current text{font-weight:700;fill:var(--fe-stage-color)}
+.chapter-front-end .fe-reference-node.is-current>.fe-node-hit{stroke:var(--fe-stage-color)}
+.chapter-front-end .fe-section-definition{margin-bottom:20px}
+@media(max-width:850px){.chapter-front-end .fe-location{flex-direction:column;gap:7px;padding:13px}.chapter-front-end .fe-lesson>.fe-system-overview{padding:12px}.chapter-front-end .fe-location strong{font-size:15px}}
+
+/* Chapter editorial layout: aligned panels, controlled text widths and spacing. */
+.receiver-redesign.chapter-front-end .fe-lesson{--fe-panel-padding:24px}
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head{padding:24px!important;margin:0 0 24px;border:1px solid #34546c;border-top:3px solid var(--fe-stage-color);border-radius:14px;background:#102036}
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head::before{content:none;display:none}
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head h2{max-width:none;margin:10px 0 20px;font-size:clamp(28px,2.4vw,36px)!important;line-height:1.25}
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head>.fe-introduction{max-width:76ch;margin:0 0 16px}
+.receiver-redesign.chapter-front-end .fe-introduction-label{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--fe-stage-color);margin-bottom:7px}
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head p{max-width:76ch;font-size:17px!important;line-height:1.75;margin:0}
+.chapter-front-end .fe-prerequisite-link{display:inline-block;color:#b8dbe9;font-size:14px;line-height:1.6;text-underline-offset:4px}
+.chapter-front-end .fe-lesson>:is(.fe-card,.fe-definitions,.fe-worked,.fe-system-overview,.fe-simulation-continuity){margin:0 0 24px;border-radius:14px}
+.chapter-front-end .fe-lesson>.fe-card{border:1px solid #34546c;border-top:2px solid var(--fe-stage-color);background:#102036}
+.chapter-front-end .fe-card .card-head{padding:22px var(--fe-panel-padding) 14px}
+.chapter-front-end .fe-card .card-head h3{font-size:21px;line-height:1.4;margin:0}
+.chapter-front-end .fe-prose{padding:0 var(--fe-panel-padding) 22px;font-size:16px;line-height:1.8}
+.chapter-front-end .fe-definition-heading{padding:22px var(--fe-panel-padding) 18px}
+.chapter-front-end .fe-definition-heading h3{margin:8px 0 10px;font-size:21px;line-height:1.4}
+.chapter-front-end .fe-definition-heading p{margin:0;max-width:72ch;font-size:14px;line-height:1.7}
+.receiver-redesign.chapter-front-end .fe-definitions dl{padding:18px var(--fe-panel-padding) 22px;gap:14px}
+.receiver-redesign.chapter-front-end .fe-definitions dl>div{padding:16px;border:1px solid #34546c;border-radius:10px;background:#12283a}
+.receiver-redesign.chapter-front-end .fe-definitions dt{font-size:16px;line-height:1.5;margin-bottom:7px}
+.receiver-redesign.chapter-front-end .fe-definitions dd{font-size:15px;line-height:1.75}
+.chapter-front-end .fe-worked>summary{padding:18px var(--fe-panel-padding);font-size:16px;line-height:1.6}
+.chapter-front-end .fe-worked>.fe-worked-body{padding:18px var(--fe-panel-padding);font-size:16px;line-height:1.8}
+.chapter-front-end .fe-lesson>.fe-system-overview{padding:var(--fe-panel-padding);margin:0 0 24px}
+.chapter-front-end .fe-system-heading{gap:16px;margin-bottom:18px}
+.chapter-front-end .fe-system-heading .fe-simulation-link{font-size:13px;flex-shrink:1}
+.chapter-front-end .fe-system-heading h3{font-size:20px;line-height:1.4}
+.chapter-front-end .fe-spectrum-caption{padding:0 var(--fe-panel-padding) 18px;margin:0;max-width:90ch}
+.chapter-front-end .fe-spectrum-svg{background:#0c1c2d}
+.chapter-front-end .fe-next{padding-top:8px;gap:12px;flex-wrap:wrap}
+@media(max-width:1150px){.chapter-front-end .fe-system-heading{align-items:flex-start;flex-direction:column}.chapter-front-end .fe-system-heading .fe-simulation-link{align-self:flex-start}}
+@media(max-width:760px){.receiver-redesign.chapter-front-end .fe-lesson{--fe-panel-padding:16px}.receiver-redesign.chapter-front-end .fe-lesson>.section-head{padding:18px!important}.receiver-redesign.chapter-front-end .fe-lesson>.section-head h2{font-size:28px!important}.receiver-redesign.chapter-front-end .fe-definitions dl{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-lesson>:is(.fe-card,.fe-definitions,.fe-worked,.fe-system-overview){margin-bottom:18px}}
+
+/* Navigation follows the reader; the document remains the only vertical scroller. */
+.chapter-front-end .lab-main,.chapter-front-end .fe-lesson{overflow:visible;min-width:0}
+.chapter-front-end .fe-reading-nav{position:sticky;top:10px;z-index:30;display:flex;align-items:center;gap:6px;padding:8px;margin:0 0 24px;border:1px solid #426078;border-radius:12px;background:#102036;box-shadow:0 8px 24px #0005}
+.chapter-front-end .fe-reading-nav a,.chapter-front-end .fe-reading-nav button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 12px;border:1px solid transparent;border-radius:7px;color:#c9dce9;background:transparent;font:inherit;font-size:13px;text-decoration:none;cursor:pointer;white-space:nowrap}
+.chapter-front-end .fe-reading-nav a:hover,.chapter-front-end .fe-reading-nav a:focus-visible,.chapter-front-end .fe-reading-nav button:hover{background:#203b50;border-color:#52738c;color:#fff}
+.chapter-front-end .fe-reading-nav button{border-color:#426078;font-size:19px;min-width:40px;padding:5px}
+.chapter-front-end .fe-reading-nav button:disabled{opacity:.35;cursor:default}
+.chapter-front-end .fe-reading-section{font-size:12px;font-weight:700;color:var(--fe-stage-color);margin:0 auto 0 8px;white-space:nowrap}
+.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations){scroll-margin-top:90px}
+.chapter-front-end .fe-lesson{scroll-margin-top:20px}
+@media(max-width:1100px){.chapter-front-end .fe-reading-section{display:none}.chapter-front-end .fe-reading-nav{gap:3px;justify-content:space-between}.chapter-front-end .fe-reading-nav a{padding:8px;font-size:12px}}
+@media(max-width:500px){.chapter-front-end .fe-reading-nav{top:6px;flex-wrap:wrap;padding:6px;gap:2px}.chapter-front-end .fe-reading-nav a{padding:8px 6px;font-size:11px;min-height:40px}.chapter-front-end .fe-reading-nav button{min-width:30px;min-height:40px;font-size:16px}.chapter-front-end .fe-reading-nav a:first-of-type{display:none}}
+@media(prefers-reduced-motion:reduce){.chapter-front-end *{scroll-behavior:auto!important}}
