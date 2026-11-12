@@ -206,3 +206,17 @@ html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thi
 @media(max-width:1100px){.chapter-front-end .fe-reading-section{display:none}.chapter-front-end .fe-reading-nav{gap:3px;justify-content:space-between}.chapter-front-end .fe-reading-nav a{padding:8px;font-size:12px}}
 @media(max-width:500px){.chapter-front-end .fe-reading-nav{top:6px;flex-wrap:wrap;padding:6px;gap:2px}.chapter-front-end .fe-reading-nav a{padding:8px 6px;font-size:11px;min-height:40px}.chapter-front-end .fe-reading-nav button{min-width:30px;min-height:40px;font-size:16px}.chapter-front-end .fe-reading-nav a:first-of-type{display:none}}
 @media(prefers-reduced-motion:reduce){.chapter-front-end *{scroll-behavior:auto!important}}
+
+.chapter-front-end .fe-frequency-intro{display:flex;align-items:flex-start;gap:24px;padding:0 var(--fe-panel-padding) 20px}
+.chapter-front-end .fe-frequency-intro>div{flex:1;min-width:0}
+.chapter-front-end .fe-frequency-intro p{font-size:16px;line-height:1.8;margin:10px 0 0;color:#c0d3e1;max-width:70ch}
+.chapter-front-end .fe-original-figure{display:block;max-width:270px;padding:13px 16px;border:1px solid #456b81;border-radius:9px;color:#9de2ee;font-size:14px;text-decoration:none;line-height:1.5;background:#142e40}
+.chapter-front-end .fe-original-figure:hover{border-color:#72d8ef;background:#1b3c50}
+.chapter-front-end .fe-original-figure small{display:block;color:#afc6d5;font-size:12px;margin-top:6px}
+.chapter-front-end .fe-spectrum-context{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 var(--fe-panel-padding) 20px;padding:16px;border:1px solid #35546b;border-radius:10px;background:#142b3d;font-size:13px;line-height:1.6;color:#b7cddd}
+.chapter-front-end .fe-spectrum-context strong{color:#72d8ef}
+.chapter-front-end .fe-spectrum-context b{color:#66899e}
+.chapter-front-end .fe-band-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:20px var(--fe-panel-padding)}
+.chapter-front-end .fe-band-notes p{font-size:14px;line-height:1.8;margin:0;padding:16px;background:#142b3d;border:1px solid #35546b;border-radius:10px;color:#b9cddd}
+.chapter-front-end .fe-band-notes strong{color:#dcebf7}
+@media(max-width:1150px){.chapter-front-end .fe-frequency-intro{flex-direction:column}.chapter-front-end .fe-band-notes{grid-template-columns:minmax(0,1fr)}}
