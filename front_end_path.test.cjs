@@ -16,6 +16,7 @@ const entries=JSON.parse(execFileSync(process.env.PYTHON || (process.platform ==
 }));
 assert.ok(entries.every(e=>e.model));
 
+require('./public/gps_l1_received.js');
 require('./public/front_end_signal_path.js');
 const P=globalThis.FRONT_END_PATH;
 const result=P.build(entries,'G03');
@@ -23,15 +24,23 @@ assert.equal(result.epoch,entries[0].selection.epoch);
 assert.equal(result.selected.satellite,'G03');
 for(const source of ['individual','mixed']){
  assert.equal(result[source].length,8);
- for(const stage of result[source]){assert.equal(stage.I.length,4096);assert.ok(stage.I.every(Number.isFinite));assert.ok(stage.Q.every(Number.isFinite));}
+ for(const [index,stage] of result[source].entries()){
+  assert.equal(stage.I.length,index<5?16384:4096);
+  assert.equal(stage.analog,index<5);
+  assert.ok(stage.I.every(Number.isFinite));assert.ok(stage.Q.every(Number.isFinite));
+ }
  const stages=result[source];
  assert.equal(stages[0].center,1575420000);
  assert.equal(stages[3].center,47740000);
  assert.equal(stages[5].fs,38192000);
+ assert.equal(stages[4].fs,4*38192000);
+ assert.equal(stages[5].input.length,4096);
+ for(let n=0;n<4096;n++)assert.equal(stages[5].input[n],stages[4].voltage[4*n]);
  assert.ok(stages[5].codes.every(x=>x>=0&&x<=15));
  assert.equal(stages[7].bytes.length,8192);
  for(let n=0;n<4096;n++)assert.ok(Math.abs(stages[2].I[n]-10*stages[1].I[n])<1e-12);
 }
+assert.deepEqual(result.reference,{rfBandwidth:50e6,firstIFBandwidth:18e6,ifGainDb:50,finalIFBandwidth:6e6,lo:1527.68e6,clock:10e6,adcBits:4});
 assert.deepEqual(P.build(entries,'G03').individual[7].bytes,result.individual[7].bytes);
 for(let angle=0;angle<=360;angle++)assert.ok(Math.abs(P.phaseTest(angle).errorDegrees)<1e-10);
 assert.ok(Math.abs(P.phaseTest(90).I)<1e-12);

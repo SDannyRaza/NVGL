@@ -1,12 +1,93 @@
-/* Academic content: supplied lecture and GNSS Antennas and Front Ends chapter. */
+/* Primary teaching sequence: user-supplied undergraduate lecture. */
 window.FE_LESSONS=[
-{title:'GPS L1 C/A Reception and Signal Representation',stage:0,definition:'The antenna receives a mixture of satellite signals, receiver noise and interference. Selecting a satellite in this laboratory identifies its simulated contribution; an RF filter cannot separate satellites sharing L1.',change:'Radio waves induce a voltage at the antenna terminals. The spreading code, navigation bits, Doppler and carrier phase are still present.',equation:'s(t) = A C(t - tau) D(t - tau) cos[2 pi (fL1 + fD)t + phi]',example:'GPS L1 is 1575.42 MHz. The C/A code has 1,023 chips at 1.023 million chips/s, so its period is 1 ms. A 50 bit/s legacy navigation bit lasts 20 ms and spans 20 code periods.',ref:'Lecture pp. 2, 8-15; supplied textbook chapter, PDF pp. 1-3.'},
-{title:'Antenna Reception and Equivalent Baseband Signal',stage:0,definition:'An antenna converts an incident electromagnetic field into an electrical signal. Equivalent complex baseband describes that signal without drawing 1.575 billion oscillations per second.',change:'The received voltage is represented by two envelopes, I and Q, around the L1 carrier; this is a plotting representation, not an ADC at the antenna.',equation:'rRF(t) = Re{[I(t) + j Q(t)] exp(j 2 pi fL1 t)}',example:'A received level of -130 dBm equals 10^((-130 - 30)/10) = 10^-16 W. In a matched 50 ohm load, Vrms = sqrt(P R) = 70.7 nV.',ref:'Supplied textbook chapter, PDF p. 1; lecture system architecture.'},
-{title:'RF Band Selection and C/A Signal Bandwidth',stage:1,definition:'A band-pass filter retains the desired frequency region and attenuates energy outside it. GPS satellites on L1 share this band and are distinguished later by their spreading codes.',change:'Convolution with a finite low-pass filter narrows the RF envelope spectrum and introduces group delay.',equation:'Bnull-to-null = 2 Rc = 2.046 MHz; fL1 +/- Rc = 1574.397 to 1576.443 MHz',example:'For rectangular chips, the power-spectrum envelope is proportional to sinc squared(f/Rc). Its first zeros are at +/-1.023 MHz. This null-to-null bandwidth is not the entire nonzero spectrum. The displayed 129-tap teaching filter has a 1.023 MHz cutoff, not an ideal brick-wall response.',ref:'Lecture pp. 14-15 (p. 14 axis labels corrected); textbook filtering discussion.'},
-{title:'Low-Noise Amplification and Receiver Noise',stage:2,definition:'An amplifier raises voltage and power. A low-noise amplifier limits the extra noise added by the receiver; it does not improve the signal-to-noise ratio of its input.',change:'A 20 dB ideal gain multiplies envelope voltage by 10 and signal and existing noise power by 100.',equation:'Pout,dBm = Pin,dBm + GdB; Av = 10^(GdB/20)',example:'With Pin = -130 dBm and G = 20 dB, Pout = -110 dBm. The matched-load voltage rises from 70.7 nV to 707 nV. A physical amplifier also adds noise: Ftotal = F1 + (F2 - 1)/G1 + ... in linear units. The waveform model uses ideal gain and does not claim a measured noise figure.',ref:'Supplied textbook chapter, PDF p. 7 (printed p. 59).'},
-{title:'Frequency Translation by Local-Oscillator Mixing',stage:3,definition:'A mixer multiplies the RF signal by a local oscillator. Filtering selects the difference-frequency component while retaining modulation and the carrier phase relative to that oscillator.',change:'The spectrum moves from 1575.42 MHz to a 47.74 MHz analog intermediate frequency; the complex envelope is unchanged by ideal translation.',equation:'fIF = fRF - fLO; 1575.42 - 1527.68 = 47.74 MHz',example:'cos(a) cos(b) = [cos(a - b) + cos(a + b)]/2. Selecting the difference term retains code, bits and Doppler. In this example a positive RF Doppler remains a positive IF offset; other mixer conventions can reverse the sign.',ref:'Supplied textbook chapter, PDF pp. 7-11; lecture reference front end.'},
-{title:'Intermediate-Frequency Filtering and Alias Placement',stage:4,definition:'The intermediate frequency is a lower carrier used for conditioning and digitization. An IF filter rejects unwanted mixer products and limits noise before sampling.',change:'A second finite filter suppresses out-of-band envelope energy at 47.74 MHz and adds another 64 samples of model group delay.',equation:'47.74 MHz - 38.192 MHz = 9.548 MHz',example:'The reference front end samples an isolated 47.74 MHz band at 38.192 million samples/s. Its replica is centered at 9.548 MHz. The analog ADC bandwidth must accept 47.74 MHz and the retained band must avoid overlapping aliases.',ref:'Supplied textbook chapter, PDF p. 11 (printed p. 63); lecture pp. 46-49.'},
-{title:'Analog-to-Digital Conversion and Sampling Conditions',stage:5,definition:'Sampling records a voltage at regularly spaced times; quantization assigns each sample one of a finite number of amplitude levels. These are separate operations.',change:'The IF becomes a real sample sequence at 38.192 Msamples/s, quantized to 16 levels in the four-bit reference model.',equation:'t[n] = n/fs; fNyquist = fs/2; Delta = 2 VFS / 2^b',example:'Here the Nyquist frequency is 19.096 MHz. For a real low-pass signal extending from 0 to B, its Nyquist rate is 2B. A real band-pass signal of width B can have a theoretical minimum rate 2B, but allowable rates also depend on band placement. A complex baseband of total width 2.046 MHz instead needs a complex sample rate exceeding 2.046 Msamples/s, with filter transition margin.',ref:'Lecture ADC and sampling slides; textbook PDF pp. 9-11.'},
-{title:'Digital Intermediate Frequency and Quadrature Conversion',stage:6,definition:'Digital IF is the sampled real carrier after aliasing. Digital downconversion multiplies it by cosine and sine references and low-pass filters both products to obtain I and Q.',change:'The stored real samples still contain a 9.548 MHz carrier. The next block removes that nominal carrier while preserving residual Doppler and relative phase.',equation:'z[n] = LPF{sqrt(2) x[n] exp(-j 2 pi 9.548e6 n/fs)}',example:'At fs = 38.192 MHz, one millisecond contains 38,192 real samples. Four-bit packed storage would use 19,096 bytes/ms; one byte per four-bit sample would use 38,192 bytes/ms. ADC resolution alone does not specify file packing.',ref:'Lecture pp. 43, 46-49; textbook PDF p. 11.'},
-{title:'Raw I/Q Recording and Software Receiver Interfaces',stage:7,definition:'A raw I/Q recording stores successive in-phase and quadrature amplitudes with a known sample rate and center frequency. It contains samples, not RINEX observations or decoded navigation fields.',change:'Quadrature conversion removes the nominal IF; interleaved I,Q values are serialized as unsigned bytes for the CU8 demonstration.',equation:'z[n] = I[n] + j Q[n]; phase = atan2(Q,I); CU8 bytes = 2 fs T',example:'At 2.4 million complex samples/s, CU8 needs 4.8 MB/s and 288 MB for 60 s (274.66 MiB). Complex float32 uses 8 bytes per pair, so the same recording becomes 1.152 GB. Sample rate, center frequency, gain and timestamp must be recorded separately because these raw formats have no header.',ref:'Lecture pp. 51-52; current Osmocom RTL-SDR source and GNSS-SDR documentation linked below.'}
+  {
+    "title": "Understanding the GNSS Signal",
+    "stage": 0,
+    "definition": "A GPS L1 C/A signal is a radio wave carrying a ranging code and navigation data at 1575.42 MHz.",
+    "change": "The antenna input remains a weak, analog, noise-like signal. Clean sinusoidal examples explain frequency and modulation; they are not complete received GPS waveforms.",
+    "example": "At 290 K in a 2 MHz bandwidth, thermal noise power N = kTB is approximately -111 dBm. The example GPS signal is -130 dBm, approximately 19 dB below that integrated noise power.",
+    "equation": "fL1 = 1575.42 MHz; wavelength = c/f; Bmain = 2 Rc = 2.046 MHz; N = kTB",
+    "ref": "User-supplied lecture, Section 01; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Complete GNSS Front-End Architecture",
+    "stage": 0,
+    "definition": "A GNSS front end prepares received radio signals for digital processing.",
+    "change": "Reception, RF filtering, amplification, mixing and IF conditioning operate on an analog signal. The transition to digital numbers occurs only in the ADC. The front end prepares samples for acquisition and tracking; it does not calculate receiver position.",
+    "example": "Reference parameters: RF 1575.42 MHz; local oscillator 1527.68 MHz; analog IF 47.74 MHz; sampling frequency 38.192 MHz; digital IF 9.548 MHz; ADC resolution four bits.",
+    "equation": "fRF = 1575.42 MHz; fLO = 1527.68 MHz; fIF = 47.74 MHz; fs = 38.192 MHz",
+    "ref": "User-supplied lecture, Section 02; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "GNSS Receiving Antenna",
+    "stage": 0,
+    "definition": "A receiving antenna converts arriving radio waves into a small electrical voltage.",
+    "change": "The antenna produces a weak analog voltage. Its frequency content includes the received L1 band and noise; the signal is not decoded or separated by satellite.",
+    "example": "For a received power of -130 dBm, a 30 dB active-antenna LNA produces -100 dBm. An 8 dB cable loss then reduces the signal power to -108 dBm.",
+    "equation": "Pafter LNA = -130 + 30 = -100 dBm; Pafter cable = -100 - 8 = -108 dBm",
+    "ref": "User-supplied lecture, Section 03; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "RF Bandpass Filter",
+    "stage": 1,
+    "definition": "An RF bandpass filter passes a selected frequency band and weakens frequencies outside it.",
+    "change": "Out-of-band energy is attenuated. The waveform remains analog, and its center frequency remains 1575.42 MHz. The RF filter does not separate individual GPS satellites. The reference RF filter is centered at 1575.42 MHz with an approximately 50 MHz 3-dB bandwidth.",
+    "example": "The symmetric 50 MHz RF passband has approximate 3-dB edges at 1550.42 MHz and 1600.42 MHz. A separate 1.5 dB insertion-loss example reduces -130 dBm to -131.5 dBm. The C/A main-lobe width remains 2.046 MHz.",
+    "equation": "B3dB = 50 MHz; flower = 1550.42 MHz; fupper = 1600.42 MHz",
+    "ref": "User-supplied lecture, Section 04; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Amplification and Noise Figure",
+    "stage": 2,
+    "definition": "Amplification increases the amplitude or power of an electrical signal.",
+    "change": "The analog voltage increases in magnitude. The carrier center remains 1575.42 MHz, and the input signal-to-noise ratio does not improve through ideal gain alone.",
+    "example": "The lecture amplifier example has -110 dBm input and 20 dB gain, giving -90 dBm output. An input SNR of 10 dB and output SNR of 7 dB correspond to a noise figure of 3 dB. Friis noise factors and gains must be expressed in linear units.",
+    "equation": "GdB = Pout,dBm - Pin,dBm; SNR = Psignal/Pnoise; NFdB = SNRin,dB - SNRout,dB",
+    "ref": "User-supplied lecture, Section 05; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Mixer and Local Oscillator",
+    "stage": 3,
+    "definition": "A mixer combines RF and local-oscillator signals to produce sum and difference frequencies.",
+    "change": "The analog mixer produces the desired component at 47.74 MHz and an unwanted sum-frequency component at 3103.10 MHz. The next IF filter selects the desired band.",
+    "example": "1575.42 - 1527.68 = 47.74 MHz; 1575.42 + 1527.68 = 3103.10 MHz. The image frequency is 1527.68 - 47.74 = 1479.94 MHz. Dividing the synthesized local oscillator by 40 gives 38.192 MHz sampling.",
+    "equation": "fdifference = |fRF - fLO|; fsum = fRF + fLO; fs = fLO/40",
+    "ref": "User-supplied lecture, Section 06; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Intermediate-Frequency Filtering and Amplification",
+    "stage": 4,
+    "definition": "IF conditioning filters and amplifies the intermediate-frequency signal before digitization.",
+    "change": "The first IF filter passes an approximately 18 MHz band. The IF amplifier then provides approximately 50 dB gain. The final filter reduces the analog bandwidth to approximately 6 MHz. The center frequency remains 47.74 MHz.",
+    "example": "For the same 2.046 MHz comparison bandwidth, Q = 1575.42/2.046 is approximately 770 at RF and Q = 47.74/2.046 is approximately 23.33 at IF. The actual reference final IF passband is approximately 6 MHz.",
+    "equation": "Q = fcenter/BW; BIF,first = 18 MHz; GIF = 50 dB; BIF,final = 6 MHz",
+    "ref": "User-supplied lecture, Section 07; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Analog-to-Digital Converter",
+    "stage": 5,
+    "definition": "An analog-to-digital converter (ADC) converts a continuous analog voltage into numerical samples.",
+    "change": "The ADC samples the conditioned analog IF and quantizes each measurement to one of 16 levels. Intentional bandpass sampling places the desired IF at 9.548 MHz in the sampled spectrum.",
+    "example": "The sampling interval is 1/(38.192 million) = approximately 26.18 ns. The Nyquist frequency is 19.096 MHz. The analog IF appears at |47.74 - 38.192| = 9.548 MHz. A four-bit ADC provides 2^4 = 16 quantization levels.",
+    "equation": "fs = 1/Ts; fN = fs/2; fdigital = |fIF - fs|; L = 2^N",
+    "ref": "User-supplied lecture, Section 08; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Resulting Digital GNSS Signal",
+    "stage": 6,
+    "definition": "The digital GNSS output is a sequence of numbers representing the received intermediate-frequency voltage.",
+    "change": "The time-domain waveform, 16-level histogram and frequency spectrum describe the same four-bit digital IF sample sequence. A noise-like waveform is compatible with valid GPS information. The reference output uses four-bit samples at 38.192 million samples per second, with a digital IF of 9.548 MHz.",
+    "example": "One thousand samples span 1000/(38.192 million) = approximately 26.2 microseconds. The histogram contains one count per sample: its 16 bin counts must sum to the displayed sample count.",
+    "equation": "fs = 38.192 MHz; fdigital = 9.548 MHz; N = 4 bits/sample; T = sample count/fs",
+    "ref": "User-supplied lecture, Section 09; supplied GNSS front-end presentation and textbook chapter."
+  },
+  {
+    "title": "Complete Front-End Signal Transformation",
+    "stage": 6,
+    "definition": "Signal transformation is the sequence of changes applied between antenna reception and digital output.",
+    "change": "The received analog L1 signal has become a noise-like sequence of digital IF samples. Satellite identification and navigation-message processing belong to subsequent digital receiver stages.",
+    "example": "The final sequence is antenna, RF filter, RF amplifier, mixer, first IF filter, IF amplifier, final IF filter, ADC sampling and ADC quantization. The digital output retains the desired ranging and navigation modulation.",
+    "equation": "Analog reception and conditioning -> ADC sampling -> ADC quantization -> digital IF",
+    "ref": "User-supplied lecture, Section 10; supplied GNSS front-end presentation and textbook chapter."
+  }
 ];

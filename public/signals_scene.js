@@ -7,6 +7,7 @@
 'use strict';
 const SCENE_STORE={epoch:null,promise:null,data:null,prns:new Map(),generation:0};
 const SCENE_BANDS={
+  gpsl1:{title:'GPS L1 C/A',centerMHz:1575.42,gpsL1Reference:true,match:s=>s.prn_mode==='gps-ca'},
   l1:{title:'L1 / E1',centerMHz:1575.42,match:s=>Math.abs(Number(s.carrier_mhz)-1575.42)<0.3},
   b1:{title:'BeiDou B1',centerMHz:1561.098,match:s=>Math.abs(Number(s.carrier_mhz)-1561.098)<0.3},
   g1:{title:'GLONASS G1',centerMHz:1602,match:s=>s.band==='G1'},
@@ -84,6 +85,11 @@ async function sceneModels(channels){
   return entries.filter(Boolean);
 }
 function sceneSynthesize(entries,band,epochISO){
+  if(band.gpsL1Reference){
+    const saved=GPS_L1_RECEIVED.readContext(),satellite=entries.some(e=>e.selection.satellite===saved?.satellite)?saved.satellite:entries[0].selection.satellite;
+    const frame=GPS_L1_RECEIVED.synthesize(entries,satellite,{samples:GPS_L1_RECEIVED.DISPLAY_SAMPLES});
+    return {tUs:frame.tUs,sumI:frame.composite.I,sumQ:frame.composite.Q,cleanI:frame.composite.cleanI,cleanQ:frame.composite.cleanQ,contributions:frame.contributions,sampleRate:frame.sampleRate};
+  }
   const n=768;
   const fs=band===SCENE_BANDS.g1||band===SCENE_BANDS.g2?20e6:
     Math.max(4.092e6,...entries.map(e=>4*e.model.codeRate));
@@ -124,7 +130,8 @@ async function renderScene(){
     const inBand=scene.channels.filter(c=>band.match(c.signal));
     $('scene-satellite-list').innerHTML=sceneChannelRows(scene.channels,band);
     $('scene-status').textContent=`${scene.satellite_count} observed satellites · ${scene.channel_count} recorded signal channels · ${band.title} front end`;
-    const entries=await sceneModels(inBand);
+    const reconstructable=band.gpsL1Reference?inBand.filter(GPS_L1_RECEIVED.complete):inBand;
+    const entries=await sceneModels(reconstructable);
     if(token!==SCENE_STORE.generation||state.view!=='scene'||state.epoch.index!==index)return;
     const observedSats=new Set(inBand.map(c=>c.satellite));
     const mixSats=new Set(entries.map(e=>e.selection.satellite));
@@ -141,6 +148,10 @@ async function renderScene(){
       return;
     }
     const output=sceneSynthesize(entries,band,scene.epoch);
+    if(band.gpsL1Reference){
+      const satellite=entries.some(e=>e.selection.satellite===state.sat)?state.sat:entries[0].selection.satellite;
+      GPS_L1_RECEIVED.saveContext({epoch:index,satellite,source:'mixed',includeNoise:true,view:'scene'});
+    }
     plot('scene-iq-plot',[
       {x:output.tUs,y:output.sumI,name:'Combined I + common noise',mode:'lines',line:{width:1.2,color:'#72c7f5'}},
       {x:output.tUs,y:output.sumQ,name:'Combined Q + common noise',mode:'lines',line:{width:1.2,color:'#febf7d'}},
@@ -152,6 +163,7 @@ async function renderScene(){
       mode:'lines',line:{width:1.3,color:COLORS[e.selection.satellite[0]]||'#b3cad8'},
     })),{xaxis:{title:'Sample time [µs]'},yaxis:{title:'Individual clean I contribution'},legend:{orientation:'h',y:1.28},margin:{l:68,r:20,t:70,b:60}});
     $('scene-status').textContent+=` · ${entries.length} channels summed · all ${best.length} contributions available in the legend`;
+    if(band.gpsL1Reference)$('scene-status').textContent+=` · shared GPS L1 C/A input for GNSS Front End · ${inBand.length-reconstructable.length} incomplete channels omitted`;
   }catch(error){
     if(token!==SCENE_STORE.generation)return;
     $('scene-status').textContent='Unable to construct this epoch: '+error.message;

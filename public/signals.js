@@ -95,11 +95,15 @@ function updateEpochReadout(index=state.epoch.index){
 async function init(){
   state.meta=await getJSON('/api/signals/meta');
   const n=state.meta.dataset.epoch_count;
-  const ep=$('epoch-select');ep.max=String(Math.max(0,n-1));ep.value='0';ep.disabled=n<2;
-  state.epoch=await getJSON('/api/signals/epoch?index=0');
+  const saved=GPS_L1_RECEIVED.readContext(),index=Math.min(saved?.epoch||0,Math.max(0,n-1));
+  if(saved){state.sat=saved.satellite;state.signalId='G-1C';$('receiver-noise').checked=saved.includeNoise!==false;}
+  const ep=$('epoch-select');ep.max=String(Math.max(0,n-1));ep.value=String(index);ep.disabled=n<2;
+  state.epoch=await getJSON('/api/signals/epoch?index='+index);
   updateEpochReadout();
   state.system=state.epoch.systems.G?'G':ORDER.find(s=>state.epoch.systems[s])||Object.keys(state.epoch.systems)[0];
   bindEvents();populateSystem();await refreshSelection('initial dataset load');renderStatic();
+  const requested=location.hash.slice(1);
+  if([...document.querySelectorAll('#stage-nav button[data-view]')].some(button=>button.dataset.view===requested))switchView(requested);
 }
 function bindEvents(){
   $('stage-nav').addEventListener('click',e=>{const b=e.target.closest('button[data-view]');if(!b)return;switchView(b.dataset.view)});
@@ -110,7 +114,7 @@ function bindEvents(){
     $('focus-stage').textContent=document.body.classList.contains('signal-focus-mode')?'◱ Show introduction':'⤢ Focus graphs';
     requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
   });
-  $('receiver-noise').addEventListener('change',()=>{if(state.view==='received')renderReceived()});
+  $('receiver-noise').addEventListener('change',()=>{saveSignalContext();if(state.view==='received')renderReceived()});
   let epochRequest=0;
   $('epoch-select').addEventListener('input',e=>{
     ++epochRequest; ++state.revision;
@@ -145,9 +149,14 @@ function populateSatellite(){
 }
 function populateSignal(){const sigs=systemMeta()?.signals||[];if(!sigs.some(s=>s.id===state.signalId))state.signalId=sigs[0]?.id;selectOptions($('signal-select'),sigs,x=>x.id,x=>`${x.name} · ${x.observation_codes.join('/')}`,state.signalId)}
 function populateComponent(){const comps=signalMeta()?.components||[];if(!comps.includes(state.component))state.component=signalMeta()?.default_component||comps[0];selectOptions($('component-select'),comps,x=>x,x=>x,state.component)}
+function saveSignalContext(){
+  if(!state.selection||state.selection.signal?.prn_mode!=='gps-ca'||!state.sat?.startsWith('G'))return;
+  const previous=GPS_L1_RECEIVED.readContext();
+  GPS_L1_RECEIVED.saveContext({epoch:state.epoch.index,satellite:state.sat,source:state.view==='received'?'individual':state.view==='scene'?'mixed':previous?.source||'individual',includeNoise:state.view==='scene'?true:$('receiver-noise').checked,view:state.view});
+}
 async function refreshSelection(reason){
   const rev=++state.revision; const url=`/api/signals/selection?epoch=${state.epoch.index}&sat=${encodeURIComponent(state.sat)}&signal=${encodeURIComponent(state.signalId)}`;
-  try{const result=await getJSON(url);if(rev!==state.revision)return;state.selection=result;try{if(result.satellite?.startsWith('G')&&result.signal?.prn_mode==='gps-ca')sessionStorage.setItem('nvgl.gps-l1-context',JSON.stringify({epoch:state.epoch.index,satellite:result.satellite,signalId:state.signalId}));}catch{}await regeneratePRN(reason,rev);if(rev!==state.revision)return;renderContext();renderCurrent();}
+  try{const result=await getJSON(url);if(rev!==state.revision)return;state.selection=result;saveSignalContext();await regeneratePRN(reason,rev);if(rev!==state.revision)return;renderContext();renderCurrent();}
   catch(err){if(rev!==state.revision)return;console.error(err);$('context-title').textContent='Signal selection error';$('context-subtitle').textContent=err.message;}
 }
 function shiftStage(direction){
@@ -161,6 +170,7 @@ function switchView(view){
   const index=buttons.findIndex(b=>b.dataset.view===view);
   if(index<0)return;
   state.view=view;
+  saveSignalContext();
   renderContext();
   buttons.forEach(b=>{const active=b.dataset.view===view;b.classList.toggle('active',active);b.setAttribute('aria-current',active?'step':'false')});
   document.querySelectorAll('.workspace-view').forEach(p=>p.classList.toggle('active',p.dataset.viewPanel===view));
@@ -305,7 +315,16 @@ function renderReceived(){
     ['Code offset',m.delayChips===null?'Unavailable':`${fmt(m.delayChips,3)} chips`,'Modulo primary-code length'],
     ['RINEX C/N₀',m.cn0===null?'Unavailable':`${fmt(m.cn0,1)} dB-Hz`,'Receiver S observable'],
   ]);
-  const noise=$('receiver-noise').checked,w=RECEIVER_MODEL.synthesize(m,{samples:2048,includeNoise:noise});
+  const noise=$('receiver-noise').checked;
+  let w;
+  if(state.selection.signal.prn_mode==='gps-ca'){
+    if(!GPS_L1_RECEIVED.complete(state.selection)){receiverUnavailable(['receiver-iq-plot','receiver-cloud-plot']);return;}
+    const shared=GPS_L1_RECEIVED.synthesize([{selection:state.selection,model:m}],state.sat,{samples:GPS_L1_RECEIVED.DISPLAY_SAMPLES,includeNoise:noise});
+    w={tUs:shared.tUs,...shared.individual};
+  }else w=RECEIVER_MODEL.synthesize(m,{samples:2048,includeNoise:noise});
+  let handoff=$('receiver-front-end-link');
+  if(!handoff){$('receiver-metrics').insertAdjacentHTML('afterend','<div id="receiver-front-end-link" class="callout"><strong>Continue with this received GPS L1 C/A signal</strong><p>The Front End uses the same observation epoch, Doppler, code delay, carrier phase and receiver-noise realization. This I/Q display represents the received RF envelope, not digitization at the antenna.</p><a class="button-link" href="/front-end/">Follow this signal through the GNSS Front End</a></div>');handoff=$('receiver-front-end-link');}
+  handoff.hidden=state.selection.signal.prn_mode!=='gps-ca';
   plot('receiver-iq-plot',[
     {x:w.tUs,y:w.I,name:'In-phase (I)',mode:'lines',line:{color:'#62d7ec',width:1.3}},
     {x:w.tUs,y:w.Q,name:'Quadrature (Q)',mode:'lines',line:{color:'#f2bd70',width:1.3}},

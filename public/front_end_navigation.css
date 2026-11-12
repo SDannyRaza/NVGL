@@ -30,3 +30,38 @@
 .chapter-front-end #fe-nav button .fe-sidebar-number{color:var(--stage-accent)}
 .chapter-front-end .fe-lesson .fe-definitions dt{color:var(--fe-stage-color)}
 .chapter-front-end .fe-lesson .fe-worked summary::marker{color:var(--fe-stage-color)}
+
+/* Ten source-lecture sections and mathematical content. */
+.chapter-front-end .fe-stage-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.chapter-front-end .fe-worked-body math{font-family:Cambria Math,STIX Two Math,serif;font-size:1.1em;max-width:100%;overflow-x:auto}
+.chapter-front-end .fe-inline-math{font-family:Cambria Math,Georgia,serif}
+.chapter-front-end .section-head h3{font-size:18px;margin:14px 0 7px}
+.chapter-front-end .fe-stage-copy small{font-size:12px}
+@media(max-width:1200px){.chapter-front-end .fe-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.chapter-front-end .fe-example-equations{display:flex;flex-wrap:wrap;gap:10px;padding:0 20px 10px}
+.chapter-front-end .fe-example-equations>.fe-equation{flex:1 1 230px;min-width:0;border:1px solid #2c495b;border-radius:8px}
+.chapter-front-end .fe-worked-body .fe-equation,.chapter-front-end .fe-example-equations>.fe-equation{max-width:100%;overflow-x:auto}
+.chapter-front-end .fe-equation math{font-size:1em}
+
+/* Keep prerequisite definitions readable without sideways scrolling on a phone. */
+@media(max-width:650px){
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) .fe-table-wrap{padding:0;overflow:visible}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) table{min-width:0;width:100%;table-layout:auto}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) tbody,.chapter-front-end :is(#fe-foundations,#fe-section-symbols) tr,.chapter-front-end :is(#fe-foundations,#fe-section-symbols) td{display:block;width:100%}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) tr{margin:12px 0;border:1px solid #34566a;border-radius:9px;background:#102430;overflow:hidden}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) td{border:0;padding:10px 14px;font-size:15px;overflow-wrap:anywhere}
+ .chapter-front-end :is(#fe-foundations,#fe-section-symbols) td::before{content:attr(data-label);display:block;margin-bottom:4px;color:#acc5d4;font-size:12px;font-weight:650}
+}
+
+/* Point-of-use definitions retain the existing chapter typography and accents. */
+.chapter-front-end a.fe-term{color:inherit;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:4px;text-decoration-color:var(--fe-stage-color,#8ac5da)}
+.chapter-front-end a.fe-term:hover,.chapter-front-end a.fe-term:focus-visible{color:var(--fe-stage-color,#8ac5da);text-decoration-style:solid}
+.chapter-front-end .fe-concept-entry.is-selected{outline:2px solid var(--fe-stage-color,#8ac5da);outline-offset:-2px}
+.chapter-front-end .fe-definition-back{display:block;margin-top:9px;padding:6px 10px;border:1px solid #52728a;border-radius:6px;background:#173244;color:#d7edf5;font:inherit;font-size:13px;cursor:pointer}
+.chapter-front-end .fe-definition-back[hidden]{display:none}
+.chapter-front-end .fe-definition-heading p{font-size:14px;line-height:1.6;color:#b6cad9}
+.chapter-front-end .fe-concept-entry dt:focus{outline:2px solid var(--fe-stage-color,#8ac5da);outline-offset:3px}
+
+.chapter-front-end .fe-definition-back{min-height:44px}

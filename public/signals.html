@@ -117,7 +117,7 @@
 
   <section class="workspace-view receiver-screen" data-view-panel="scene">
     <div class="section-head receiver-head"><div><span class="eyebrow">RECEIVER / 08 · COMPLETE OBSERVATION EPOCH</span><h2>All satellites at the receiver</h2><p>Every satellite and observation channel is read from the chosen RINEX epoch. Mix compatible signals at one selected RF front-end center, then isolate any satellite for detailed study.</p></div></div>
-    <div class="scene-toolbar card"><label>Receiver RF group<select id="scene-rf-band" aria-label="Choose RF group for composite signal"><option value="l1">L1 / E1 · 1575.42 MHz</option><option value="b1">BeiDou B1 · 1561.098 MHz</option><option value="g1">GLONASS G1 · FDMA</option><option value="l2">L2 · 1227.60 MHz</option><option value="e5b">E5b / B2 · 1207.14 MHz</option><option value="g2">GLONASS G2 · FDMA</option></select></label><div id="scene-status" role="status" aria-live="polite">Select this stage to reconstruct the epoch's satellite scene.</div></div>
+    <div class="scene-toolbar card"><label>Receiver RF group<select id="scene-rf-band" aria-label="Choose RF group for composite signal"><option value="gpsl1">GPS L1 C/A &middot; shared Front End reference</option><option value="l1">L1 / E1 · 1575.42 MHz</option><option value="b1">BeiDou B1 · 1561.098 MHz</option><option value="g1">GLONASS G1 · FDMA</option><option value="l2">L2 · 1227.60 MHz</option><option value="e5b">E5b / B2 · 1207.14 MHz</option><option value="g2">GLONASS G2 · FDMA</option></select></label><div id="scene-status" role="status" aria-live="polite">Select this stage to reconstruct the epoch's satellite scene.</div></div>
     <div class="receiver-metrics" id="scene-metrics"></div>
     <div class="receiver-plots"><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">COMMON RECEIVER FRONT END</span><h3>Combined complex I/Q with shared thermal noise</h3></div></div><div id="scene-iq-plot" class="plot"></div></article><article class="card plot-card"><div class="card-head"><div><span class="eyebrow">INDIVIDUAL CHANNELS</span><h3>Clean signal contributions in the chosen band</h3></div></div><div id="scene-components-plot" class="plot"></div></article></div>
     <article class="card scene-table-card"><div class="card-head"><div><span class="eyebrow">COMPLETE EPOCH INVENTORY</span><h3>All observed satellites and available RINEX signals</h3></div></div><div id="scene-satellite-list" class="scene-table-wrap"></div></article>
@@ -162,7 +162,7 @@
 <footer><strong>NCGSA Virtual GNSS Laboratory · GNSS Signal Simulation</strong><span>Recorded RINEX measurements and ICD-based signal reconstruction are intentionally distinguished throughout the laboratory.</span></footer>
 </div>
 <script defer src="/gps_lnav_replay.js"></script>
-<script defer src="/signal_receiver_model.js"></script>
+<script defer src="/signal_receiver_model.js"></script><script defer src="/gps_l1_received.js"></script>
 <script defer src="/signals.js"></script>
 <script defer src="/signals_scene.js"></script>
 <footer class="institutional-footer" id="footer">
