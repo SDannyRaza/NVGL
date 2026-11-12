@@ -65,3 +65,40 @@
 .chapter-front-end .fe-concept-entry dt:focus{outline:2px solid var(--fe-stage-color,#8ac5da);outline-offset:3px}
 
 .chapter-front-end .fe-definition-back{min-height:44px}
+
+/* Receiver overview: one page scroll, with distinct signal and clock paths. */
+.receiver-redesign.chapter-front-end .lab-sidebar{position:static;max-height:none;overflow:visible}
+.chapter-front-end .fe-system-overview{margin:0 24px 28px;padding:24px;border:1px solid #34546c;border-radius:18px;background:#102036}
+.chapter-front-end .fe-system-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px}
+.chapter-front-end .fe-system-heading h2{font-size:24px;margin:8px 0;color:#e8f1ff}
+.chapter-front-end .fe-system-heading p,.chapter-front-end .fe-system-note{color:#aec3d5;font-size:14px;line-height:1.65;margin:8px 0}
+.chapter-front-end .fe-simulation-link{border:1px solid #466a85;border-radius:10px;padding:12px 16px;color:#a9dbed;text-decoration:none;flex-shrink:0;font-weight:650}
+.chapter-front-end .fe-simulation-link small{display:block;font-size:12px;color:#aec3d5;font-weight:400;margin-top:6px}
+.chapter-front-end .fe-rf-lane,.chapter-front-end .fe-clock-lane{border:1px solid #37647a;border-radius:12px;padding:16px;background:#0c1c2d}
+.chapter-front-end .fe-lane-label{display:block;color:#72d8ef;font-size:12px;letter-spacing:.09em;font-weight:750;margin-bottom:18px}
+.chapter-front-end .fe-lane-label small{font-size:12px;font-weight:400;letter-spacing:normal;margin-left:12px;color:#aec3d5}
+.chapter-front-end .fe-circuit{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:18px}
+.chapter-front-end .fe-component{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 3px;border:1px solid transparent;border-radius:10px;color:var(--component-color);text-decoration:none;min-width:0;transition:background .15s,border-color .15s}
+.chapter-front-end .fe-component:hover,.chapter-front-end .fe-component.is-current{border-color:var(--component-color);background:#172e43}
+.chapter-front-end .fe-component:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.chapter-front-end .fe-component-title{color:#e5eef8;font-size:13px;font-weight:650;min-height:38px;line-height:1.4}
+.chapter-front-end .fe-component svg{width:72px;height:70px;max-width:100%;margin:7px 0}
+.chapter-front-end .fe-component-frequency{font-size:12px;font-weight:650;line-height:1.5;color:#d7e7f4}
+.chapter-front-end .fe-component small{font-size:11px;line-height:1.6;color:#aec3d5}
+.chapter-front-end .fe-wire{position:absolute;right:-19px;top:84px;font-size:23px;color:#72d8ef}
+.chapter-front-end .fe-adc-boundary{border-left:1px dashed #bea6ff}
+.chapter-front-end .fe-clock-lane{margin-top:14px;border-color:#746341}
+.chapter-front-end .fe-clock-lane .fe-lane-label{color:#ffd17a;margin-bottom:14px}
+.chapter-front-end .fe-clock-flow{display:flex;align-items:center;gap:24px;color:#ffd17a}
+.chapter-front-end .fe-clock-flow>div{padding:10px 16px;border:1px solid #77633f;border-radius:8px}
+.chapter-front-end .fe-clock-flow b{display:block;color:#e8edf5;font-size:13px;margin-bottom:5px}
+.chapter-front-end .fe-clock-flow span{font-size:13px}
+.chapter-front-end .fe-clock-branch{display:flex;gap:32px}
+.chapter-front-end .fe-clock-branch>span{display:block}
+.chapter-front-end .fe-simulation-continuity{padding:16px;border-left:3px solid #72d8ef;background:#132b3c;line-height:1.7}
+html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thin}
+@media(max-width:1100px){.chapter-front-end .fe-circuit{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.chapter-front-end .fe-component:nth-child(3n) .fe-wire{display:none}.chapter-front-end .fe-component:nth-child(3n):not(:last-child)::after{content:'\2193';position:absolute;bottom:-24px;font-size:21px;color:#72d8ef}.chapter-front-end .fe-component-title{min-height:20px}.chapter-front-end .fe-wire{top:64px}.chapter-front-end .fe-clock-flow{gap:12px;flex-wrap:wrap}}
+@media(max-width:850px){.receiver-redesign.chapter-front-end .lab-sidebar{display:block}.chapter-front-end #fe-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chapter-front-end #fe-nav button{min-width:0}.chapter-front-end .fe-system-overview{margin:0 16px 20px;padding:16px}.chapter-front-end .fe-system-heading{align-items:flex-start;flex-direction:column;gap:12px}.chapter-front-end .fe-system-heading h2{font-size:22px}.chapter-front-end .fe-lane-label small{display:block;margin:8px 0 0}.chapter-front-end .fe-clock-branch{flex-direction:column;gap:14px}.chapter-front-end .fe-component-frequency{font-size:11px}.chapter-front-end .fe-rf-lane{padding:12px}.chapter-front-end .fe-circuit{gap:18px 10px}.chapter-front-end .fe-component-title{font-size:12px;min-height:34px}.chapter-front-end .fe-component small{font-size:10px}.chapter-front-end .fe-wire{right:-13px;top:76px}.chapter-front-end .fe-clock-flow>div{padding:10px}.chapter-front-end .fe-system-note{font-size:12px}}
+
+.chapter-front-end .fe-component-title .fe-path-number{display:block;color:var(--component-color);font-size:11px;margin-bottom:5px}
+@media(max-width:1100px){.chapter-front-end .fe-component:nth-child(3n):not(:last-child)::after{content:none}}
