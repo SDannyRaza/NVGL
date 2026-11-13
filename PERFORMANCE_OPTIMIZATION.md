@@ -10,10 +10,10 @@ Measured from the local production build after this revision:
 
 | Initial local JS/CSS | Previous | Current |
 | --- | ---: | ---: |
-| Raw file bytes | 5,056,946 | 480,465 |
+| Raw file bytes | 5,056,946 | 484,472 |
 | Reduction | | 90.5% |
 
-The current initial local assets have an independently gzip-compressed estimate of 144,689 bytes. These are asset-size measurements, not a live Vercel speed score; HTML, fonts and later on-demand scientific assets are not included.
+The current initial local assets have an independently gzip-compressed estimate of 145,215 bytes. These are asset-size measurements, not a live Vercel speed score; HTML, fonts and later on-demand scientific assets are not included.
 
 - Plotly (4,558,696 raw bytes) is no longer a prerequisite for the lesson shell. A viewport chart scheduler loads its versioned URL once, draws nearby figures, coalesces input changes, and purges old lesson charts. Chart download failures expose a retry action without blocking the lesson.
 - The unused receiver_lessons.js entry was removed from the two Front End pages. Other dashboards still load their existing dependencies.

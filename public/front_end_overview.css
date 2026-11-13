@@ -1,0 +1,33 @@
+
+.chapter-front-end .fe-overview>.card-head{display:block}
+.chapter-front-end .fe-overview>.card-head .eyebrow{display:block;margin-bottom:8px;font-size:11px;color:var(--fe-stage-color)}
+.chapter-front-end .fe-overview-body{padding:0 var(--fe-panel-padding,24px) 24px;color:#bdd0df;font-size:16px;line-height:1.8}
+.chapter-front-end .fe-overview-body>p{max-width:85ch;margin:0 0 20px}
+.chapter-front-end .fe-overview-body h4{font-size:19px;line-height:1.5;color:#e1edf7;margin:28px 0 12px}
+.chapter-front-end .fe-overview-lead{font-size:17px;color:#d3e3ef}
+.chapter-front-end .fe-overview-source,.chapter-front-end .fe-overview-controls{display:flex;flex-wrap:wrap;gap:16px;padding:16px;border:1px solid #3d6077;border-radius:10px;background:#142d40;margin:20px 0}
+.chapter-front-end .fe-overview-source label,.chapter-front-end .fe-overview-controls label{display:flex;flex:1 1 180px;flex-direction:column;gap:7px;min-width:0;color:#d9eaf5;font-size:13px;font-weight:650}
+.chapter-front-end .fe-overview-source select,.chapter-front-end .fe-overview-source input,.chapter-front-end .fe-overview-controls select{font:inherit;min-height:44px;width:100%;min-width:0;padding:10px;border:1px solid #52778e;border-radius:7px;color:#dceef8;background:#102336}
+.chapter-front-end .fe-overview-controls label.fe-overview-check{flex-direction:row;align-items:center;gap:10px;line-height:1.6}
+.chapter-front-end .fe-overview-check input{width:20px;height:20px;accent-color:var(--fe-stage-color);flex:none}
+.chapter-front-end .fe-overview-status{font-size:13px;color:#adcbde;overflow-wrap:anywhere}
+.chapter-front-end .fe-overview-flow{display:flex;align-items:stretch;gap:14px;margin:24px 0}
+.chapter-front-end .fe-overview-flow>div{flex:1;min-width:0;padding:16px;border:1px solid #3d6077;border-radius:10px;background:#132b3e}
+.chapter-front-end .fe-overview-flow strong,.chapter-front-end .fe-overview-flow span{display:block}
+.chapter-front-end .fe-overview-flow strong{font-size:15px;color:#deedf7}
+.chapter-front-end .fe-overview-flow span{font-size:12px;color:#a9c7da;margin-top:6px}
+.chapter-front-end .fe-overview-flow>b{align-self:center;font-size:23px;color:#72d8ef}
+.chapter-front-end .fe-overview-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.chapter-front-end .fe-overview-metrics>div{padding:16px;border:1px solid #3d6077;border-radius:10px;background:#142d40;min-width:0}
+.chapter-front-end .fe-overview-metrics span,.chapter-front-end .fe-overview-metrics small{display:block;color:#afc9da;font-size:12px;line-height:1.7}
+.chapter-front-end .fe-overview-metrics strong{display:block;margin:6px 0;font-size:19px;line-height:1.6;color:#e0f0f8;overflow-wrap:anywhere}
+.chapter-front-end .fe-overview-equation{padding:18px 20px;border:1px solid #496d84;border-left:3px solid var(--fe-stage-color);border-radius:10px;background:#132b3d;margin:24px 0}
+.chapter-front-end .fe-overview-equation strong,.chapter-front-end .fe-overview-equation span{display:block}
+.chapter-front-end .fe-overview-equation strong{font-size:14px;color:#d7ebf8;margin-bottom:12px}
+.chapter-front-end .fe-overview-equation span{font-family:Cambria Math,Georgia,serif;font-size:18px;line-height:1.9;color:#e4f0f8;overflow-wrap:anywhere}
+.chapter-front-end .fe-overview-equation p{font-size:13px;line-height:1.8;color:#abc6d8;margin:14px 0 0}
+.chapter-front-end .fe-overview-caption{font-size:13px;line-height:1.8;color:#a6c3d6}
+@media(max-width:850px){.chapter-front-end .fe-overview-metrics{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-overview-flow{flex-direction:column;gap:8px}.chapter-front-end .fe-overview-flow>b{transform:rotate(90deg)}.chapter-front-end .fe-overview-body{padding:0 16px 20px}.chapter-front-end .fe-overview-equation{padding:16px}.chapter-front-end .fe-overview-equation span{font-size:16px}}
+
+.chapter-front-end :is(.fe-overview-source,.fe-overview-controls){scroll-margin-top:180px}
+@media(max-width:850px){.chapter-front-end :is(.fe-overview-source,.fe-overview-controls){scroll-margin-top:110px}}

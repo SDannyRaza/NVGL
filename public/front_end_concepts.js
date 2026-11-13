@@ -1043,7 +1043,7 @@ const matcher=new RegExp('(?<![A-Za-z0-9])('+[...aliases.values()].map(item=>ite
 // Curated learning vocabulary. Do not seed every lesson with a global term list.
 const primary=[
  ['Electromagnetic Spectrum','Microwaves','L-Band','Frequency','Wavelength','Carrier','C/A Code','Navigation Data'],
- ['Front End','RF','IF','Analog Signal','Digital Signal','ADC','Clock','Digitization'],
+ ['Front End','RF','Analog Signal','Carrier','C/A Code','Doppler','Code Delay','Pseudorange'],
  ['Receiving Antenna','Polarization','RHCP','LHCP','Antenna Gain','Radiation Pattern','Active Antenna','LNA','Cable Loss'],
  ['Bandpass Filter','Passband','Stopband','Bandwidth','3-dB Bandwidth','Insertion Loss','Selectivity','Attenuation'],
  ['Gain','Power Gain','dB','dBm','dBW','SNR','Noise Figure','Noise Factor'],
@@ -1055,7 +1055,7 @@ const primary=[
 ];
 const supporting=[
  ['GNSS','GPS','Radio Signal','RF','Hertz','Megahertz','L1','PRN Code','Ranging Code','Chip','Chip Rate','Bit','Modulation','BPSK','Sinusoid','Bandwidth','Main Lobe','Spectral Null','Null-to-Null Bandwidth','Thermal Noise'],
- ['Analog Signal','Digital Signal','Composite Signal','Reception','Filtering','Amplification','Frequency Translation','Digitization','Digital Processing','Clock'],
+ ['Receiving Antenna','Reception','Filtering','Amplification','Downconversion','IF','IF Filter','ADC','Clock','Digitization','PRN Code','Chip','Chip Rate','Code Period','Carrier Phase','Hertz','Nanosecond'],
  ['Reception','Electric Field','Voltage','Analog Signal','RF','Passive Antenna','Elevation','Horizon','Reflection','dBm','dB'],
  ['Filtering','Center Frequency','RF','Interference','Decibel','dB','dBm','Gain','Main Lobe','Null-to-Null Bandwidth'],
  ['Power','Voltage','Voltage Gain','Amplification','Noise','Thermal Noise','Bandwidth','Noise Density','C/N0','Friis Equation','Cascade','RMS Voltage','Impedance'],

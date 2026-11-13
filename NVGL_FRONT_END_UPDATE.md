@@ -1,3 +1,11 @@
+## GPS L1 Front End overview correction
+
+- Renamed the second topic and navigation tab to GPS L1 Front End. The overview describes the real analog RF voltage at the antenna and the RF front-end blocks, rather than a complete navigation receiver.
+- Removed that topic's I/Q/cloud/spectrum laboratory, input/output result panels, output-parameter table, redundant processing progression and current-location badge. Other processing topics retain their location cues.
+- Added observed-GPS and epoch selectors, exact selected C/A Gold-code replicas with independent code-delay/Doppler toggles, a real 1575.42 MHz voltage view over 16 ns, and millisecond accumulated Doppler phase. Disabled effects produce identical reference/received traces.
+- The RF drawing grid is 75 billion intervals/s, sufficient to resolve the actual carrier; it is not an antenna ADC. The navigation sign and initial phase convention are held equal for comparison. The code view uses nominal chip rate for the no-Doppler reference.
+- Browser validation covered G08 at epoch 2, toggle equivalence/differences, code-window choices, absence of overview I/Q/output/location panels, responsive layouts at 1440/800/390/320 px and continuity into antenna reception. All 50 tests and the production build pass.
+
 ## Front End web and mobile optimization
 
 The lesson shell now defers the chart library and recorded-signal engine until needed. Initial local JS/CSS decreased from 5.06 MB to 0.48 MB raw. Figures are viewport-driven, old lesson charts are purged, and rapid control updates are coalesced. Definitions remain available through a collapsed catalogue and working inline links. The mobile reading bar is static, while topic navigation remains sticky. Experiment links target their actual controls. See PERFORMANCE_OPTIMIZATION.md for measurement scope and verification.
