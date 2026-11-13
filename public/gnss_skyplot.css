@@ -1,0 +1,28 @@
+/* Constellations view: retain the laboratory palette, type and panel treatment. */
+#dashboard .kpi{min-width:0;overflow-wrap:anywhere}
+#controls{grid-template-columns:minmax(260px,1.65fr) minmax(190px,.85fr) minmax(220px,1fr);align-items:start;gap:18px}
+#controls .control{min-width:0}
+#controls .step-buttons{grid-column:1/-1;flex-wrap:wrap;align-items:center;padding-top:12px;border-top:1px solid var(--line)}
+#controls .epoch-readout{font-size:13px;overflow-wrap:anywhere}
+#controls input[type=range]{accent-color:var(--accent);cursor:pointer;min-height:28px}
+#controls label{display:flex;justify-content:space-between;gap:12px}
+#controls output{font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.playback-row{display:flex;gap:8px}.playback-row button{min-width:96px;border-color:#4b95ad;background:#17364b;color:#eafaff}.playback-row select{min-width:0;flex:1}
+.playback-hint{display:block;color:var(--muted);font-size:13px;line-height:1.5;margin-top:6px}
+#playback-status{color:var(--muted);font-size:13px;margin-left:auto}
+#dashboard[aria-busy=true] #epoch-time::after{content:' · Updating…';color:var(--accent)}
+.sky-card{grid-column:1/-1}.sky-card .card-head{flex-wrap:wrap;align-items:start}
+.sky-card .card-head h2{margin-bottom:3px}.sky-card .card-head small{display:block}
+.sky-heading-tools{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.sky-heading-tools label{color:var(--muted);font-size:14px}.sky-heading-tools select{padding:6px 8px}
+.sky-summary{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:14px 20px 0;background:#091321;color:var(--muted);font-size:14px}
+#sky-count{color:var(--text);font-weight:600}.sky-orientation{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.5px}
+.sky-stage{position:relative;background:#091321}.sky-card #sky{width:100%;height:clamp(360px,55vw,740px);display:block;background:#091321;outline-offset:-3px}
+.sky-inspect{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px 0;background:#091321}.sky-inspect label{font-size:13px;color:var(--muted)}.sky-inspect select{max-width:100%;padding:5px 8px;font-size:13px}
+.sky-detail{margin:0;padding:12px 20px;color:var(--muted);border-top:1px solid var(--line);font-size:14px;min-height:48px;overflow-wrap:anywhere}
+.sky-detail strong{color:var(--text)}.sky-legend{display:flex;gap:10px 20px;flex-wrap:wrap;padding:14px 20px;background:var(--panel2);border-top:1px solid var(--line)}
+.sky-key{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600}.sky-key i{width:9px;height:9px;background:currentColor;border-radius:50%;box-shadow:0 0 0 1px #091321}
+.sky-notes{padding:0 20px 16px;background:var(--panel2);color:var(--muted);font-size:13px;line-height:1.6}
+.sky-mask-key{display:inline-block;width:24px;border-top:2px dashed #ffc76d;vertical-align:middle;margin-right:6px}
+@media(max-width:1000px){#controls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#controls .epoch-control{grid-column:1/-1}}
+@media(max-width:600px){#controls{grid-template-columns:minmax(0,1fr);gap:14px;padding:14px}#controls .step-buttons{gap:5px}#controls .step-buttons button{font-size:12px;padding:8px;min-width:0}#playback-status{margin-left:0;flex-basis:100%}.sky-card .card-head{padding:14px}.sky-heading-tools{width:100%;justify-content:space-between}.sky-summary{padding:12px 14px 0;font-size:13px}.sky-card #sky{height:390px}.sky-detail{padding:12px 14px}.sky-legend{padding:14px;gap:10px 14px}.sky-notes{padding:0 14px 14px}.sky-card .card-actions{flex-wrap:wrap}}
