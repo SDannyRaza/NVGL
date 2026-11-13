@@ -1,0 +1,20 @@
+
+.chapter-front-end .fe-filter-lab>.card-head{display:block}
+.chapter-front-end .fe-filter-lab .card-head .eyebrow{display:block;margin-bottom:8px;font-size:11px;color:var(--fe-stage-color)}
+.chapter-front-end .fe-filter-body{padding:0 var(--fe-panel-padding,24px) 24px;font-size:16px;line-height:1.8;color:#bdd0df}
+.chapter-front-end .fe-filter-body>p{max-width:85ch;margin:0 0 20px}
+.chapter-front-end .fe-filter-body>h4{margin:22px 0 10px;font-size:17px;line-height:1.5;color:#dcebf5}
+.chapter-front-end .fe-filter-controls{display:flex;align-items:end;flex-wrap:wrap;gap:16px;padding:16px;border:1px solid #35546b;border-radius:10px;background:#142c3d;margin:18px 0}
+.chapter-front-end .fe-filter-controls label{display:flex;flex:1 1 190px;flex-direction:column;gap:7px;color:#d8e9f5;font-size:13px;font-weight:650;min-width:0}
+.chapter-front-end .fe-filter-controls select{font:inherit;min-height:44px;padding:10px;border:1px solid #52758b;border-radius:7px;background:#102336;color:#dcebf5;width:100%;min-width:0}
+.chapter-front-end .fe-filter-controls .fe-filter-check{flex-direction:row;align-items:center;min-height:44px;font-size:13px}
+.chapter-front-end .fe-filter-check input{width:18px;height:18px;accent-color:#72d8ef}
+.chapter-front-end .fe-filter-summary{padding:16px 18px;border-left:3px solid var(--fe-stage-color);border-radius:8px;background:#16303f;color:#bed7e5}
+.chapter-front-end .fe-filter-summary strong,.chapter-front-end .fe-filter-summary span{display:block}
+.chapter-front-end .fe-filter-summary strong{color:#e1eff8;font-size:16px}
+.chapter-front-end .fe-filter-summary span,.chapter-front-end .fe-filter-summary p{font-size:13px;line-height:1.8;margin:7px 0 0}
+.chapter-front-end .fe-filter-explanation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0}
+.chapter-front-end .fe-filter-explanation>div{padding:17px;border:1px solid #35546b;border-radius:10px;background:#142c3d}
+.chapter-front-end .fe-filter-explanation h4{font-size:16px;line-height:1.5;color:#deecf7;margin:0 0 8px}
+.chapter-front-end .fe-filter-explanation p{font-size:14px;line-height:1.8;margin:0}
+@media(max-width:850px){.chapter-front-end .fe-filter-explanation{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-filter-body{padding:0 16px 20px}}

@@ -1,3 +1,30 @@
+## Feature-preservation verification
+
+The optimization retains all ten interactive concepts, full Plotly chart tools and PNG export, responsive sizing, satellite/epoch/noise controls, inline definitions and symbols, glossary search, CU8/metadata downloads and the conversion script. Added regression coverage ensures scrolling back to an unchanged chart preserves its zoom, updates made offscreen appear on return, and in-flight rendering is cleaned up on topic changes. Source selectors are guarded until the observed scene is ready.
+
+Browser verification exported a PNG, preserved a user-selected axis range after scrolling, opened collapsed definitions through term links, selected G08 at epoch 2, downloaded an 8,192-byte CU8 block with matching metadata, and fetched the converter. No browser errors occurred. Source numerical models and RINEX parsing were not changed by these loading optimizations.
+
+## Front End: progressive runtime and mobile reading
+
+Measured from the local production build after this revision:
+
+| Initial local JS/CSS | Previous | Current |
+| --- | ---: | ---: |
+| Raw file bytes | 5,056,946 | 480,465 |
+| Reduction | | 90.5% |
+
+The current initial local assets have an independently gzip-compressed estimate of 144,689 bytes. These are asset-size measurements, not a live Vercel speed score; HTML, fonts and later on-demand scientific assets are not included.
+
+- Plotly (4,558,696 raw bytes) is no longer a prerequisite for the lesson shell. A viewport chart scheduler loads its versioned URL once, draws nearby figures, coalesces input changes, and purges old lesson charts. Chart download failures expose a retry action without blocking the lesson.
+- The unused receiver_lessons.js entry was removed from the two Front End pages. Other dashboards still load their existing dependencies.
+- WebAssembly and the compact scientific cache start only when a recorded-signal view or data-dependent experiment needs them. Conceptual SVG activities and the initial phase illustration remain usable first.
+- Source-data failure is isolated from concept content and offers an explicit retry. Numerical signal-generation algorithms and RINEX parsers are unchanged.
+- Topic navigation remains sticky; the mobile reading toolbar is static and uses larger links. Definitions are a closed, accessible catalogue that still opens through point-of-use term links.
+- Start Experiment now scrolls to the control group, not the beginning of a long card. At 390x900, the sampling-rate selector was verified at y=168 px after the jump.
+- Fixed figure heights preserve layout while figures load. The local build excludes the user-ignored Front End PDFs from deployment output; originals remain in public/reference/front_end locally.
+
+Validation: browser checks confirmed no initial Plotly request or scientific worker; one on-demand Plotly request; functional plots through all ten topics; mobile control visibility; no JavaScript errors. Four scheduler tests cover deferred loading, latest-data coalescing, stale-node cleanup and failed-download retry.
+
 # Web performance optimization
 
 Changes are local until committed, pushed and deployed. No theme, CSS or font changes.

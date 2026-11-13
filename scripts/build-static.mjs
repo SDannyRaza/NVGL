@@ -15,7 +15,8 @@ fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 fs.cpSync(publicDir, outDir, { recursive: true, force: true, filter: file =>
   !file.split(path.sep).includes('__pycache__') && !file.endsWith('.pyc') &&
-  path.basename(file) !== 'precomputed.pkl.gz'
+  path.basename(file) !== 'precomputed.pkl.gz' &&
+  !/^reference\/front_end\/.*\.pdf$/i.test(path.relative(publicDir, file).split(path.sep).join('/'))
 });
 fs.copyFileSync(path.join(publicDir, 'landing.html'), path.join(outDir, 'index.html'));
 

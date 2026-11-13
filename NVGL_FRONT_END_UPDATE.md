@@ -1,3 +1,24 @@
+## Front End web and mobile optimization
+
+The lesson shell now defers the chart library and recorded-signal engine until needed. Initial local JS/CSS decreased from 5.06 MB to 0.48 MB raw. Figures are viewport-driven, old lesson charts are purged, and rapid control updates are coalesced. Definitions remain available through a collapsed catalogue and working inline links. The mobile reading bar is static, while topic navigation remains sticky. Experiment links target their actual controls. See PERFORMANCE_OPTIMIZATION.md for measurement scope and verification.
+
+## One discoverable interactive experiment per topic
+
+All ten Front End topics now have an Interactive Visual Explanation panel naming the concept, a Change instruction, an Observe instruction, and a Start Experiment link that opens and focuses the actual control. The reading toolbar also links directly to the experiment.
+
+Activities: carrier phase; selected GPS/noise; RHCP/LHCP; RF bandwidth; amplifier gain; LO downconversion; first/final IF filtering; sampling aliasing; ADC clipping; raw-I/Q phase preservation. RF bandwidth options recalculate the FIR output from the same input while preserving the 50 MHz reference path.
+
+Verified every activity link, keyboard focus and resulting visual change in the production build, plus 320/390 px navigation. All 41 numerical and application tests pass.
+
+## Interactive Front End and common footer revision
+
+- Replaced the left lesson sidebar with unnumbered, sticky horizontal topics, including keyboard selection and horizontal scroll controls.
+- Moved the received GPS I/Q laboratory into Receiver Architecture; the Electromagnetic Spectrum lesson now uses only conceptual waves, code modulation and frequency diagrams with a phase control.
+- Added an interactive IEEE/ITU-convention RHCP/LHCP laboratory with direction, phase, animation and ideal antenna-coupling controls. Added gain sensitivity and LO-frequency experiments; existing sampling/aliasing, ADC-gain and raw-I/Q phase controls remain.
+- Replaced RF/IF filter comparisons with common settled Hann-window records, a shared numerical power reference, actual FIR response overlays and first/final IF selection. Final IF filtering compares amplifier output to final-filter output, excluding the 50 dB gain from the filtering effect.
+- Canonical quotation immediately precedes the same footer in all 15 HTML entries. The six affiliation logos link to the requested URAAN, Planning Commission, HEC, NCGSA, IST and GNSS Research Lab URLs.
+- Browser checked all ten interactive topics, desktop/mobile widths, keyboard navigation and all eight canonical page footers. Numerical tests include polarization handedness/coupling and filter response/comparison invariants.
+
 ## Front End scope boundary
 
 The Front End lessons end at conditioned digital samples, raw I/Q representation and file-source formats. Acquisition/tracking/PNT explanations, downstream glossary entries and the navigation-solution progression are excluded from the chapter. The architecture overview now covers RF selection, amplification, downconversion/IF and ADC output only. Recorded Doppler/code-delay views illustrate source observations; they do not estimate delay or Doppler by search or correlation. The Doppler visual shows phase change 2*pi*D*t directly, without a despreading step. The independent Acquisition dashboard remains in the laboratory-wide navigation.

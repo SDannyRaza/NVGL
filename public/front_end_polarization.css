@@ -1,0 +1,29 @@
+
+.chapter-front-end .fe-polarization>.card-head{display:block}
+.chapter-front-end .fe-polarization .card-head .eyebrow{display:block;margin-bottom:8px;color:var(--fe-stage-color,#72d8ef);font-size:11px}
+.chapter-front-end .fe-pol-body{padding:0 var(--fe-panel-padding,24px) 24px;color:#bfd3e2;font-size:16px;line-height:1.8}
+.chapter-front-end .fe-pol-body>p{max-width:85ch;margin:0 0 20px}
+.chapter-front-end .fe-pol-convention{padding:16px 18px;background:#153143;border:1px solid #466c83;border-left:3px solid #72d8ef;border-radius:10px;font-size:14px;line-height:1.8;margin:18px 0}
+.chapter-front-end .fe-pol-convention strong{color:#e1f1fa}
+.chapter-front-end .fe-pol-controls{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;padding:16px;background:#142c3d;border:1px solid #35546b;border-radius:10px;margin:18px 0}
+.chapter-front-end .fe-pol-controls label{display:flex;flex:1 1 210px;min-width:0;flex-direction:column;gap:8px;font-size:13px;font-weight:650;color:#d7e8f4}
+.chapter-front-end .fe-pol-controls output{color:#72d8ef}
+.chapter-front-end .fe-pol-controls input{width:100%;accent-color:#72d8ef;min-height:34px}
+.chapter-front-end .fe-pol-controls select,.chapter-front-end .fe-pol-controls button{font:inherit;font-size:14px;min-height:44px;border:1px solid #53788f;border-radius:7px;padding:9px 12px;background:#102336;color:#d9eaf5}
+.chapter-front-end .fe-pol-controls button{cursor:pointer;background:#1a3d50}
+.chapter-front-end .fe-pol-controls button:focus-visible,.chapter-front-end .fe-pol-controls select:focus-visible{outline:3px solid #b9efff;outline-offset:2px}
+.chapter-front-end .fe-pol-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+.chapter-front-end .fe-pol-circle{padding:18px;border:1px solid #35566e;border-radius:12px;background:#0c1c2d;min-width:0}
+.chapter-front-end .fe-pol-circle h4{margin:0 0 8px;color:#daeaf5;font-size:16px;line-height:1.5}
+.chapter-front-end .fe-pol-circle h4 span{display:block;color:#72d8ef;font-size:12px;letter-spacing:.04em;margin-top:4px}
+.chapter-front-end .fe-pol-circle:last-child h4 span{color:#f6b883}
+.chapter-front-end .fe-pol-circle svg{display:block;width:100%;height:auto;max-height:330px;font-family:inherit}
+.chapter-front-end .fe-pol-circle p{margin:8px 0 0;text-align:center;font-size:15px;color:#bfd4e2}
+.chapter-front-end .fe-pol-subtitle{margin:26px 0 12px;font-size:20px;line-height:1.5;color:#e0edf7}
+.chapter-front-end .fe-pol-caption{font-size:13px!important;line-height:1.8;color:#9fbdcf}
+.chapter-front-end .fe-pol-result{padding:18px;background:#142c3d;border:1px solid #35566e;border-radius:10px;margin-bottom:20px}
+.chapter-front-end .fe-pol-meter{height:12px;border-radius:8px;background:#071722;overflow:hidden}
+.chapter-front-end .fe-pol-meter span{display:block;height:100%;width:100%;background:#72d8ef;transition:width .2s}
+.chapter-front-end .fe-pol-result p{font-size:14px;line-height:1.8;margin:12px 0 0;color:#d5e9f4}
+@media(max-width:650px){.chapter-front-end .fe-pol-pair{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-pol-body{padding:0 16px 20px}.chapter-front-end .fe-pol-controls button{width:100%}.chapter-front-end .fe-pol-circle{padding:14px}}
+@media(prefers-reduced-motion:reduce){.chapter-front-end .fe-pol-meter span{transition:none}}

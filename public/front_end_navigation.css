@@ -285,3 +285,58 @@ html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thi
 @media(max-width:650px){.chapter-front-end .fe-rx-tabs{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-rx-tabs button{padding:12px}.chapter-front-end .fe-rx-body{padding:0 16px 20px}.chapter-front-end .fe-reading-nav{justify-content:flex-start}.chapter-front-end .fe-reading-nav a{padding:7px 5px;font-size:11px}.chapter-front-end .fe-rx-actions button{width:100%}}
 
 @media(max-width:500px){.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations,#fe-received-lab){scroll-margin-top:130px}}
+
+/* Front End topics live above the lesson, with one horizontal topic strip. */
+.receiver-redesign.chapter-front-end .lab-layout{display:block;padding:0 24px 32px}
+.chapter-front-end .fe-section-navigation{position:sticky;top:0;z-index:45;display:flex;align-items:center;gap:10px;margin:0 24px 24px;padding:10px 12px;border:1px solid #3a5c75;border-radius:12px;background:#0e2032;box-shadow:0 8px 22px #0004;min-width:0}
+.chapter-front-end #fe-nav.fe-section-tabs{display:flex;flex-direction:row;flex:1;gap:8px;align-items:stretch;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#52758d #0e2032;min-width:0;padding:4px 2px 8px}
+.chapter-front-end #fe-nav.fe-section-tabs button{display:block;flex:0 0 auto;width:auto;white-space:nowrap;min-height:44px;padding:11px 16px;border:1px solid #36536b;border-top:3px solid var(--stage-accent);border-radius:8px;background:#132b3d;color:#bfd4e3;font-family:inherit;font-size:14px;font-weight:600;line-height:1.5;cursor:pointer}
+.chapter-front-end #fe-nav.fe-section-tabs button.active{color:#eefaff;background:#203d51;border-color:var(--stage-accent)}
+.chapter-front-end #fe-nav.fe-section-tabs button:hover{background:#24465c}
+.chapter-front-end #fe-nav.fe-section-tabs button:focus-visible{outline:3px solid #def4fc;outline-offset:-3px}
+.chapter-front-end .fe-topics-arrow{flex:none;width:36px;min-height:44px;display:grid;place-items:center;background:#173247;color:#d4eaf6;border:1px solid #4b6c83;border-radius:8px;font-family:inherit;font-size:20px;line-height:1;cursor:pointer}
+.chapter-front-end .fe-topics-arrow:hover{background:#264c63}
+.chapter-front-end .fe-reading-nav{top:90px;justify-content:flex-start}
+.chapter-front-end .fe-reading-nav #fe-reading-prev{margin-left:auto}
+.chapter-front-end .fe-lesson,.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations,#fe-received-lab),.chapter-front-end .fe-lesson>.fe-card{scroll-margin-top:180px}
+@media(max-width:850px){.receiver-redesign.chapter-front-end .lab-layout{padding:0 14px 24px}.chapter-front-end .fe-section-navigation{margin:0 14px 18px;padding:8px;gap:6px}.chapter-front-end #fe-nav.fe-section-tabs button{font-size:13px;padding:10px 13px}.chapter-front-end .fe-reading-nav{top:84px}.chapter-front-end .fe-topics-arrow{width:30px}}
+@media(max-width:500px){.chapter-front-end .fe-lesson,.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations,#fe-received-lab),.chapter-front-end .fe-lesson>.fe-card{scroll-margin-top:220px}}
+
+.chapter-front-end #fe-lo-frequency{flex:1 1 240px;min-height:44px;accent-color:var(--fe-stage-color);min-width:0}
+.chapter-front-end #fe-lo-reset{font:inherit;font-size:13px;min-height:44px;padding:9px 13px;border:1px solid #59798f;border-radius:7px;color:#d9edf8;background:#183449;cursor:pointer}
+
+.chapter-front-end .fe-topics-arrow:disabled{opacity:.35;cursor:default;background:#14293b}
+
+/* Make each topic's learning experiment visible before the reference material. */
+.chapter-front-end .fe-activity-guide{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 24px;padding:20px 24px;border:1px solid #486a81;border-left:4px solid var(--fe-stage-color);border-radius:12px;background:#142d40}
+.chapter-front-end .fe-activity-guide .eyebrow{font-size:11px;color:var(--fe-stage-color)}
+.chapter-front-end .fe-activity-guide h3{margin:8px 0 12px;font-size:20px;line-height:1.4;color:#e5f0fa}
+.chapter-front-end .fe-activity-guide p{margin:5px 0;font-size:14px;line-height:1.8;color:#bad0df;max-width:80ch}
+.chapter-front-end .fe-activity-guide strong{color:#e0edf6}
+.chapter-front-end .fe-activity-guide>a{flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;border:1px solid #60859a;border-radius:8px;background:#1b4055;color:#dbf4fb;text-decoration:none;font-size:14px;font-weight:650}
+.chapter-front-end .fe-activity-guide>a:hover{background:#28566e;border-color:var(--fe-stage-color)}
+.chapter-front-end .fe-experiment-anchor{display:block;height:0;scroll-margin-top:180px}
+@media(max-width:900px){.chapter-front-end .fe-activity-guide{align-items:flex-start;flex-direction:column;gap:12px;padding:18px}.chapter-front-end .fe-activity-guide h3{font-size:18px}}
+@media(max-width:500px){.chapter-front-end .fe-experiment-anchor{scroll-margin-top:230px}}
+
+/* Quieter reading layout and progressive figures. */
+.chapter-front-end .fe-concept-reference>.fe-worked-body{padding:0}
+.chapter-front-end .fe-concept-reference .fe-definitions{margin:0;border:0;background:transparent}
+.chapter-front-end .fe-concept-reference .fe-definition-heading>.eyebrow{display:none}
+.chapter-front-end .fe-plot:empty{display:grid;place-items:center}
+.chapter-front-end .fe-plot:empty::before{content:'Observed-signal figure loads when needed';font-size:14px;color:#91b0c4}
+.chapter-front-end .fe-chart-placeholder{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;color:#9fbdcf;text-align:center;font-size:14px;background:#0c1c2d}
+.chapter-front-end .fe-chart-placeholder p{margin:0;line-height:1.7}
+.chapter-front-end .fe-chart-placeholder button,.chapter-front-end .fe-source-error button{font:inherit;min-height:44px;padding:9px 16px;border:1px solid #567d95;border-radius:8px;color:#def1fb;background:#19384d;cursor:pointer}
+.chapter-front-end .fe-source-error{padding:16px;background:#302c23;border:1px solid #a18a59;border-radius:10px;color:#e3d7b9;line-height:1.8}
+.chapter-front-end :is(.fe-controls,.fe-rx-controls,.fe-pol-controls,.fe-filter-controls,.fe-alias-control){scroll-margin-top:180px}
+.chapter-front-end .fe-received-lab .fe-rx-metrics{min-height:116px}
+.chapter-front-end .fe-rx-status{min-height:2.4em}
+@media(max-width:850px){
+ .chapter-front-end .fe-reading-nav{position:static;box-shadow:none;flex-wrap:wrap;gap:4px;padding:8px}
+ .chapter-front-end .fe-reading-nav a{font-size:13px;min-height:44px;padding:9px 10px}
+ .chapter-front-end .fe-activity-guide{padding:18px}
+ .chapter-front-end .fe-lesson,.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations,#fe-received-lab,.fe-experiment-anchor),.chapter-front-end .fe-lesson>.fe-card,.chapter-front-end :is(.fe-controls,.fe-rx-controls,.fe-pol-controls,.fe-filter-controls,.fe-alias-control){scroll-margin-top:110px}
+ .chapter-front-end .fe-reading-nav a:first-of-type{display:inline-flex}
+ .chapter-front-end .fe-reading-nav button{min-width:38px}
+}

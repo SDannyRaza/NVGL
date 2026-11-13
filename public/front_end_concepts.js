@@ -405,11 +405,15 @@ const definitions={
   "aliases": []
  },
  "RHCP": {
-  "definition": "Right-hand circular polarization: one direction of electric-field rotation in a propagating wave.",
+  "definition": "Circular polarization whose electric-field vector rotates clockwise when viewed in the direction of wave propagation.",
   "aliases": [
    "right-hand circular polarization",
    "right-hand circularly polarized"
   ]
+ },
+ "LHCP": {
+  "definition": "Circular polarization whose electric-field vector rotates counterclockwise when viewed in the direction of wave propagation.",
+  "aliases": ["left-hand circular polarization", "left-hand circularly polarized"]
  },
  "Antenna Gain": {
   "definition": "The direction-dependent strength of an antenna response.",
@@ -1040,7 +1044,7 @@ const matcher=new RegExp('(?<![A-Za-z0-9])('+[...aliases.values()].map(item=>ite
 const primary=[
  ['Electromagnetic Spectrum','Microwaves','L-Band','Frequency','Wavelength','Carrier','C/A Code','Navigation Data'],
  ['Front End','RF','IF','Analog Signal','Digital Signal','ADC','Clock','Digitization'],
- ['Receiving Antenna','Polarization','RHCP','Antenna Gain','Radiation Pattern','Active Antenna','LNA','Cable Loss'],
+ ['Receiving Antenna','Polarization','RHCP','LHCP','Antenna Gain','Radiation Pattern','Active Antenna','LNA','Cable Loss'],
  ['Bandpass Filter','Passband','Stopband','Bandwidth','3-dB Bandwidth','Insertion Loss','Selectivity','Attenuation'],
  ['Gain','Power Gain','dB','dBm','dBW','SNR','Noise Figure','Noise Factor'],
  ['Downconversion','Mixer','Local Oscillator','IF Filter','IF','Frequency Translation','Difference Frequency','Sum Frequency'],
