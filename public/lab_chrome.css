@@ -38,7 +38,7 @@ body.lab-theme-rinex .dashboard-nav>a[href^="/"]{display:none!important}
 body.lab-unified header>strong{font-family:Manrope,Inter,sans-serif;font-size:18px;letter-spacing:-.025em}
 body.lab-unified header>span{font-size:12px;letter-spacing:.015em}
 
-/* RINEX, Satellite Orbits and SPP: one institutional banner language, matching
+/* RINEX, GNSS Constellations and SPP: one institutional banner language, matching
    the receiver sequence without flattening the scientific page identities. */
 body.lab-theme-rinex .academic-banner,
 body.lab-theme-orbits .hero,
@@ -172,3 +172,8 @@ body.lab-unified select:focus-visible{outline:3px solid #ffcc8b;outline-offset:3
   .lab-banner-flow-note{font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){body.lab-unified *,body.lab-unified *::before,body.lab-unified *::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* The shared laboratory name is a single line; affiliation is secondary. */
+body.lab-unified header .brand strong{white-space:nowrap;font-size:17px;letter-spacing:-.02em}
+body.lab-unified header .brand small{font-size:10px;line-height:1.5}
+@media(max-width:500px){body.lab-unified header .brand strong{font-size:15px}body.lab-unified header .brand small{font-size:9px}}

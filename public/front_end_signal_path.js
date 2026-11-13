@@ -21,7 +21,7 @@ function build(entries,satellite,count=N,options={}){
   const ai=fi.map(v=>10*v),aq=fq.map(v=>10*v);stages.push({I:ai,Q:aq,fs:modelFs,center:1575.42e6,kind:'Analog RF voltage envelope after amplification',analog:true,delaySamples:64});
   stages.push({I:ai.slice(),Q:aq.slice(),voltage:realIF(ai,aq),fs:modelFs,center:47.74e6,kind:'Analog mixer difference-frequency branch',analog:true,delaySamples:64});
   const ii=filter(ai,firstIF),iq=filter(aq,firstIF),gain=10**(50/20),amplifiedI=ii.map(v=>v*gain),amplifiedQ=iq.map(v=>v*gain),oi=filter(amplifiedI,finalIF),oq=filter(amplifiedQ,finalIF),voltage=realIF(oi,oq);
-  stages.push({I:oi,Q:oq,voltage,fs:modelFs,center:47.74e6,kind:'Analog IF after 18 MHz filtering, 50 dB gain and 6 MHz filtering',analog:true,delaySamples:192,first:{I:ii,Q:iq,fs:modelFs},amplified:{I:amplifiedI,Q:amplifiedQ,fs:modelFs}});
+  stages.push({I:oi,Q:oq,voltage,fs:modelFs,center:47.74e6,kind:'Analog IF after 18 MHz filtering, 50 dB gain and 6 MHz filtering',analog:true,delaySamples:192,first:{I:ii,Q:iq,voltage:realIF(ii,iq),fs:modelFs,center:47.74e6,analog:true,delaySamples:128,kind:'Downconversion output after the 18 MHz first IF filter'},amplified:{I:amplifiedI,Q:amplifiedQ,fs:modelFs}});
   // The computational grid represents continuous analog waveforms. Only here
   // does the modeled ADC take measurements at 38.192 million samples/s.
   return {stages,real:Array.from({length:count},(_,n)=>voltage[4*n])};

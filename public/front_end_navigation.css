@@ -220,3 +220,68 @@ html:has(.chapter-front-end){scrollbar-color:#52718a #0b1828;scrollbar-width:thi
 .chapter-front-end .fe-band-notes p{font-size:14px;line-height:1.8;margin:0;padding:16px;background:#142b3d;border:1px solid #35546b;border-radius:10px;color:#b9cddd}
 .chapter-front-end .fe-band-notes strong{color:#dcebf7}
 @media(max-width:1150px){.chapter-front-end .fe-frequency-intro{flex-direction:column}.chapter-front-end .fe-band-notes{grid-template-columns:minmax(0,1fr)}}
+
+/* Concept-led lessons: a distinct learning aim and quieter reference material. */
+.receiver-redesign.chapter-front-end .fe-lesson>.section-head .fe-learning-focus{font-size:14px!important;line-height:1.7;color:#a9c7d8;border-top:1px solid #2c485e;padding-top:14px;margin:16px 0}
+.chapter-front-end .fe-source-reference .fe-card{margin-bottom:0;border:0;background:transparent}
+.chapter-front-end .fe-source-reference .card-head{display:none}
+.chapter-front-end .fe-reference-library{background:#0c1c2d}
+.chapter-front-end .fe-reference-library .fe-card{margin:0;border:0;background:transparent}
+.chapter-front-end .fe-reference-library .card-head{display:none}
+.chapter-front-end .fe-reference-node.is-current .fe-node-hit{fill-opacity:.16}
+.chapter-front-end .fe-reference-node:focus-visible .fe-node-hit{stroke:#fff;stroke-width:2.5}
+.chapter-front-end #iq-supplement>.fe-worked-body>.fe-card{border:1px solid #34546c;border-radius:12px;margin-bottom:20px}
+.chapter-front-end #iq-supplement>.fe-worked-body{padding:20px}
+
+.chapter-front-end .fe-principle>.card-head{display:block;align-items:initial}
+.chapter-front-end .fe-principle>.card-head h3{display:block;margin-top:7px}
+.chapter-front-end .fe-lesson>.fe-card,.chapter-front-end .fe-principle-subhead{scroll-margin-top:90px}
+
+.chapter-front-end .fe-complete-glossary .fe-glossary-count{padding:0 var(--fe-panel-padding);font-size:13px;color:#a8c5d6}
+.chapter-front-end .fe-complete-glossary #glossary-results{margin:0 var(--fe-panel-padding) 24px;border:0}
+.chapter-front-end .fe-book-reference{margin:16px 0 0;padding:14px 16px;background:#142b3d;border:1px solid #35546b;border-radius:9px;color:#b8cddd;font-size:13px;line-height:1.8}
+.chapter-front-end .fe-book-reference strong{color:#e0edf7}
+
+.chapter-front-end .fe-glossary-actions{padding:0 var(--fe-panel-padding) 24px}
+.chapter-front-end .fe-glossary-actions button{font:inherit;font-size:14px;min-height:44px;padding:10px 16px;border:1px solid #52748b;border-radius:8px;background:#173247;color:#d5e8f5;cursor:pointer}
+.chapter-front-end .fe-glossary-actions button:hover{background:#22465e;border-color:#72d8ef}
+.chapter-front-end .fe-glossary-actions button[hidden]{display:none}
+
+/* The receiver prelude adds no new scrolling container or scientific data load. */
+.chapter-front-end #fe-received-lab{scroll-margin-top:90px}
+.chapter-front-end .fe-received-lab>.card-head{display:block}
+.chapter-front-end .fe-received-lab>.card-head .eyebrow{display:block;margin-bottom:8px;font-size:11px;color:var(--fe-stage-color)}
+.chapter-front-end .fe-rx-body{padding:0 var(--fe-panel-padding) 24px;color:#bdd0df;font-size:16px;line-height:1.8}
+.chapter-front-end .fe-rx-body>p{max-width:85ch;margin:0 0 18px}
+.chapter-front-end .fe-rx-controls{display:flex;gap:16px;flex-wrap:wrap;padding:16px;background:#142c3d;border:1px solid #35546b;border-radius:10px;margin-bottom:14px}
+.chapter-front-end .fe-rx-controls label{display:flex;flex:1 1 180px;flex-direction:column;gap:7px;font-size:13px;font-weight:650;color:#d8e9f5;min-width:0}
+.chapter-front-end .fe-rx-controls select,.chapter-front-end .fe-rx-controls input{font:inherit;color:#d9eaf5;background:#102336;border:1px solid #52758b;border-radius:7px;padding:10px;min-height:44px;width:100%;min-width:0}
+.chapter-front-end .fe-rx-status{font-size:13px;color:#b9d8e8;overflow-wrap:anywhere}
+.chapter-front-end .fe-rx-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.chapter-front-end .fe-rx-tabs button{font:inherit;text-align:left;padding:16px;border:1px solid #3e6178;border-top:3px solid #36566c;border-radius:10px;background:#112536;color:#dceaf5;cursor:pointer}
+.chapter-front-end .fe-rx-tabs button[aria-selected="true"]{border-color:#72d8ef;background:#193a4d}
+.chapter-front-end .fe-rx-tabs button:focus-visible{outline:3px solid #e9f7ff;outline-offset:3px}
+.chapter-front-end .fe-rx-tabs strong{display:block;font-size:14px;line-height:1.5}
+.chapter-front-end .fe-rx-tabs small{display:block;font-size:12px;line-height:1.6;color:#a9c8da;margin-top:5px}
+.chapter-front-end .fe-rx-explanation{font-size:15px;line-height:1.8;max-width:85ch;margin:0 0 20px}
+.chapter-front-end .fe-rx-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.chapter-front-end .fe-rx-metrics>div{padding:16px;background:#142c3d;border:1px solid #35546b;border-radius:10px;min-width:0}
+.chapter-front-end .fe-rx-metrics span,.chapter-front-end .fe-rx-metrics small{display:block;font-size:12px;line-height:1.7;color:#adc7d8}
+.chapter-front-end .fe-rx-metrics strong{display:block;font-size:20px;line-height:1.6;color:#daf1fa;margin:6px 0;overflow-wrap:anywhere}
+.chapter-front-end .fe-rx-graph{border:1px solid #35546b;border-radius:12px;padding:16px 8px 0;margin:18px 0;background:#0c1c2d}
+.chapter-front-end .fe-rx-graph h4{margin:0 10px 6px;font-size:16px;color:#dcebf5;line-height:1.5}
+.chapter-front-end .fe-rx-boundary{padding:16px 18px;border-left:3px solid #72d8ef;border-radius:8px;background:#16303f;font-size:14px;margin-top:22px}
+.chapter-front-end .fe-rx-boundary strong{color:#dbeff8}
+.chapter-front-end .fe-rx-boundary p{margin:7px 0 0;line-height:1.8}
+.chapter-front-end .fe-rx-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;font-size:14px}
+.chapter-front-end .fe-rx-actions button{font:inherit;padding:12px 16px;border:1px solid #588299;border-radius:8px;background:#1a3c50;color:#dbf3fb;cursor:pointer;min-height:44px}
+.chapter-front-end .fe-rx-formula{padding:18px;border:1px solid #42647b;border-radius:10px;background:#142c3d}
+.chapter-front-end .fe-rx-formula strong,.chapter-front-end .fe-rx-formula span{display:block}
+.chapter-front-end .fe-rx-formula span{margin:10px 0;font-family:Cambria Math,Georgia,serif;font-size:19px;color:#e4f2f9}
+.chapter-front-end .fe-rx-formula p{font-size:14px;line-height:1.8;margin:0}
+.chapter-front-end .fe-rx-offset{overflow-x:auto;border:1px solid #35546b;border-radius:10px;background:#0c1c2d;margin:18px 0}
+.chapter-front-end .fe-rx-offset svg{display:block;width:100%;min-width:600px;height:auto;font-family:inherit}
+@media(max-width:1100px){.chapter-front-end .fe-reading-nav a{padding:8px 5px;font-size:11px}.chapter-front-end .fe-rx-metrics{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:650px){.chapter-front-end .fe-rx-tabs{grid-template-columns:minmax(0,1fr)}.chapter-front-end .fe-rx-tabs button{padding:12px}.chapter-front-end .fe-rx-body{padding:0 16px 20px}.chapter-front-end .fe-reading-nav{justify-content:flex-start}.chapter-front-end .fe-reading-nav a{padding:7px 5px;font-size:11px}.chapter-front-end .fe-rx-actions button{width:100%}}
+
+@media(max-width:500px){.chapter-front-end :is(#front-end-main,#fe-system-overview,#fe-definitions-title,#fe-signal-transformation,#fe-worked-example,#fe-foundations,#fe-received-lab){scroll-margin-top:130px}}

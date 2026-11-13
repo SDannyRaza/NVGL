@@ -13,7 +13,7 @@ window.FE_LESSONS=[
     "title": "Complete GNSS Front-End Architecture",
     "stage": 0,
     "definition": "A GNSS front end prepares received radio signals for digital processing.",
-    "change": "Reception, RF filtering, amplification, mixing and IF conditioning operate on an analog signal. The transition to digital numbers occurs only in the ADC. The front end prepares samples for acquisition and tracking; it does not calculate receiver position.",
+    "change": "Reception, RF filtering, amplification, mixing and IF conditioning operate on an analog signal. The transition to digital numbers occurs only in the ADC. The front end produces a digital representation of the conditioned analog signal.",
     "example": "Reference parameters: RF 1575.42 MHz; local oscillator 1527.68 MHz; analog IF 47.74 MHz; sampling frequency 38.192 MHz; digital IF 9.548 MHz; ADC resolution four bits.",
     "equation": "fRF = 1575.42 MHz; fLO = 1527.68 MHz; fIF = 47.74 MHz; fs = 38.192 MHz",
     "ref": "User-supplied lecture, Section 02; supplied GNSS front-end presentation and textbook chapter."

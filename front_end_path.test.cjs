@@ -30,6 +30,15 @@ for(const source of ['individual','mixed']){
   assert.ok(stage.I.every(Number.isFinite));assert.ok(stage.Q.every(Number.isFinite));
  }
  const stages=result[source];
+ const first=stages[4].first;
+ assert.equal(first.analog,true);assert.equal(first.center,47.74e6);assert.equal(first.delaySamples,128);
+ assert.deepEqual(first.I,P.filter(stages[2].I,P.firKernel(129,9e6,first.fs)));
+ assert.equal(first.voltage.length,16384);
+ for(let n=0;n<first.I.length;n+=127){
+  const angle=2*Math.PI*47.74e6*n/first.fs;
+  assert.ok(Math.abs(first.voltage[n]-Math.SQRT2*(first.I[n]*Math.cos(angle)-first.Q[n]*Math.sin(angle)))<1e-10);
+ }
+
  assert.equal(stages[0].center,1575420000);
  assert.equal(stages[3].center,47740000);
  assert.equal(stages[5].fs,38192000);

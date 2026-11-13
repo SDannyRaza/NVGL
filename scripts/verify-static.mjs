@@ -6,7 +6,7 @@ const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const site = fs.existsSync(path.join(root, 'dist')) ? path.join(root, 'dist') : path.join(root, 'public');
 const routes = [
   ['RINEX Explorer','rinex'],
-  ['Satellite Orbits','orbits'],
+  ['GNSS Constellations','orbits'],
   ['Single Point Positioning','spp'],
   ['GNSS Signal Simulation','signals'],
   ['GNSS Front End','front-end'],

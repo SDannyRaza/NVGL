@@ -14,7 +14,7 @@
 | # | Dashboard | Route | Static route/assets | Scientific/UI verification |
 |---|---|---|---|---|
 | 1 | RINEX Explorer | `/rinex/` | PASS | `/api/view` client-science dispatcher PASS |
-| 2 | Satellite Orbits | `/orbits/` | PASS | `/api/orbit/meta` + `/api/orbit` PASS |
+| 2 | GNSS Constellations | `/orbits/` | PASS | `/api/orbit/meta` + `/api/orbit` PASS |
 | 3 | Single Point Positioning | `/spp/` | PASS | metadata, epoch, contributions and series endpoints PASS |
 | 4 | GNSS Signal Simulation | `/signals/` | PASS | metadata, epoch, selection and scene endpoints PASS; PRN ICD regression PASS |
 | 5 | GNSS Front End | `/front-end/` | PASS | frontend scripts/assets PASS; academic reference repaired/bundled |

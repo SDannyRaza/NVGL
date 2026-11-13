@@ -270,3 +270,12 @@ body{font-family:Inter,ui-sans-serif,"Segoe UI",Arial,sans-serif}
   .identity:nth-child(n+3){border-top:1px solid rgba(100,169,214,.16)}
   .identity-ministry img{width:75px;height:75px}
 }
+
+/* One-line laboratory identity and the quotation at the point of inspiration. */
+.brand-wordmark strong{font-size:17px;letter-spacing:-.015em;white-space:nowrap}
+.brand-wordmark small{font-size:8px;letter-spacing:.08em}
+.hero-main-name{display:block;white-space:nowrap;font-size:clamp(28px,5.3vw,78px);line-height:1.15;letter-spacing:-.045em}
+.approach-quotation{margin:22px 0 25px;padding:18px 0 18px 22px;border-left:3px solid #57caff}
+.approach-quotation blockquote{margin:0;color:#eef8ff;font:650 clamp(20px,2vw,27px)/1.5 Manrope,Inter,sans-serif;letter-spacing:-.025em}
+.approach-quotation figcaption{margin-top:9px;font-size:12px;line-height:1.6;color:#93b9d1}
+@media(max-width:590px){.brand-wordmark strong{font-size:15px}.brand-wordmark small{font-size:7px;letter-spacing:.045em}.hero-main-name{font-size:clamp(27px,7.7vw,42px)}.approach-quotation{padding-left:16px}}

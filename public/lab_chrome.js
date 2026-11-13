@@ -3,7 +3,7 @@
   'use strict';
   const modules = [
     { path: '/rinex', key: 'rinex', label: 'RINEX Explorer' },
-    { path: '/orbits', key: 'orbits', label: 'Satellite Orbits' },
+    { path: '/orbits', key: 'orbits', label: 'GNSS Constellations' },
     { path: '/spp', key: 'spp', label: 'Single Point Positioning' },
     { path: '/signals', key: 'signals', label: 'GNSS Signal Simulation' },
     { path: '/front-end', key: 'front', label: 'GNSS Front End' },
@@ -50,7 +50,9 @@
   else document.body.prepend(nav);
   const brand = document.querySelector('header .brand strong');
   if (brand && /Virtual GNSS (Lab|Laboratory)/i.test(brand.textContent)) {
-    brand.textContent = 'NCGSA Virtual GNSS Laboratory';
+    brand.textContent = 'Virtual GNSS Lab';
+    const affiliation = brand.parentElement.querySelector('small');
+    if (affiliation) affiliation.textContent = 'GNSS Research Lab \u00b7 NCGSA \u00b7 IST';
   }
 
   // RINEX, Orbit and SPP now share the same illustrated, scientific three-step
@@ -76,7 +78,7 @@
     },
     orbits: {
       selector: '.hero .hero-note.orbit-banner',
-      titleSelector: '.hero h1', titleHtml: 'Satellite <span>Orbits</span>',
+      titleSelector: '.hero h1', titleHtml: 'GNSS <span>Constellations</span>',
       steps: [['orbit','PROPAGATE','Broadcast elements'],['axes','TRANSFORM','ECI / ECEF / ENU'],['globe','ANALYZE','Tracks, skyplot, DOP']],
       note: 'BROADCAST EPHEMERIS  →  SATELLITE GEOMETRY'
     },

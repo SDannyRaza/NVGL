@@ -33,5 +33,5 @@ test('RF passband, IF conditioning and ADC terminology follow the supplied refer
  assert.match(lessons[7].example,/26\.18 ns.*19\.096 MHz.*9\.548 MHz/);
  assert.match(lessons[8].change,/four-bit.*38\.192.*9\.548/);
  const js=fs.readFileSync('public/front_end.js','utf8');assert.ok(js.includes('Sampling and quantization occur in the ADC'));
- assert.ok(js.includes('Supplementary Laboratory: Raw I/Q'));assert.ok(js.includes('Histogram total:'));
+ assert.ok(js.includes('Raw I/Q Files, Phase Preservation and Software Receivers'));assert.ok(js.includes('Histogram total:'));
 });

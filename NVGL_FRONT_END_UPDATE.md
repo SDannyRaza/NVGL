@@ -1,3 +1,23 @@
+## Front End scope boundary
+
+The Front End lessons end at conditioned digital samples, raw I/Q representation and file-source formats. Acquisition/tracking/PNT explanations, downstream glossary entries and the navigation-solution progression are excluded from the chapter. The architecture overview now covers RF selection, amplification, downconversion/IF and ADC output only. Recorded Doppler/code-delay views illustrate source observations; they do not estimate delay or Doppler by search or correlation. The Doppler visual shows phase change 2*pi*D*t directly, without a despreading step. The independent Acquisition dashboard remains in the laboratory-wide navigation.
+
+## GPS L1 C/A received-signal laboratory
+
+- Renamed the Satellite Orbits module to GNSS Constellations in landing/navigation/page headings and route verification labels. Existing /orbits URLs and orbital calculations remain intact.
+- Added three introductory Front End receiver views: all observed GPS L1 C/A channels, one selected satellite I/Q contribution, and measured Doppler/code delay. Only complete GPS C/A observations at the selected epoch are selectable.
+- These views reuse FRONT_END_PATH.received and RECEIVER_MODEL code/Doppler helpers. They add no independent signal generator or scientific-data download. The selected satellite, epoch, noise setting and mixture/individual choice continue into the receiver chain.
+- Added keyboard-operable tabs, GPS/epoch/noise controls, explicit analog-envelope labeling and a direct route from the received signal to antenna reception.
+
+## Concept-led Front End revision
+
+- Ten display sections now distinguish electromagnetic spectrum, receiver architecture, antenna reception, RF filtering, amplification/noise, downconversion, IF conditioning, sampling/aliasing/quantization, digital samples, and raw I/Q/software processing.
+- The mixer, local oscillator and first IF filter are one downconversion group. The shared model exposes the first-filtered 47.74 MHz analog output, which is also the IF-conditioning input. The original reference stage array and 61-slide lecture are retained.
+- Original SVG explanations cover the electromagnetic spectrum, satellite-to-PNT receiver chain, downconversion, and intentional bandpass aliasing versus spectral overlap. The sampling experiment checks the full 6 MHz passband at four rates.
+- The electrical primer is taught once in amplification. Other sections link to it. Original lecture details are collapsed references, the searchable full glossary is in the final section, and repeated ADC display plots are consolidated in digital samples.
+- Landing branding uses one-line Virtual GNSS Lab. The existing quotation is an unattributed laboratory motto in the approach banner; no unsupported personal attribution is asserted. The footer has a visible https://gnss.ncgsa.org.pk research link and consistent contact/affiliation layout across all routes.
+- Validation: all ten sections exercised against the actual browser scientific engine; first-IF continuity, alias-rate interactions, final phase visualization, desktop/mobile width and shared footer checked. Numerical tests cover first IF filtering and full-band aliasing.
+
 # GNSS Front End: academic lecture alignment
 
 The primary Front End chapter follows the user-supplied undergraduate lecture, retained in docs/front_end_lecture.txt. All ten section titles, 61 slide topics and 57 displayed equations are represented. The chapter uses a consistent teaching sequence: definition, physical explanation, worked example, time-domain representation, frequency-domain representation and section glossary. Detailed lecture topics expand individually. Native MathML renders the source equations without a remote mathematics runtime.

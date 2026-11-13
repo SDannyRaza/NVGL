@@ -5,7 +5,7 @@ Frontend-only deployment of the **NCGSA Virtual GNSS Laboratory** for GitHub and
 ## Seven dashboards
 
 1. **RINEX Explorer** — `/rinex/`
-2. **Satellite Orbits** — `/orbits/`
+2. **GNSS Constellations** — `/orbits/`
 3. **Single Point Positioning** — `/spp/`
 4. **GNSS Signal Simulation** — `/signals/`
 5. **GNSS Front End** — `/front-end/`
@@ -16,7 +16,7 @@ Frontend-only deployment of the **NCGSA Virtual GNSS Laboratory** for GitHub and
 
 There is **no deployed backend** and no Vercel Function.
 
-The application is static HTML/CSS/JavaScript. Scientific calculations used by RINEX Explorer, Satellite Orbits, SPP and Signal Simulation execute **inside the visitor's browser**:
+The application is static HTML/CSS/JavaScript. Scientific calculations used by RINEX Explorer, GNSS Constellations, SPP and Signal Simulation execute **inside the visitor's browser**:
 
 `dashboard fetch() → api_browser.js → Web Worker → Pyodide/WebAssembly → bundled GNSS Python algorithms + RINEX data`
 

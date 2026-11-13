@@ -2,6 +2,41 @@
 (function(root){
 'use strict';
 const definitions={
+
+ "Electromagnetic Spectrum": {
+  "definition": "The complete range of electromagnetic waves, ordered by frequency or wavelength.",
+  "aliases": []
+ },
+ "Microwaves": {
+  "definition": "Radio waves with relatively short wavelengths; GNSS L-band signals lie in this region.",
+  "aliases": [
+   "microwave region"
+  ]
+ },
+ "L-Band": {
+  "definition": "The radio-frequency region from 1 to 2 GHz, containing the GPS L1 carrier.",
+  "aliases": [
+   "L-band"
+  ]
+ },
+ "Wavelength": {
+  "definition": "The distance between equivalent points in consecutive wave cycles, such as adjacent peaks.",
+  "aliases": []
+ },
+ "Downconversion": {
+  "definition": "Moving a received signal to a lower carrier frequency while preserving its modulation.",
+  "aliases": [
+   "down-conversion"
+  ]
+ },
+ "Anti-Alias Filter": {
+  "definition": "An analog filter that limits unwanted frequency content before sampling so it does not overlap the desired sampled band.",
+  "aliases": [
+   "anti-alias filtering",
+   "anti-alias filter"
+  ]
+ }
+,
  "GNSS": {
   "definition": "Global Navigation Satellite System: a general term for satellite-based positioning and timing systems.",
   "aliases": []
@@ -938,7 +973,7 @@ const definitions={
   "aliases": []
  },
  "GNSS-SDR": {
-  "definition": "Software that processes GNSS samples through acquisition, tracking, and navigation calculations.",
+  "definition": "Software that accepts recorded GNSS sample streams; this chapter covers its input sample formats.",
   "aliases": []
  },
  "atan2": {
@@ -1001,44 +1036,58 @@ for(const [key,item] of Object.entries(definitions))for(const alias of [key,...i
 const regexSpecial=new Set([46,42,43,63,94,36,123,125,40,41,124,91,93,92]);
 const escapeRegex=value=>Array.from(value,c=>regexSpecial.has(c.charCodeAt(0))?String.fromCharCode(92)+c:c).join('');
 const matcher=new RegExp('(?<![A-Za-z0-9])('+[...aliases.values()].map(item=>item.alias).sort((a,b)=>b.length-a.length).map(escapeRegex).join('|')+')(?![A-Za-z0-9])','giu');
+// Curated learning vocabulary. Do not seed every lesson with a global term list.
 const primary=[
- ['GNSS','GPS','Radio Signal','Carrier','C/A Code','PRN Code','Frequency','Noise'],
- ['Front End','Analog Signal','Digital Signal','Composite Signal','RF','IF','ADC','Clock'],
+ ['Electromagnetic Spectrum','Microwaves','L-Band','Frequency','Wavelength','Carrier','C/A Code','Navigation Data'],
+ ['Front End','RF','IF','Analog Signal','Digital Signal','ADC','Clock','Digitization'],
  ['Receiving Antenna','Polarization','RHCP','Antenna Gain','Radiation Pattern','Active Antenna','LNA','Cable Loss'],
  ['Bandpass Filter','Passband','Stopband','Bandwidth','3-dB Bandwidth','Insertion Loss','Selectivity','Attenuation'],
  ['Gain','Power Gain','dB','dBm','dBW','SNR','Noise Figure','Noise Factor'],
- ['Mixer','Local Oscillator','Frequency Translation','IF','Difference Frequency','Sum Frequency','Image Frequency','Frequency Synthesizer'],
- ['IF Conditioning','IF Filter','IF Amplifier','Bandwidth','Quality Factor','Gain','Analog Signal','Filtering'],
- ['ADC','Sampling','Quantization','Bit Depth','Sampling Frequency','Nyquist Frequency','Aliasing','AGC'],
- ['Digital IF','Digital Sample','Time Domain','Frequency Domain','Histogram','Sample Count','PSD','Noise-Like Signal'],
- ['Front End','Analog Signal','Digital Signal','Digitization','Acquisition','Tracking','Digital Processing','Composite Signal']
+ ['Downconversion','Mixer','Local Oscillator','IF Filter','IF','Frequency Translation','Difference Frequency','Sum Frequency'],
+ ['IF Conditioning','IF Amplifier','Anti-Alias Filter','Bandwidth','Center Frequency','Quality Factor','Gain','Analog Signal'],
+ ['ADC','Sampling','Sampling Frequency','Nyquist Frequency','Nyquist Rate','Aliasing','Bandpass Sampling','Quantization','Bit Depth'],
+ ['Digital IF','Digital Sample','Time Domain','Frequency Domain','Histogram','Sample Count','AGC','Clipping'],
+ ['Raw I/Q','I/Q','Complex Sample','Byte','CU8','Interleaved','RTL-SDR','GNSS-SDR']
 ];
-const common=['Input','Output','Circuit','Component','Voltage','Power','Amplitude','Time Domain','Frequency Domain','Frequency Spectrum','Frequency Bin','Relative Amplitude','Epoch','Observation','RINEX','Doppler','Code Delay','Carrier Phase','C/N0','Reconstructed Signal','Voltage Envelope','Processing Delay','RF','IF','LNA','ADC','Sampling','Quantization','Sampling Frequency','Bit Depth','dB','dBm','dBW','MHz','Hertz'];
-const supplement=['I/Q','Complex Sample','Digital Downconversion','Raw I/Q','Byte','CU8','Interleaved','Unsigned','Signed','Float32','Little-Endian','SDR','RTL-SDR','GNSS-SDR','atan2','Correlation','LNAV','PVT'];
+const supporting=[
+ ['GNSS','GPS','Radio Signal','RF','Hertz','Megahertz','L1','PRN Code','Ranging Code','Chip','Chip Rate','Bit','Modulation','BPSK','Sinusoid','Bandwidth','Main Lobe','Spectral Null','Null-to-Null Bandwidth','Thermal Noise'],
+ ['Analog Signal','Digital Signal','Composite Signal','Reception','Filtering','Amplification','Frequency Translation','Digitization','Digital Processing','Clock'],
+ ['Reception','Electric Field','Voltage','Analog Signal','RF','Passive Antenna','Elevation','Horizon','Reflection','dBm','dB'],
+ ['Filtering','Center Frequency','RF','Interference','Decibel','dB','dBm','Gain','Main Lobe','Null-to-Null Bandwidth'],
+ ['Power','Voltage','Voltage Gain','Amplification','Noise','Thermal Noise','Bandwidth','Noise Density','C/N0','Friis Equation','Cascade','RMS Voltage','Impedance'],
+ ['RF','Carrier','Modulation','Mixing Product','Image Frequency','Frequency Synthesizer','Frequency Divider','Analog Signal','Bandpass Filter','Passband','Bandwidth'],
+ ['IF','IF Filter','Filtering','Passband','Stopband','Attenuation','dB','Amplification','Voltage','Input Range'],
+ ['Sampling Interval','Time Interval','Nanosecond','Microsecond','Quantization Level','Quantization Bin','Input Range','Digital Sample','IF','Digital IF','Frequency Spectrum'],
+ ['Sampling Frequency','Bit Depth','Quantization Level','Quantization Bin','Input Range','Frequency Spectrum','Frequency Bin','PSD','FFT','Noise-Like Signal','Relative Amplitude'],
+ ['Digital Downconversion','Unsigned','Signed','Float32','Little-Endian','SDR','atan2','Carrier Phase','Phase','Digital IF','Sampling Frequency','Sample Count','LNAV','Byte','Microsecond']
+];
 function lookup(term){return definitions[term]?term:aliases.get(fold(term))?.key||null;}
 function matched(value){matcher.lastIndex=0;const found=[];let match;while((match=matcher.exec(String(value)))){const item=aliases.get(fold(match[0]));if(item&&(!item.exact||match[0]===item.alias))found.push({key:item.key,start:match.index,end:matcher.lastIndex,label:match[0]});}return found;}
 function sectionKeys(index){
- const section=root.FE_LECTURE.sections[index],lesson=root.FE_LESSONS[index],set=new Set(primary[index]);
- for(const term of common){const key=lookup(term);if(key)set.add(key);}
- for(const [term] of section.glossary){const key=lookup(term);if(key)set.add(key);}
- const content=[lesson.definition,lesson.change,lesson.example,lesson.equation,...section.slides.flatMap(slide=>[slide.title,...slide.blocks.map(block=>block.text||block.latex||block.rows?.flat().join(' ')||'')])].join(' ');
- for(const item of matched(content))set.add(item.key);
- if(index===9)for(const term of supplement)set.add(term);
+ if(!primary[index])throw new RangeError('Unknown Front End section');
+ const set=new Set(primary[index]);
+ for(const term of supporting[index]){const key=lookup(term);if(key)set.add(key);}
  const dependencies={
   'dB':['Ratio','Logarithm','Logarithmic Scale'], 'dBm':['dB','Milliwatt','Power'], 'dBW':['dB','Watt','Power'],
-  'Power':['Watt','Energy'], 'Watt':['Joule'], 'Voltage':['Volt'], 'Current':['Ampere'], 'Resistance':['Ohm'],
-  'Milliwatt':['Watt','Scientific Notation'], 'Phase':['Cycle','Degree'], 'Radian':['Degree'],
-  'Carrier':['Modulation','Ranging Code','Navigation Data'], 'PRN Code':['Chip','Ranging Code'], 'C/A Code':['Ranging Code'],
+  'Power':['Watt'], 'Voltage':['Amplitude'], 'Milliwatt':['Watt'],
+  'Phase':['Cycle'], 'Carrier Phase':['Phase'], 'Radian':['Degree'],
+  'Carrier':['Modulation'], 'PRN Code':['Chip','Ranging Code'], 'C/A Code':['Chip','Ranging Code'],
   'Sampling':['Amplitude','Time Interval'], 'Sampling Frequency':['Hertz'], 'Quantization':['Quantization Level','Digital Sample'],
-  'Bit Depth':['Bit','Quantization Level'], 'SNR':['Power','Noise','Bandwidth','Ratio'], 'Noise Figure':['SNR','dB'],
+  'Bit Depth':['Bit','Quantization Level'], 'SNR':['Power','Noise','Ratio'], 'Noise Figure':['SNR','dB'],
   'Noise Factor':['SNR','Linear Ratio'], 'Friis Equation':['Noise Factor','Power Gain','Cascade'],
   '3-dB Bandwidth':['dB','Passband','Bandwidth'], 'Quality Factor':['Center Frequency','Bandwidth','Ratio'],
-  'RMS Voltage':['Voltage','Resistance','Power'], 'C/N0':['Power','Noise Density','Bandwidth','dB-Hz'], 'dB-Hz':['dB','Hertz'], 'Noise Density':['Noise','Bandwidth'], 'Modulo':['Code Period'],
-  'Thermal Noise':['Noise','Kelvin','Boltzmann Constant'], 'Complex Sample':['I/Q'], 'I/Q':['Phase','Degree']
+  'RMS Voltage':['Voltage','Resistance','Power'], 'C/N0':['Power','Noise Density','dB-Hz'], 'dB-Hz':['dB','Hertz'],
+  'Noise Density':['Noise','Bandwidth'], 'Thermal Noise':['Noise','Kelvin','Boltzmann Constant'],
+  'Complex Sample':['I/Q'], 'I/Q':['Phase'], 'Wavelength':['Cycle'],
+  'Nyquist Rate':['Bandwidth'], 'Bandpass Sampling':['Aliasing','Nyquist Frequency'],
+  'Anti-Alias Filter':['Filtering','Aliasing']
  };
- for(const key of set)for(const needed of dependencies[key]||[])set.add(needed);
+ // Include only prerequisite concepts needed to understand this section's terms.
+ // Missing named units remain plain text rather than generating broken links.
+ for(const key of set)for(const term of dependencies[key]||[]){const needed=lookup(term);if(needed)set.add(needed);}
  return [...set];
 }
+
 let active=0,available=new Set(sectionKeys(0)),seen=new Set(),returnTarget=null;
 const id=key=>'fe-concept-'+Object.keys(definitions).indexOf(key);
 function setSection(index){active=index;available=new Set(sectionKeys(index));seen=new Set();returnTarget=null;}
@@ -1050,7 +1099,7 @@ function text(value){let output='',last=0;const s=String(value);for(const item o
 }return output+esc(s.slice(last));}
 function html(value){const template=document.createElement('template');template.innerHTML=value;const walk=document.createTreeWalker(template.content,NodeFilter.SHOW_TEXT),nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);for(const node of nodes){if(node.parentElement?.closest('a,button,math,code,pre,script,style,textarea'))continue;const marked=text(node.textContent);if(marked.includes('data-concept=')){const span=document.createElement('span');span.innerHTML=marked;node.replaceWith(...span.childNodes);}}return template.innerHTML;}
 function rows(keys){return keys.map(key=>'<div id="'+id(key)+'" class="fe-concept-entry"><dt tabindex="-1">'+esc(key)+'</dt><dd>'+esc(definitions[key].definition)+'<button type="button" class="fe-definition-back" data-definition-back hidden>Return to reading</button></dd></div>').join('');}
-function render(index){const essentials=primary[index],more=sectionKeys(index).filter(key=>!essentials.includes(key));return '<section class="fe-definitions" aria-labelledby="fe-definitions-title"><div class="fe-definition-heading"><span class="eyebrow">ESSENTIAL DEFINITIONS</span><h3 id="fe-definitions-title">Concepts Used in This Section</h3><p>Each term has a short definition. Select an underlined term in the lecture to read its definition.</p></div><dl>'+rows(essentials)+'</dl></section><details class="fe-worked" id="fe-additional-definitions"><summary>Additional Definitions for This Section ('+more.length+')</summary><div class="fe-worked-body"><div class="fe-definitions"><dl>'+rows(more)+'</dl></div></div></details>';}
+function render(index){const essentials=primary[index],more=sectionKeys(index).filter(key=>!essentials.includes(key));return '<section class="fe-definitions" aria-labelledby="fe-definitions-title"><div class="fe-definition-heading"><span class="eyebrow">ESSENTIAL DEFINITIONS</span><h3 id="fe-definitions-title">Concepts Used in This Section</h3><p>Each term has a short definition. Select an underlined term in the lecture to read its definition.</p></div><dl>'+rows(essentials)+'</dl></section><details class="fe-worked" id="fe-additional-definitions"><summary>Supporting Terms for This Section ('+more.length+')</summary><div class="fe-worked-body"><div class="fe-definitions"><dl>'+rows(more)+'</dl></div></div></details>';}
 const symbolSets=[
  [['fL1','GPS L1 carrier frequency','Hz or MHz'],['f','Frequency in the wavelength formula','Hz'],['c','Speed of light, approximately 3 x 10^8','m/s'],['lambda','Wavelength: distance traveled in one cycle','m'],['Rc','C/A code chip rate','chips/s'],['BW or B','Frequency interval or noise bandwidth','Hz'],['Pr','Received signal power','W; a stated level may use dBm or dBW'],['N','Integrated thermal-noise power','W'],['k','Boltzmann constant, 1.380649 x 10^-23','J/K'],['T','Absolute temperature','K']],
  [['fRF','Incoming radio carrier frequency','MHz'],['fLO','Local-oscillator frequency','MHz'],['fIF','Analog intermediate frequency','MHz'],['fs','ADC sampling frequency','million samples/s when written in MHz'],['N','ADC bit depth','bits per amplitude sample']],
@@ -1074,6 +1123,7 @@ function bind(){const main=document.getElementById('front-end-main');if(!main||b
  main.querySelectorAll('.fe-concept-entry.is-selected').forEach(node=>{node.classList.remove('is-selected');node.querySelector('[data-definition-back]').hidden=true;});
  target.classList.add('is-selected');target.querySelector('[data-definition-back]').hidden=false;target.querySelector('dt').focus({preventScroll:true});target.scrollIntoView({block:'center'});
 });}
-const glossary=Object.fromEntries(Object.entries(definitions).flatMap(([key,item])=>[[key,item.definition],...item.aliases.filter(alias=>/^[A-Z][A-Z/0-9]+$/.test(alias)).map(alias=>[alias,item.definition])]));
-root.FE_CONCEPTS={definitions,lookup,sectionKeys,setSection,text,html,render,mathHelp,bind,glossary,symbolSets,primary};
+const excludedTerms=new Set(['Acquisition','Tracking','PVT','Correlation','Multi-Channel']);
+const glossary=Object.fromEntries(Object.entries(definitions).filter(([key])=>!excludedTerms.has(key)).flatMap(([key,item])=>[[key,item.definition],...item.aliases.filter(alias=>/^[A-Z][A-Z/0-9]+$/.test(alias)).map(alias=>[alias,item.definition])]));
+root.FE_CONCEPTS={definitions,lookup,sectionKeys,setSection,text,html,render,mathHelp,bind,glossary,symbolSets,primary,excludedTerms};
 })(window);
