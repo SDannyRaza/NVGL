@@ -228,7 +228,7 @@ function font(delta){textSize=Math.max(12,Math.min(25,textSize+delta));document.
 $('smaller').onclick=()=>font(-1);$('larger').onclick=()=>font(1);
 $('projector').onclick=()=>{const enabled=document.body.classList.toggle('projector');$('projector').setAttribute('aria-pressed',enabled);textSize=enabled?19:15;document.documentElement.style.setProperty('--mono',textSize+'px')};
 refresh();
-</script><section class="lab-footer-quotation" id="lab-story" aria-label="Laboratory quotation"><div class="content-width"><blockquote>&ldquo;Challenges are opportunities in disguise.&rdquo;</blockquote></div></section>
+</script><section class="lab-footer-quotation" id="lab-story" aria-label="Laboratory quotation"><div class="content-width"><blockquote>&ldquo;Challenges are opportunities in disguise.&rdquo;</blockquote><p class="lab-quotation-credit"><strong>Dr. Gladys West</strong><span>Pioneer in Satellite Geodesy and GPS</span></p></div></section>
 
   <footer class="institutional-footer" id="footer">
     <div class="footer-inner content-width">

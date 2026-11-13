@@ -113,3 +113,5 @@ body.lab-theme-orbits>footer.footer{display:none}
 .institutional-footer .identity-link:hover img{transform:scale(1.035)}
 @media(max-width:640px){.lab-footer-quotation{padding:38px 0}.lab-footer-quotation>.content-width{width:calc(100% - 36px)}}
 @media(prefers-reduced-motion:reduce){.institutional-footer .identity-link img{transition:none}}
+
+.lab-footer-quotation .lab-quotation-credit{margin:20px 0 0;text-align:center;font-family:Manrope,Inter,sans-serif}.lab-quotation-credit strong{display:block;color:#8cddf5;font-size:17px;line-height:1.6}.lab-quotation-credit span{display:block;margin-top:4px;color:#b4cedf;font-size:13px;line-height:1.7;letter-spacing:.025em}
