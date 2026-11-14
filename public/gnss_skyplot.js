@@ -52,14 +52,15 @@
     const colors = options.colors || {};
     const names = options.names || {};
     const mask = maskAngle(options.mask);
-    const compact = w < 430;
     const cx = w / 2, cy = h / 2;
-    const radius = Math.max(1, Math.min(w - 110, h - 90) / 2);
+    // Leave room for cardinal labels without wasting space around a compact plot.
+    const radius = Math.max(1, Math.min(w - 84, h - 84) / 2);
+    const compact = radius < 220;
     const maskRadius = radius * (90 - mask) / 90;
     const targets = (options.satellites || []).filter(aboveHorizon).map(satellite => {
       const position = project(satellite.az_deg, satellite.el_deg, cx, cy, radius);
       return Object.assign({}, satellite, position, {
-        r: satellite.sat === options.selectedSat ? 6 : (satellite.el_deg >= mask ? 4.8 : 3.6),
+        r: satellite.sat === options.selectedSat ? 6 : (satellite.el_deg >= mask ? (compact ? 4.4 : 4.8) : (compact ? 3.2 : 3.6)),
         aboveMask: satellite.el_deg >= mask
       });
     });
